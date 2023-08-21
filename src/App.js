@@ -1,9 +1,18 @@
+import BlogList from "./components/BlogList";
+import Navbar from "./components/Navbar";
+import { Container, CssBaseline } from '@mui/material';
 
 
 
 function App() {
   return (
-    <h1>test</h1>
+    <>
+      <CssBaseline />
+      <Navbar />
+      <Container maxWidth={'xl'} sx={{mt:"20px"}}>
+        <BlogList />
+      </Container>
+    </>
   );
 }
 
