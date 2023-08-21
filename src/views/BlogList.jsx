@@ -3,11 +3,10 @@ import React from 'react';
 import { useFetch } from "use-http";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea, Avatar, CardHeader, IconButton } from '@mui/material';
-import NoResults from "./NoResults";
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { CardActionArea, Avatar, CardHeader } from '@mui/material';
+import NoResults from "../components/NoResults";
+
 
 
 const BlogList = () => {

@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import {ReactComponent as TopazLogo} from '../Topaz.svg';
-import { Menu, AppBar, Box, Toolbar, IconButton, Typography,  Container, Avatar, Button, Tooltip, MenuItem } from '@mui/material';
+import { Menu, AppBar, Box, Toolbar, IconButton, Typography,  Container, Avatar, Button, Tooltip, MenuItem, Link } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { cyan } from '@mui/material/colors';
 import { AuthContext } from "../contexts/AuthContext";
@@ -154,24 +154,22 @@ const Navbar = () => {
 
                   {<Typography>
                     {setting==="Se déconnecter" ? 
-                    <Typography 
-                    variant="h5"
-                    component="a" 
-                    
-                    textAlign="center"
-                    sx={{
-                      mr: 2,
-                      fontSize : '18px', 
-                      flexGrow: 1,
-                      fontWeight: 200,
-                      color: 'inherit',
-                      textDecoration: 'none',
-                      onClick:()=>(unLogin)  
-                    }}
-                   
+                      <Link 
+                        textAlign="center"
+                        variant="h5"
+                        onClick={unLogin}
+                        sx={{
+                            mr: 2,
+                            fontSize : '18px', 
+                            flexGrow: 1,
+                            fontWeight: 200,
+                            color: 'inherit',
+                            textDecoration: 'none',
+                            
+                          }}
                       >
                         {setting}
-                      </Typography> 
+                      </Link>
                       : 
                       <Typography 
                       variant="h5"
