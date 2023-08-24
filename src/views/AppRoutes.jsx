@@ -3,11 +3,21 @@ import Login from './Login';
 import Register from './Register';
 import NotFound from "./NotFound";
 import BlogList from "./BlogList";
+import EntityProvider from '../contexts/EntityContext';
+import Create from "./Create";
 
 const AppRoutes = () => {
   return(
     <Routes >
         <Route exact path="/" element={<BlogList />} />
+        <Route
+          path="/posts"
+          element={
+            <EntityProvider>
+              <Create />
+            </EntityProvider>
+          }
+        />
         <Route path="/login" 
         element={
           <Login />

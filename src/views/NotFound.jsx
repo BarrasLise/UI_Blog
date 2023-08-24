@@ -6,16 +6,13 @@ import { Button, Container, Typography } from "@mui/material";
 const NotFound = () => {
 
     const stylesLettres = {
-        width: '90%',
-        margin: '0 auto',
         textAlign: 'center',
     };
-
     const stylesLettre = {
         display: 'inline-block',
         fontWeight: 900,
         fontSize: '8em',
-        margin: '0.2em',
+        margin: '0.2em', //marge entre chaque lettre pour aérer le 404
         position: 'relative',
         color: '#3FB8FEff',
         transformStyle: 'preserve-3d',
@@ -45,9 +42,7 @@ const NotFound = () => {
             zIndex:2,
             transform: "scale(1.08,1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg,1deg)",
         },
-    
     };
-   
     const stylesBoutons = {
         display: 'flex',
         alignItems: 'center',
@@ -63,16 +58,14 @@ const NotFound = () => {
         }
     };
 
-
-
     function Refresh() {
         window.location.reload(); 
     }
 
     return ( 
         <Container maxWidth={'xl'} sx={{mt:"50px"}}>
-        <Typography variant="div" className="not-found" display={"flex"} flexDirection={"column"} sx={{textAlign: "center"} }>
-            <Typography variant="div" className="letters" sx={stylesLettres}>
+        <Typography variant="div" className="not-found" display={"flex"} flexDirection={"column"} alignItems={"center"} sx={{textAlign: "center"} }>
+            <Typography variant="div" className="letters" sx={stylesLettres} >
                 <Typography variant="span" className="letter" data-letter="4" sx={{...stylesLettre, ...stylesLettreEvent}}>4</Typography >
                 <Typography variant="span" className="letter" data-letter="0" sx={{...stylesLettre, ...stylesLettreEvent}}>0</Typography >
                 <Typography variant="span" className="letter" data-letter="4" sx={{...stylesLettre, ...stylesLettreEvent}}>4</Typography >

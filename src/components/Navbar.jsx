@@ -87,9 +87,16 @@ const Navbar = () => {
                 display: { xs: 'block', md: 'none' },
               }}
             >
+              {/* pages quand petit menu */}
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center" >{page}</Typography>
+
+                {page === "Accueil" ? 
+                  <Typography textAlign="center" component={"a"} href={`/`} sx={{textDecoration: 'none', color: 'inherit',}} >{page}</Typography> 
+                  : 
+                  <Typography textAlign="center" component={"a"} href={`/posts`} sx={{textDecoration: 'none', color: 'inherit',}} >{page}</Typography>
+                }
+                  
                 </MenuItem>
               ))}
             </Menu>
@@ -100,7 +107,7 @@ const Navbar = () => {
                 variant="h5"
                 noWrap
                 component="a" // précise que c'est un lien (balise a) :  <a> <a/>
-                href="/" //direction lien où il renvoi
+                href="/" //direction lien où il renvoit
                 sx={{
                 mr: 2,
                 display: { xs: 'flex', md: 'none' },
@@ -117,13 +124,15 @@ const Navbar = () => {
           </Tooltip>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'black', display: 'block' }}
-              >
-                {page}
-              </Button>
+              <>
+              
+              { page==="Accueil" ? 
+                <Button  onClick={handleCloseNavMenu} textAlign="center" component={"a"} href={`/`} sx={{ textDecoration: 'none', my: 2, color: 'black', display: 'block' }}>{page}</Button> 
+              : 
+                <Button textAlign="center" component={"a"} href={`/posts`} sx={{textDecoration: 'none', color: 'inherit'}} >{page}</Button>
+              }
+              </>
+
             ))}
           </Box>
 
@@ -164,8 +173,7 @@ const Navbar = () => {
                             flexGrow: 1,
                             fontWeight: 200,
                             color: 'inherit',
-                            textDecoration: 'none',
-                            
+                            textDecoration: 'none', 
                           }}
                       >
                         {setting}
@@ -186,9 +194,9 @@ const Navbar = () => {
                         
                       }}
                      
-                        >
-                          {setting}
-                        </Typography>
+                      >
+                        {setting}
+                      </Typography>
 
                     }
                     

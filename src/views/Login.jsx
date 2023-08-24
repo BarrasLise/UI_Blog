@@ -44,7 +44,7 @@ const Login = (props) => {
                 <Avatar sx={{ m: 1, bgcolor: cyan[200] }}>
                     <LockOutlinedIcon />
                 </Avatar>
-                <Typography component="h1" variant="h5">
+                <Typography variant="h5">
                     Se connecter
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
