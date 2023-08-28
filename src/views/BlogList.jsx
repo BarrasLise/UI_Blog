@@ -6,12 +6,13 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import { CardActionArea, Avatar, CardHeader } from '@mui/material';
 import NoResults from "../components/NoResults";
+import Loading from "../components/Loading";
 
 
 
 const BlogList = () => {
 
-    const {  data : datas} = useFetch('posts', {}, []);
+    const {  data : datas, error, loading} = useFetch('posts', {}, []);
     // console.log(datas);
     
 
@@ -55,7 +56,13 @@ const BlogList = () => {
     }
 
     return ( 
+       
         <Box sx={{ display: 'flex', flexDirection: 'column'} }>
+        
+        {loading ? <Loading/> :  
+        error ? <Box component="div">{error}</Box> 
+        : null }
+            
             <Typography variant="h2" mb={"20px"}>{"Tous les posts"}</Typography>
             <Grid container spacing={3}>
 

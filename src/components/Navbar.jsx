@@ -180,7 +180,7 @@ const Navbar = () => {
                         {setting}
                       </Link>
                       : 
-                      <Typography 
+                      <Link
                       variant="h5"
                       component="a" 
                       href={`/users`} 
@@ -197,7 +197,7 @@ const Navbar = () => {
                      
                       >
                         {setting}
-                      </Typography>
+                      </Link>
 
                     }
                     

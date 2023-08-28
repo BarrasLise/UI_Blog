@@ -6,6 +6,8 @@ import BlogList from "./BlogList";
 import EntityProvider from '../contexts/EntityContext';
 import Create from "./Create";
 import BlogDetails from './BlogDetails';
+import Profile from "./Profile";
+import UserDetails from "./UserDetails";
 
 const AppRoutes = () => {
   return(
@@ -40,7 +42,18 @@ const AppRoutes = () => {
             
           }
         />
-
+        <Route
+          path="/users"
+          element={
+            <Profile />
+          }
+        />
+        <Route
+          path="/users/:id"
+          element={
+            <UserDetails />
+          }
+        />
         <Route path="*" element={<NotFound />} />
       </Routes>
   )

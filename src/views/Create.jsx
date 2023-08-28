@@ -4,6 +4,7 @@ import { useFetch } from 'use-http';
 import { AuthContext } from "../contexts/AuthContext";
 import { Box, Button, TextField, TextareaAutosize,  Typography, Container} from "@mui/material";
 import CssBaseline from '@mui/material/CssBaseline';
+import Loading from "../components/Loading";
 
 
 const Create = () => {
@@ -11,7 +12,7 @@ const Create = () => {
   const [postBody, setPostBody] = useState('');
   const navigate = useNavigate();
 
-  const { post, response } = useFetch('posts', {}, []);
+  const { post, response, error, loading } = useFetch('posts', {}, []);
 
   const {user : current_user}=useContext(AuthContext);
 
@@ -40,7 +41,10 @@ const Create = () => {
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
-      <Box
+      {loading ? <Loading/> :  
+        error ? <Box component="div">{error}</Box> 
+       : null }
+      <Box component="div"
             sx={{
                     marginTop: 8,
                     display: 'flex',

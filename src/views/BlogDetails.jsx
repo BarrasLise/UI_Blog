@@ -5,11 +5,12 @@ import { AuthContext } from "../contexts/AuthContext";
 import NotFound from "./NotFound";
 import { Box, Button, Container, CssBaseline, Paper, Typography } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
+import Loading from "../components/Loading";
 
 
 const BlogDetails = () => {
-    const [edited, setEdited] = useState(false)
-  const { entity, error} = useContext(EntityContext);
+  const [edited, setEdited] = useState(false)
+  const { entity, error, loading } = useContext(EntityContext);
   const {user : current_user}=useContext(AuthContext);
   const fields = [
     {
@@ -30,6 +31,7 @@ const BlogDetails = () => {
   }
 
   return (
+
     <Container component="main" maxWidth="xl" sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -44,8 +46,10 @@ const BlogDetails = () => {
         alignItems: 'center',
       }}
     >  */}
-      
-      {error && <Box component="div">{error}</Box>}
+      {loading ? <Loading/> :  
+        error ? <Box component="div">{error}</Box> 
+       : null }
+
       {entity ? (
         <>
         
@@ -55,7 +59,7 @@ const BlogDetails = () => {
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
-                  minWidth: "500px"
+                  minWidth: "1000px"
             }}
         >
             <Typography variant="h5" sx={{ mb: 1 }}>{entity.Title}</Typography>
