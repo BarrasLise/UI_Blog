@@ -5,6 +5,7 @@ import NotFound from "./NotFound";
 import BlogList from "./BlogList";
 import EntityProvider from '../contexts/EntityContext';
 import Create from "./Create";
+import BlogDetails from './BlogDetails';
 
 const AppRoutes = () => {
   return(
@@ -15,6 +16,14 @@ const AppRoutes = () => {
           element={
             <EntityProvider>
               <Create />
+            </EntityProvider>
+          }
+        />
+        <Route
+          path="/posts/:id"
+          element={
+            <EntityProvider>
+              <BlogDetails />
             </EntityProvider>
           }
         />

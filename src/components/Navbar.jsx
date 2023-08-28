@@ -7,7 +7,8 @@ import { AuthContext } from "../contexts/AuthContext";
 
 const Navbar = () => {
  
-  const { unLogin}=useContext(AuthContext);
+  const { unLogin, user : current_user}=useContext(AuthContext);
+  
 
   const pages = ['Accueil', 'Créer post'];
   const settings = ['Mon profil', 'Se déconnecter'];
@@ -124,12 +125,12 @@ const Navbar = () => {
           </Tooltip>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <>
+              <>                                                                                                                                                                                                                                                                    
               
               { page==="Accueil" ? 
                 <Button  onClick={handleCloseNavMenu} textAlign="center" component={"a"} href={`/`} sx={{ textDecoration: 'none', my: 2, color: 'black', display: 'block' }}>{page}</Button> 
               : 
-                <Button textAlign="center" component={"a"} href={`/posts`} sx={{textDecoration: 'none', color: 'inherit'}} >{page}</Button>
+              current_user?.Is_Admin ?  <Button textAlign="center" component={"a"} href={`/posts`} sx={{textDecoration: 'none', color: 'inherit'}} >{page}</Button> : null
               }
               </>
 

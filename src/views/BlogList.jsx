@@ -11,7 +11,7 @@ import NoResults from "../components/NoResults";
 
 const BlogList = () => {
 
-    const {  data : datas,} = useFetch('posts', {}, []);
+    const {  data : datas} = useFetch('posts', {}, []);
     // console.log(datas);
     
 
@@ -45,7 +45,6 @@ const BlogList = () => {
 
         return color;
     }
-
     const stringAvatar = (name) => {
         return {
             sx: {
@@ -55,7 +54,6 @@ const BlogList = () => {
         }
     }
 
-   
     return ( 
         <Box sx={{ display: 'flex', flexDirection: 'column'} }>
             <Typography variant="h2" mb={"20px"}>{"Tous les posts"}</Typography>
@@ -63,9 +61,9 @@ const BlogList = () => {
 
         { datas?.length ? datas.map(data => (
            
-        <Grid item xs={4} key={data.id}>
-            <Card sx={{ maxWidth: 345 }} key={data.id}>
-                <CardActionArea>
+        <Grid item xs={4} key={data.ID}>
+            <Card sx={{ maxWidth: 345 }} key={data.ID}>
+                <CardActionArea href={`/posts/${data.ID}`}>
                     <CardHeader
                         avatar={
                         <Avatar  aria-label="title"  {...stringAvatar(data.Pseudo)}>
