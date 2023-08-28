@@ -7,12 +7,13 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea, Avatar, CardHeader } from '@mui/material';
 import NoResults from "../components/NoResults";
 import Loading from "../components/Loading";
+import Filters from "../components/Filters";
 
 
 
 const BlogList = () => {
 
-    const {  data : datas, error, loading} = useFetch('posts', {}, []);
+    const { get, data : datas, error, loading} = useFetch('posts', {}, []);
     // console.log(datas);
     
 
@@ -62,6 +63,10 @@ const BlogList = () => {
         {loading ? <Loading/> :  
         error ? <Box component="div">{error}</Box> 
         : null }
+
+        <Box component={"div"} mb={"20px"} sx={{display: "flex", justifyContent: "flex-end"}}>
+            <Filters onSubmit={(url)=>get(url)} />
+        </Box>
             
             <Typography variant="h2" mb={"20px"}>{"Tous les posts"}</Typography>
             <Grid container spacing={3}>

@@ -6,6 +6,7 @@ import NotFound from "./NotFound";
 import { Box, Button, Container, CssBaseline, Paper, Typography } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import Loading from "../components/Loading";
+import LikeButton from "../components/LikeButton";
 
 
 const BlogDetails = () => {
@@ -65,6 +66,7 @@ const BlogDetails = () => {
             <Typography variant="h5" sx={{ mb: 1 }}>{entity.Title}</Typography>
             <Typography variant="p">Ecrit par {entity.Pseudo}</Typography>
             <Box component="div" sx={{ mt: 4 }}>{entity.Body}</Box>
+            <LikeButton/>
         </Paper>
        
     

@@ -6,6 +6,7 @@ import { Link} from "react-router-dom";
 import LogoutIcon from '@mui/icons-material/Logout';
 import EditIcon from '@mui/icons-material/Edit';
 import { Box, Button, Container, CssBaseline, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import Loading from "../components/Loading";
 
 const Profile = () => {
   const { data : users, error, loading} = useFetch( 'users' ,{}, []);
