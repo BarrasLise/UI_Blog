@@ -2,9 +2,11 @@ import { useContext } from "react";
 import { EntityContext } from "../contexts/EntityContext";
 import DeleteIcon from '@mui/icons-material/Delete';
 import SaveIcon from '@mui/icons-material/Save';
-import { Box, Button, FormLabel, TextField, TextareaAutosize,  Typography} from "@mui/material";
+import { Box, Button, FormLabel, TextField, TextareaAutosize,  Typography, useTheme} from "@mui/material";
 
 const EntityForm = ({fields}) => {
+ 
+
   const { entity, updateField, isDirty, saveEntity, deleteEntity } = useContext(EntityContext);
 
   return (
@@ -18,6 +20,7 @@ const EntityForm = ({fields}) => {
            
              
               <TextField
+              
                 margin="normal"
                 type="text"
                 required
@@ -41,7 +44,7 @@ const EntityForm = ({fields}) => {
                 size="md"
                 value={entity[field.code] ? entity[field.code] : ''}
                 onChange={(e) => updateField(field.code, e.target.value)}
-                style={{ width: "100%", minWidth: "1000px" }} />
+                style={{ width: "100%", minWidth: "1000px", fontSize: "1rem" }} />
                 </>
             
 
@@ -71,8 +74,8 @@ const EntityForm = ({fields}) => {
         justifyContent: 'space-evenly'
         }}
       > 
-      {isDirty ? <Button id="submit" type="submit" value="Sauvegarder" onClick={saveEntity}><SaveIcon /></Button> : null}
-      <Button onClick={deleteEntity}><DeleteIcon /></Button>
+      {isDirty ? <Button className="IconButton" id="submit" type="submit" value="Sauvegarder" onClick={saveEntity}><SaveIcon /></Button> : null}
+      <Button className="IconButton" onClick={deleteEntity}><DeleteIcon /></Button>
       </Box>
       </>
     ) : null

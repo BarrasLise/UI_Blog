@@ -39,7 +39,7 @@ const Create = () => {
 
 
   return (
-    <Container component="main" maxWidth="xs">
+    <Container component="main" maxWidth="xl">
       <CssBaseline />
       {loading ? <Loading/> :  
         error ? <Box component="div">{error}</Box> 
@@ -83,7 +83,7 @@ const Create = () => {
               name="postBody"
               value={postBody}
               onChange={(e) => setPostBody(e.target.value)}
-              style={{ width: "100%" }}
+              style={{ width: "100%", fontSize: "1rem" }}
             />
 
             <Button

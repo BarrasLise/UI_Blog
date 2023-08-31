@@ -2,10 +2,11 @@ import React, { useContext, useState } from 'react';
 import {ReactComponent as TopazLogo} from '../Topaz.svg';
 import { Menu, AppBar, Box, Toolbar, IconButton, Typography,  Container, Avatar, Button, Tooltip, MenuItem, Link } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { cyan } from '@mui/material/colors';
 import { AuthContext } from "../contexts/AuthContext";
+import { useTheme } from '@mui/material/styles'; // Importez useTheme
 
 const Navbar = () => {
+  const theme = useTheme(); // Récupérez le thème
  
   const { unLogin, user : current_user}=useContext(AuthContext);
   
@@ -32,7 +33,7 @@ const Navbar = () => {
   };
 
   return ( 
-
+    
     <AppBar position="static" color='transparent' >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -93,7 +94,11 @@ const Navbar = () => {
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
 
                 {page === "Accueil" ? 
-                  <Typography textAlign="center" component={"a"} href={`/`} sx={{textDecoration: 'none', color: 'inherit',}} >{page}</Typography> 
+                  <Typography 
+                  className="Navbar"
+                  textAlign="center" component={"a"} 
+                  href={`/`} 
+                  sx={{textDecoration: 'none', color: 'inherit',}} >{page}</Typography> 
                   : 
                   <Typography textAlign="center" component={"a"} href={`/posts`} sx={{textDecoration: 'none', color: 'inherit',}} >{page}</Typography>
                 }
@@ -105,42 +110,64 @@ const Navbar = () => {
           
           <Tooltip title="retourner à la page d'accueil">
             <Typography
-                variant="h5"
-                noWrap
-                component="a" // précise que c'est un lien (balise a) :  <a> <a/>
-                href="/" //direction lien où il renvoit
-                sx={{
-                mr: 2,
-                display: { xs: 'flex', md: 'none' },
-                flexGrow: 1,
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-                }}
-            >
+              textDecoration= 'none' 
+              variant="h5"
+              noWrap
+              component="a" // précise que c'est un lien (balise a) :  <a> <a/>
+              href="/" //direction lien où il renvoit
+              display={ {xs: 'flex', md: 'none' }}
+                //petit menu ->petit écran
+              color= 'inherit'
+              mr="2"
+              flexGrow= "1"
+              fontFamily= 'monospace'
+              sx={{ 
+             fontWeight: 700,
+             letterSpacing: '.2rem',
+             textDecoration: 'none'
+              }}
+                
+            > 
                 Topaz Blog
             </Typography>
           </Tooltip>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          <Box 
+          display={{ xs: 'none', md: 'flex' }}
+          flexGrow={1}
+          >
             {pages.map((page) => (
-              <>                                                                                                                                                                                                                                                                    
-              
+              <>                                                           
               { page==="Accueil" ? 
-                <Button  onClick={handleCloseNavMenu} textAlign="center" component={"a"} href={`/`} sx={{ textDecoration: 'none', my: 2, color: 'black', display: 'block' }}>{page}</Button> 
+                <Button  
+                className="NavButton"
+                onClick={handleCloseNavMenu} 
+                component={"a"} 
+                href={`/`} 
+                color="inherit"
+                
+                >{page}</Button> 
               : 
-              current_user?.Is_Admin ?  <Button textAlign="center" component={"a"} href={`/posts`} sx={{textDecoration: 'none', color: 'inherit'}} >{page}</Button> : null
+              current_user?.Is_Admin ?  
+              <Button
+              className="NavButton"
+              component={"a"} 
+              href={`/posts`} 
+              color="inherit"
+              >{page}</Button> : null
               }
               </>
 
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          <Box flexGrow={0} >
             <Tooltip title="Paramètres du compte">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="" src="/static/images/avatar/2.jpg" sx={{bgcolor: cyan[200]}} />
+                <Avatar 
+                alt="" 
+                src="/static/images/avatar/2.jpg" 
+                sx={{bgcolor: theme.palette.primary.main}}
+                />
               </IconButton>
             </Tooltip>
             <Menu //cadre blanc représentant le menu lié au profil utilisateur
@@ -158,6 +185,7 @@ const Navbar = () => {
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
+              
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
@@ -182,9 +210,10 @@ const Navbar = () => {
                       : 
                       <Link
                       variant="h5"
-                      component="a" 
                       href={`/users`} 
                       textAlign="center"
+                      color={"inherit"}
+                      textDecoration="none"
                       sx={{
                         mr: 2,
                         fontSize : '18px', 

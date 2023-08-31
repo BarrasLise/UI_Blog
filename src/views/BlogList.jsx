@@ -64,11 +64,11 @@ const BlogList = () => {
         error ? <Box component="div">{error}</Box> 
         : null }
 
-        <Box component={"div"} mb={"20px"} sx={{display: "flex", justifyContent: "flex-end"}}>
-            <Filters onSubmit={(url)=>get(url)} />
+        <Box component={"div"} mb={"20px"} sx={{display: "flex", justifyContent: "space-between", alignItems:"center"}}>
+        <Typography variant="h2" mb={"20px"}>{"Tous les posts"}</Typography>
+            <Filters  onSubmit={(url)=>get(url)} />
         </Box>
             
-            <Typography variant="h2" mb={"20px"}>{"Tous les posts"}</Typography>
             <Grid container spacing={3}>
 
         { datas?.length ? datas.map(data => (

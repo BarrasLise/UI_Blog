@@ -20,9 +20,11 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import FormControl from '@mui/material/FormControl';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
+import { useTheme } from "@mui/material";
 
 
 const Filters = ({ onSubmit }) => {
+  const theme = useTheme(); // Récupérez le thème
   const [open, setOpen] = useState(false);
   const [checkboxState, setCheckboxState] = useState({
     liked: false,
@@ -120,38 +122,46 @@ const Filters = ({ onSubmit }) => {
   return (
     <>
     <Box component="div" >
-      <Button className="link-button" onClick={handleClickOpen} sx={{
-        backgroundColor: "#3FB8FEff",
-        mt: "5px",
-      }}>
-      <SearchIcon sx={{ color: "white" }}/>
+      <Button 
+      color="primary" 
+      variant="contained"
+      onClick={handleClickOpen}
+      mt={"5px"}
+      > 
+        <SearchIcon />
       </Button>
      
         <Dialog open={open} onClose={handleClose}>
           
-          <DialogTitle>Filtres
-            <Button variant="text" onClick={handleClose}>
-              <CloseIcon />
+          <DialogTitle sx={{
+                         display: 'flex',
+                         flexDirection: 'row',
+                         justifyContent: 'space-between',
+                       }}>Filtres
+            <Button color="inherit" className="CloseButton" variant="text" onClick={handleClose}>
+              <CloseIcon  />
             </Button>
           </DialogTitle>
-         
 
           <DialogContent sx={{maxWidth: "500px"}}>
-            <DialogContentText>
+            <DialogContentText color={theme.palette.primary.main}>
               Ici bientôt des filtres!
             </DialogContentText>
             <TextField
                 type="text"
                 placeholder="Rechercher"
                 value={searchValue}
-                onChange={handleSearchChange}
+                onChange={handleSearchChange}  
             />
             <FormGroup>
               
               <FormControlLabel
                 control={
-                  <Checkbox  name="liked" checked={checkboxState.liked}
-                  onChange={handleCheckboxChange}/>
+                  <Checkbox  
+                  name="liked" 
+                  checked={checkboxState.liked}
+                  onChange={handleCheckboxChange}
+                  />
                 }
                 label="checkbox liked"
               />
@@ -181,7 +191,7 @@ const Filters = ({ onSubmit }) => {
           >
             {/* faire générer les auteurs ici */}
             {users?.length ? users.map(user => (
-              <MenuItem value={user.Pseudo}>{user.Pseudo}</MenuItem>
+              <MenuItem  value={user.Pseudo}>{user.Pseudo}</MenuItem>
             )) : null }
            
           </Select> 
@@ -190,10 +200,10 @@ const Filters = ({ onSubmit }) => {
           </DialogContent>
           <DialogActions style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Box component="div" >
-              <Button variant="contained" onClick={handleFilter} ><SearchIcon/>Filtrer</Button>
+              <Button  variant="contained" onClick={handleFilter} ><SearchIcon/>Filtrer</Button>
               <Button variant="contained" onClick={handleReset}><ReplayIcon /> Réinitialiser</Button>
               
-              <Button variant="contained" onClick={handleClose}><CloseIcon />Fermer</Button>
+              <Button color="secondary" variant="contained" onClick={handleClose}><CloseIcon />Fermer</Button>
             </Box>
           </DialogActions>
         </Dialog>

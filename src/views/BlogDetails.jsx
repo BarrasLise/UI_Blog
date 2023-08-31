@@ -39,14 +39,7 @@ const BlogDetails = () => {
         alignItems: 'center',
     }}>
     <CssBaseline />
-    {/* <Box className="form" component="div" 
-    sx={{
-        mt: 8,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}
-    >  */}
+  
       {loading ? <Loading/> :  
         error ? <Box component="div">{error}</Box> 
        : null }
@@ -71,41 +64,30 @@ const BlogDetails = () => {
        
     
         {current_user?.Is_Admin? ( 
-            <>
-                
-                <Button onClick={handleEdited} sx={{mt:2}}>
+            <>   
+                <Button className="IconButton" onClick={handleEdited} sx={{mt:2}}>
                   <EditIcon  />
                 </Button>
                 { edited ? 
-
                     <Box component="div" 
                     sx={{
                         mt:8,
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        
                     }}
                     >
     
                         <Typography variant="h5" sx={{ mb: 1 }}>Modifier le post :  </Typography>
                         
-                        <EntityForm fields={fields}  />
-                        
-                        
+                        <EntityForm fields={fields}  />  
                     </Box>
-                : null }
-                
+                : null }   
             </>
-
         ) : null }
-
     </>   
     )  : <NotFound/>}
-    
-    {/* </Box> */}
     </Container>
-    
   );
 };
 

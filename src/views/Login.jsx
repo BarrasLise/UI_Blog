@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Typography, useTheme } from "@mui/material";
 import Container from '@mui/material/Container';
 import React,{useContext} from 'react';
 import { AuthContext } from "../contexts/AuthContext";
@@ -15,6 +15,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { cyan } from '@mui/material/colors';
 
 const Login = (props) => {
+    const theme = useTheme(); // Récupérez le thème
     const {  pseudo, password, setPseudo, setPassword, login} = useContext(AuthContext);
 
     const handleSubmit = (event) => {
@@ -41,7 +42,7 @@ const Login = (props) => {
                     alignItems: 'center',
                 }}
             >
-                <Avatar sx={{ m: 1, bgcolor: cyan[200] }}>
+                <Avatar sx={{ m: 1, bgcolor: theme.palette.primary.main }}>
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography variant="h5">
@@ -83,13 +84,13 @@ const Login = (props) => {
                     </Button>
                     <Grid container>
                         <Grid item xs>
-                            <Link href="#" variant="body2">
-                                Mot de passe oublié ?
+                            <Link mt={2} href="#" variant="body2">
+                                {"Mot de passe oublié ?"}
                             </Link>
                         </Grid>
                         <Grid item>
-                            <Link  variant="body2" onClick={props.switchForm}>
-                                {"Don't have an account? Sign Up"}
+                            <Link mt={2} variant="body2" onClick={props.switchForm}>
+                                {" Pas de compte ? Inscrivez-vous "}
                             </Link>
                         </Grid>
                     </Grid>

@@ -1,13 +1,13 @@
-import { Button, Grid, TextField, Typography, Box, CssBaseline, Container, Avatar } from "@mui/material";
+import { Button, Grid, TextField, Typography, Box, CssBaseline, Container, Avatar, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { cyan } from '@mui/material/colors';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFetch } from "use-http";
 import { useNavigate } from "react-router-dom";
 
 const Register = (props) => {
-
+    const theme = useTheme(); // Récupérez le thème
     const [postPseudo, setPostPseudo] = useState("");
     const [postFirstname, setPostFirstname] = useState("");
     const [postLastname, setPostLastname] = useState("");
@@ -17,7 +17,7 @@ const Register = (props) => {
 
     const navigate = useNavigate();
 
-    const { post, response} = useFetch('register');
+    const { post, response, error} = useFetch('register');
 
     const [errorForm, setErrorForm] = useState("form");
 
@@ -48,6 +48,9 @@ const Register = (props) => {
           console.error('Une erreur s\'est produite', error);
         }
     }
+    useEffect(()=> {
+        if (error) setErrorForm("error");
+    }, [ error ])
 
     //Email valide ?
     const validEmail = postEmail.match(/^\S+@\S+\.\S+$/) ? true : false;
@@ -59,7 +62,6 @@ const Register = (props) => {
     return ( 
         <>
         <Typography variant="div" className={errorForm}></Typography>
-        <Typography variant="h2">S'enregistrer</Typography>
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <Box
@@ -70,11 +72,11 @@ const Register = (props) => {
                     alignItems: 'center',
                 }}
             >
-                <Avatar sx={{ m: 1, bgcolor: cyan[200] }}>
+                <Avatar sx={{ m: 1, bgcolor: theme.palette.primary.main }}>
                     <LockOutlinedIcon  />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Se connecter
+                    S'enregistrer
                 </Typography>
                 <Box component="form" onSubmit={register} noValidate sx={{ mt: 1 }}>
                     <TextField
@@ -140,9 +142,17 @@ const Register = (props) => {
                         value={postPassword}
                         onChange={(e) => setPostPassword(e.target.value)}
                         autoComplete="current-password" />
-                    <Typography variant="div" xs={{ color: passwordStrength==='bon' ? "green" : "red" }}>
-                        {postPassword.length > 0 && `Force du mot de passe: ${passwordStrength}`}
-                    </Typography>
+                    
+                        { passwordStrength==='bon' ? 
+                         <Typography variant="p" color={"Success"}>
+                            {postPassword.length && `Force du mot de passe: ${passwordStrength}` }
+                        </Typography>  
+                         :
+                          <Typography variant="p" color="error"> 
+                            {postPassword.length && `Force du mot de passe: ${passwordStrength}` }
+                         </Typography>
+                        }
+                    
                     <TextField
                         margin="normal"
                         required
@@ -154,26 +164,37 @@ const Register = (props) => {
                         value={postCheckPassword}
                         onChange={(e) => setPostCheckPassword(e.target.value)}
                         autoComplete="current-password" />
-                    <Typography variant="div" xs={{ color: "red"}}>
+                    <Typography color="error" variant="div" >
                         {postPassword !== postCheckPassword ? "Les mots de passe ne correspondent pas" : null}
                     </Typography>
+
+                    {error ? (
+                        <>
+                        <Typography color="error" variant="p" ><strong>ERREUR {response.status}</strong>
+                        </Typography>
+                        <Typography color="error" variant="p">
+                            {response?.data?.message}
+                        </Typography>
+                        </>
+                    ) : null}
 
                     <Button
                         type="submit"
                         fullWidth
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
+                        disabled={postPseudo && postFirstname && postLastname && postEmail && validEmail && postPassword && postCheckPassword && postPassword === postCheckPassword ? false : true  }
                     >
                         S'enregistrer
                     </Button>
                     <Grid container>
                         <Grid item xs>
-                            <Link href="#" variant="body2">
-                                Mot de passe oublié ? Cliquer ici
+                            <Link mt={2}  href="#" variant="body2">
+                                {"Mot de passe oublié ? Cliquer ici"}
                             </Link>
                         </Grid>
-                        <Grid item>
-                            <Link variant="body2" onClick={props.switchForm}>
+                        <Grid item xs>
+                            <Link mt={2} variant="body2" onClick={props.switchForm}>
                                 {"Vous avez déjà un compte ? Cliquer ici pour vous connecter"}
                             </Link>
                         </Grid>

@@ -83,7 +83,7 @@ const UserForm = ({fields}) => {
                 required
                 value={entity[field.code] ? entity[field.code] : ''}
                 onChange={(e) => updateField(field.code, e.target.value)}
-                style={{ width: "100%", minWidth: "500px" }}
+                style={{ width: "100%", minWidth: "500px", fontSize: "1rem" }}
               />
            
 
@@ -141,9 +141,9 @@ const UserForm = ({fields}) => {
         }}
       > 
 
-      {isDirty ? <Button id="submit" type="submit" value="Sauvegarder" onClick={saveEntity}><SaveIcon/></Button> : null}
+      {isDirty ? <Button className="IconButton" id="submit" type="submit" value="Sauvegarder" onClick={saveEntity}><SaveIcon/></Button> : null}
       
-      <Button id="submit" type="submit" value="Supprimer" onClick={deleteEntity}><DeleteIcon/></Button> 
+      <Button className="IconButton" id="submit" type="submit" value="Supprimer" onClick={deleteEntity}><DeleteIcon/></Button> 
       </Box>
       
       </>

@@ -7,7 +7,7 @@ import { Button, Typography } from "@mui/material";
 
 const LikeButton = () => {
   
-  const {entity, refreshEntity, baseURL, id, response} = useContext(EntityContext);
+  const {entity, refreshEntity, baseURL, id} = useContext(EntityContext);
   const { post } = useFetch(`${baseURL}/${id}/like`, {});
 
 
@@ -27,7 +27,7 @@ const LikeButton = () => {
  
   return (
     
-      <><Button className="like" onClick={() => (handleLikeClick())}>{!entity?.UserLiked ? <FavoriteBorderIcon /> : <FavoriteIcon />}</Button><Typography variant="p">Nombres de like: {entity?.TotalLikes}</Typography></>
+      <><Button className="IconButton" onClick={() => (handleLikeClick())}>{!entity?.UserLiked ? <FavoriteBorderIcon /> : <FavoriteIcon />}</Button><Typography variant="p">Nombres de like: {entity?.TotalLikes}</Typography></>
    
   );
 }

@@ -5,29 +5,32 @@ import { AuthContext } from "../contexts/AuthContext";
 import { Link} from "react-router-dom";
 import LogoutIcon from '@mui/icons-material/Logout';
 import EditIcon from '@mui/icons-material/Edit';
-import { Box, Button, Container, CssBaseline, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from "@mui/material";
+import { Box, Button, Container, CssBaseline, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, colors, useTheme } from "@mui/material";
 import Loading from "../components/Loading";
+import theme from "../components/Theme";
 
 const Profile = () => {
+  const theme = useTheme(); // Récupérez le thème
+  const color = theme.palette.primary ;
   const { data : users, error, loading} = useFetch( 'users' ,{}, []);
   const {user : current_user, unLogin}=useContext(AuthContext);
 
   const stylesTableRows = {
     "&:nth-of-type(odd):hover": {
-        backgroundColor : '#64b5f6',
+        backgroundColor : color.light,
+        // colors : theme.palette.secondary.contrastText
     },
     ":hover": {
-        backgroundColor : '#64b5f6',
+        backgroundColor : color.light,
     },
     "&:nth-of-type(odd)": {
-        backgroundColor : '#82b1ff',
+      backgroundColor :color.lighter,
     },
     "&:last-child td, &:last-child th": {
         border: 0,  
     },
   }
-
-  
+ 
   return ( 
     <Box component="div" className="MyProfile" 
         sx={{
@@ -40,9 +43,6 @@ const Profile = () => {
         {loading ? <Loading/> :  
         error ? <NotFound /> 
        : 
-     
-       
-      
       <Box component="div" className="MyProfile">
         <Typography variant="h1">Mon profil</Typography >
         <Box component="div" className="infos-users">
@@ -64,10 +64,18 @@ const Profile = () => {
                         flexDirection: 'column',
                         alignItems: 'stretch',
                 }}>
-                    <Typography variant="p">Mon pseudo : <strong>{current_user.Pseudo}</strong></Typography>
-                    <Typography variant="p">Mes nom et prénom : <strong>{current_user.Lastname} {current_user.Username}</strong></Typography>
-                    <Typography variant="p">Mon Email : <strong>{current_user.Email}</strong></Typography>
-                    <Typography variant="p">Mon statut : <strong>{current_user.Is_Admin ? "admin" : "utilisateur"}</strong> </Typography>
+                    <Typography variant="p">
+                      Mon pseudo : <strong>{current_user.Pseudo}</strong>
+                    </Typography>
+                    <Typography variant="p">
+                      Mes nom et prénom : <strong>{current_user.Lastname} {current_user.Username}</strong>
+                    </Typography>
+                    <Typography variant="p">
+                      Mon Email : <strong>{current_user.Email}</strong>
+                    </Typography>
+                    <Typography variant="p">
+                      Mon statut : <strong>{current_user.Is_Admin ? "admin" : "utilisateur"}</strong> 
+                    </Typography>
                 </Box>
                 </>
                 ) : null}
@@ -87,17 +95,20 @@ const Profile = () => {
         </Box>
           {current_user?.Is_Admin ? 
             <>
-            <Typography variant="h2">Les utilisateurs</Typography>
+            <Typography variant="h2" mt={2} mb={2}>Les utilisateurs</Typography>
             <TableContainer>
-              <Table aria-label="simple table">
-                <TableHead sx={{backgroundColor:"black"}} >
-                  <TableRow >
-                    <TableCell align="links" sx={{ color:"white"}}>Pseudo</TableCell>
-                    <TableCell align="links" sx={{ color:"white"}}>Prénom</TableCell>
-                    <TableCell align="links" sx={{ color:"white"}}>Nom</TableCell>
-                    <TableCell align="links" sx={{ color:"white"}}>Email</TableCell>
-                    <TableCell align="links" sx={{ color:"white"}}>Admin ou utilisateur </TableCell>
-                    <TableCell align="center" sx={{ color:"white"}}>Action</TableCell>
+              <Table aria-label="simple table"  >
+                <TableHead  sx={{
+                  backgroundColor:theme.palette.primary.dark,
+                  color:theme.palette.primary.contrastText
+                  }}>
+                  <TableRow  >
+                    <TableCell  align="links"  >Pseudo</TableCell>
+                    <TableCell align="links" >Prénom</TableCell>
+                    <TableCell align="links" >Nom</TableCell>
+                    <TableCell align="links" >Email</TableCell>
+                    <TableCell align="links" >Admin ou utilisateur </TableCell>
+                    <TableCell align="center" >Action</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -108,7 +119,7 @@ const Profile = () => {
                       <TableCell align="links">{user.Lastname}</TableCell>
                       <TableCell align="links">{user.Email}</TableCell>
                       <TableCell align="links">{user.Is_Admin ? "admin" : "utilisateur"}</TableCell>
-                      <TableCell align="center"><Link to={`/users/${user.ID}`}><Button className="link-button">Modifier</Button></Link></TableCell>
+                      <TableCell align="center"><Link to={`/users/${user.ID}`}><Button  className="link-button">Modifier</Button></Link></TableCell>
                     </TableRow>
                   )) : null}
                 </TableBody>
