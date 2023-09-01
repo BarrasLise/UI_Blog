@@ -9,6 +9,8 @@ const Navbar = () => {
   const theme = useTheme(); // Récupérez le thème
  
   const { unLogin, user : current_user}=useContext(AuthContext);
+
+  
   
 
   const pages = ['Accueil', 'Créer post'];
@@ -52,8 +54,9 @@ const Navbar = () => {
                 fontFamily: 'monospace',
                 fontWeight: 700,
                 letterSpacing: '.2rem',
-                color: 'inherit',
-                textDecoration: 'none',
+                color: 'inherit !important',
+                textDecoration: 'none !important',
+                
                 }}
             >
                 Topaz Blog
@@ -138,7 +141,8 @@ const Navbar = () => {
             {pages.map((page) => (
               <>                                                           
               { page==="Accueil" ? 
-                <Button  
+                <Button 
+                key={page} 
                 className="NavButton"
                 onClick={handleCloseNavMenu} 
                 component={"a"} 
@@ -149,6 +153,7 @@ const Navbar = () => {
               : 
               current_user?.Is_Admin ?  
               <Button
+              key={page} 
               className="NavButton"
               component={"a"} 
               href={`/posts`} 
@@ -193,9 +198,11 @@ const Navbar = () => {
                   {<Typography>
                     {setting==="Se déconnecter" ? 
                       <Link 
+                        key={setting} 
                         textAlign="center"
                         variant="h5"
                         onClick={unLogin}
+                        color={"inherit"}
                         sx={{
                             mr: 2,
                             fontSize : '18px', 
@@ -209,6 +216,7 @@ const Navbar = () => {
                       </Link>
                       : 
                       <Link
+                      key={setting} 
                       variant="h5"
                       href={`/users`} 
                       textAlign="center"
@@ -220,8 +228,7 @@ const Navbar = () => {
                         flexGrow: 1,
                         fontWeight: 200,
                         color: 'inherit',
-                        textDecoration: 'none',
-                        
+                        textDecoration: 'none', 
                       }}
                      
                       >

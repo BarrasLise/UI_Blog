@@ -1,13 +1,15 @@
 import { useFetch } from "use-http";
 import NotFound from "./NotFound";
-import { useContext } from "react";
+import { useContext} from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { Link} from "react-router-dom";
 import LogoutIcon from '@mui/icons-material/Logout';
 import EditIcon from '@mui/icons-material/Edit';
-import { Box, Button, Container, CssBaseline, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, colors, useTheme } from "@mui/material";
+import {  Box, Button,  Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography,  useTheme } from "@mui/material";
 import Loading from "../components/Loading";
-import theme from "../components/Theme";
+import LogoutButton from "../components/LogoutButton";
+
+
 
 const Profile = () => {
   const theme = useTheme(); // Récupérez le thème
@@ -18,7 +20,7 @@ const Profile = () => {
   const stylesTableRows = {
     "&:nth-of-type(odd):hover": {
         backgroundColor : color.light,
-        // colors : theme.palette.secondary.contrastText
+       
     },
     ":hover": {
         backgroundColor : color.light,
@@ -30,6 +32,7 @@ const Profile = () => {
         border: 0,  
     },
   }
+  
  
   return ( 
     <Box component="div" className="MyProfile" 
@@ -40,6 +43,7 @@ const Profile = () => {
                     alignItems: 'center',
         }}
     >
+     
         {loading ? <Loading/> :  
         error ? <NotFound /> 
        : 
@@ -88,7 +92,8 @@ const Profile = () => {
                     <Link to={`/users/${current_user.ID}`}>
                         <Button className="link-button"><EditIcon /></Button>
                     </Link>
-                    <Button className="link-button" type="button" value="se déconnecter" onClick={unLogin}><LogoutIcon /></Button>
+                    <LogoutButton/>
+                    {/* <Button className="link-button" type="button" value="se déconnecter" onClick={handleOpenAlert}><LogoutIcon /></Button> */}
                 </Box>
             </Box>
             

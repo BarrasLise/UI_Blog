@@ -11,6 +11,7 @@ import Filters from "../components/Filters";
 
 
 
+
 const BlogList = () => {
 
     const { get, data : datas, error, loading} = useFetch('posts', {}, []);
@@ -21,9 +22,11 @@ const BlogList = () => {
         let hash = 0;
         let i;
       
+       
         /* generateur de couleur */
         for (i = 0; i < string.length; i += 1) {
           hash = string.charCodeAt(i) + ((hash << 5) - hash);
+         
         }
       
         let color = '#';
@@ -32,6 +35,7 @@ const BlogList = () => {
           const value = (hash >> (i * 8)) & 0xff;
           color += `00${value.toString(16)}`.slice(-2);
         }
+       
 
         // generateur de couleur dans les tons bleu
         // for (i = 0; i < string.length; i += 1) {
@@ -65,6 +69,7 @@ const BlogList = () => {
         : null }
 
         <Box component={"div"} mb={"20px"} sx={{display: "flex", justifyContent: "space-between", alignItems:"center"}}>
+           
         <Typography variant="h2" mb={"20px"}>{"Tous les posts"}</Typography>
             <Filters  onSubmit={(url)=>get(url)} />
         </Box>

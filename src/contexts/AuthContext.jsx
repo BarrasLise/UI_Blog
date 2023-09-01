@@ -2,6 +2,7 @@ import  { useState, createContext, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { useFetch } from 'use-http';
 
+
 export const AuthContext = createContext({});
 
 const AuthProvider = ({ children }) => {
@@ -11,6 +12,8 @@ const AuthProvider = ({ children }) => {
   const [pseudo, setPseudo] = useState('');
   const [password, setPassword] = useState('');
   const [cookie] = useCookies(['PHPSESSID']);
+
+  
 
   const login = () => {
     post('login', {
@@ -26,8 +29,9 @@ const AuthProvider = ({ children }) => {
   },[cookie, get])
 
   const unLogin = () => {
-    alert('Vous allez être déconnecter...');
+    // alert('Vous allez être déconnecter...');
     get('unlogin');
+
   }
 
   const value = {
@@ -44,7 +48,10 @@ const AuthProvider = ({ children }) => {
     login,
   };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={value}>
+    {children}
+    
+    </AuthContext.Provider>;
 }
 
 export default AuthProvider;
