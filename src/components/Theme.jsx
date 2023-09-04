@@ -51,6 +51,18 @@ const theme = createTheme({
           }
         }
       },
+      MuiLink : {
+        styleOverrides : {
+          root : {
+            // color: "#3bb4fc !important",
+
+            '&:visited': {
+              // color : "#3bb4fc !important",
+            }, 
+
+          }
+        }
+      }
       
     },
   });

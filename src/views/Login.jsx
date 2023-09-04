@@ -6,13 +6,11 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { cyan } from '@mui/material/colors';
+
 
 const Login = (props) => {
     const theme = useTheme(); // Récupérez le thème
@@ -45,7 +43,7 @@ const Login = (props) => {
                 <Avatar sx={{ m: 1, bgcolor: theme.palette.primary.main }}>
                     <LockOutlinedIcon />
                 </Avatar>
-                <Typography variant="h5">
+                <Typography component="h1" variant="h5">
                     Se connecter
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -71,9 +69,9 @@ const Login = (props) => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         autoComplete="current-password" />
-                    <FormControlLabel
+                    {/* <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}
-                        label="Se souvenir de moi" />
+                        label="Se souvenir de moi" /> */}
                     <Button
                         type="submit"
                         fullWidth
@@ -83,13 +81,13 @@ const Login = (props) => {
                         Se connecter
                     </Button>
                     <Grid container>
-                        <Grid item xs>
+                        {/* <Grid item xs>
                             <Link mt={2} href="#" variant="body2">
                                 {"Mot de passe oublié ?"}
                             </Link>
-                        </Grid>
+                        </Grid> */}
                         <Grid item>
-                            <Link mt={2} variant="body2" onClick={props.switchForm}>
+                            <Link mt={2} variant="p" onClick={props.switchForm}>
                                 {" Pas de compte ? Inscrivez-vous "}
                             </Link>
                         </Grid>

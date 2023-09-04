@@ -4,11 +4,12 @@ import { Menu, AppBar, Box, Toolbar, IconButton, Typography,  Container, Avatar,
 import MenuIcon from '@mui/icons-material/Menu';
 import { AuthContext } from "../contexts/AuthContext";
 import { useTheme } from '@mui/material/styles'; // Importez useTheme
+import LogoutButton from "./LogoutButton";
 
 const Navbar = () => {
   const theme = useTheme(); // Récupérez le thème
  
-  const { unLogin, user : current_user}=useContext(AuthContext);
+  const {  user : current_user}=useContext(AuthContext);
 
   
   
@@ -94,18 +95,20 @@ const Navbar = () => {
             >
               {/* pages quand petit menu */}
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem key={page} sx={{justifyContent: "center"}} >
+                
 
                 {page === "Accueil" ? 
                   <Typography 
                   className="Navbar"
-                  textAlign="center" component={"a"} 
+                  textAlign="center" 
+                  component={"a"} 
                   href={`/`} 
                   sx={{textDecoration: 'none', color: 'inherit',}} >{page}</Typography> 
                   : 
                   <Typography textAlign="center" component={"a"} href={`/posts`} sx={{textDecoration: 'none', color: 'inherit',}} >{page}</Typography>
                 }
-                  
+                
                 </MenuItem>
               ))}
             </Menu>
@@ -193,37 +196,38 @@ const Navbar = () => {
               
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting}  sx={{ justifyContent: "center"}}>
 
-                  {<Typography>
+                  {<>
                     {setting==="Se déconnecter" ? 
-                      <Link 
-                        key={setting} 
-                        textAlign="center"
-                        variant="h5"
-                        onClick={unLogin}
-                        color={"inherit"}
-                        sx={{
-                            mr: 2,
-                            fontSize : '18px', 
-                            flexGrow: 1,
-                            fontWeight: 200,
-                            color: 'inherit',
-                            textDecoration: 'none', 
-                          }}
-                      >
-                        {setting}
-                      </Link>
+                      // <Link 
+                      //   key={setting} 
+                      //   textAlign="center"
+                      //   // variant="h5"
+                      //   onClick={unLogin}
+                      //   color={"inherit"}
+                      //   sx={{
+                      //       // mr: 2,
+                      //       fontSize : '18px', 
+                      //       flexGrow: 1,
+                      //       fontWeight: 200,
+                      //       color: 'inherit',
+                      //       textDecoration: 'none', 
+                      //     }}
+                      // >
+                      //   {setting}
+                      // </Link>
+                      <LogoutButton/>
                       : 
                       <Link
                       key={setting} 
-                      variant="h5"
+                      // variant="h5"
                       href={`/users`} 
                       textAlign="center"
                       color={"inherit"}
                       textDecoration="none"
                       sx={{
-                        mr: 2,
+                        // mr: 2,
                         fontSize : '18px', 
                         flexGrow: 1,
                         fontWeight: 200,
@@ -237,7 +241,7 @@ const Navbar = () => {
 
                     }
                     
-                    </Typography>}
+                    </>}
                   
                 </MenuItem>
               ))}

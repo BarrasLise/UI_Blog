@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -6,9 +6,12 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { Box } from "@mui/material";
+import { AuthContext } from "../contexts/AuthContext";
 
 const LogoutButton = () => {
     const [open, setOpen] = useState(false);
+    const {unLogin}=useContext(AuthContext);
 
     const handleOpen = () => {
       setOpen(true);
@@ -19,17 +22,17 @@ const LogoutButton = () => {
     };
   
     const handleLogout = () => {
-      // Ajoutez ici votre logique de déconnexion
-      // Par exemple, vous pouvez exécuter une action de déconnexion ici
-      // Puis, fermez la boîte de dialogue
+      unLogin();
       setOpen(false);
     };
 
     return ( 
-        <div>
-        <Button onClick={handleOpen} variant="contained" color="secondary">
-        <LogoutIcon /> Se déconnecter
+        <Box component="div" >
+        {/* <Button onClick={handleOpen} variant="contained" color="secondary"> */}
+        <Button onClick={handleOpen} >
+          <LogoutIcon />
         </Button>
+        
         <Dialog
           open={open}
           onClose={handleClose}
@@ -51,9 +54,7 @@ const LogoutButton = () => {
             </Button>
           </DialogActions>
         </Dialog>
-      </div>
-
-
+      </Box>
 
     );
 }

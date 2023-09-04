@@ -3,7 +3,7 @@ import NotFound from "./NotFound";
 import { useContext} from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import { Link} from "react-router-dom";
-import LogoutIcon from '@mui/icons-material/Logout';
+// import LogoutIcon from '@mui/icons-material/Logout';
 import EditIcon from '@mui/icons-material/Edit';
 import {  Box, Button,  Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography,  useTheme } from "@mui/material";
 import Loading from "../components/Loading";
@@ -15,7 +15,7 @@ const Profile = () => {
   const theme = useTheme(); // Récupérez le thème
   const color = theme.palette.primary ;
   const { data : users, error, loading} = useFetch( 'users' ,{}, []);
-  const {user : current_user, unLogin}=useContext(AuthContext);
+  const {user : current_user }=useContext(AuthContext);
 
   const stylesTableRows = {
     "&:nth-of-type(odd):hover": {
@@ -69,16 +69,16 @@ const Profile = () => {
                         alignItems: 'stretch',
                 }}>
                     <Typography variant="p">
-                      Mon pseudo : <strong>{current_user.Pseudo}</strong>
+                      Mon pseudo : <Box component="span" sx={{fontWeight:900}}>{current_user.Pseudo}</Box>
                     </Typography>
                     <Typography variant="p">
-                      Mes nom et prénom : <strong>{current_user.Lastname} {current_user.Username}</strong>
+                      Mes nom et prénom : <Box component="span" sx={{fontWeight:900}}>{current_user.Lastname} {current_user.Username}</Box>
                     </Typography>
                     <Typography variant="p">
-                      Mon Email : <strong>{current_user.Email}</strong>
+                      Mon Email : <Box component="span" sx={{fontWeight:900}}>{current_user.Email}</Box>
                     </Typography>
                     <Typography variant="p">
-                      Mon statut : <strong>{current_user.Is_Admin ? "admin" : "utilisateur"}</strong> 
+                      Mon statut : <Box component="span" sx={{fontWeight:900}}>{current_user.Is_Admin ? "admin" : "utilisateur"}</Box> 
                     </Typography>
                 </Box>
                 </>
@@ -90,9 +90,9 @@ const Profile = () => {
                     justifyContent: 'space-between'
                 }}>
                     <Link to={`/users/${current_user.ID}`}>
-                        <Button className="link-button"><EditIcon /></Button>
+                        <Button className="link-button" ><EditIcon /></Button>
                     </Link>
-                    <LogoutButton/>
+                    <LogoutButton />
                     {/* <Button className="link-button" type="button" value="se déconnecter" onClick={handleOpenAlert}><LogoutIcon /></Button> */}
                 </Box>
             </Box>
@@ -101,19 +101,19 @@ const Profile = () => {
           {current_user?.Is_Admin ? 
             <>
             <Typography variant="h2" mt={2} mb={2}>Les utilisateurs</Typography>
-            <TableContainer>
+            <TableContainer >
               <Table aria-label="simple table"  >
                 <TableHead  sx={{
                   backgroundColor:theme.palette.primary.dark,
                   color:theme.palette.primary.contrastText
                   }}>
                   <TableRow  >
-                    <TableCell  align="links"  >Pseudo</TableCell>
-                    <TableCell align="links" >Prénom</TableCell>
-                    <TableCell align="links" >Nom</TableCell>
-                    <TableCell align="links" >Email</TableCell>
-                    <TableCell align="links" >Admin ou utilisateur </TableCell>
-                    <TableCell align="center" >Action</TableCell>
+                    <TableCell align="links" sx={{fontWeight:900}} >Pseudo</TableCell>
+                    <TableCell align="links" sx={{fontWeight:900}}>Prénom</TableCell>
+                    <TableCell align="links"sx={{fontWeight:900}} >Nom</TableCell>
+                    <TableCell align="links" sx={{fontWeight:900}}>Email</TableCell>
+                    <TableCell align="links" sx={{fontWeight:900}}>Admin ou utilisateur </TableCell>
+                    <TableCell align="center"sx={{fontWeight:900}} >Action</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -124,7 +124,7 @@ const Profile = () => {
                       <TableCell align="links">{user.Lastname}</TableCell>
                       <TableCell align="links">{user.Email}</TableCell>
                       <TableCell align="links">{user.Is_Admin ? "admin" : "utilisateur"}</TableCell>
-                      <TableCell align="center"><Link to={`/users/${user.ID}`}><Button  className="link-button">Modifier</Button></Link></TableCell>
+                      <TableCell align="center"><Link to={`/users/${user.ID}`}><Button  className="link-button" variant="contained" color="primary">Modifier</Button></Link></TableCell>
                     </TableRow>
                   )) : null}
                 </TableBody>

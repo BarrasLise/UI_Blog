@@ -1,7 +1,5 @@
 import { Button, Grid, TextField, Typography, Box, CssBaseline, Container, Avatar, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { cyan } from '@mui/material/colors';
 import { useEffect, useState } from "react";
 import { useFetch } from "use-http";
 import { useNavigate } from "react-router-dom";
@@ -56,7 +54,7 @@ const Register = (props) => {
     const validEmail = postEmail.match(/^\S+@\S+\.\S+$/) ? true : false;
   
     //gestion force du mot de passe 
-    const passwordStrength = postPassword.length > 10 ? 'bon' : 'faible';
+    // const passwordStrength = postPassword.length > 10 ? 'bon' : 'faible';
   
 
     return ( 
@@ -73,7 +71,7 @@ const Register = (props) => {
                 }}
             >
                 <Avatar sx={{ m: 1, bgcolor: theme.palette.primary.main }}>
-                    <LockOutlinedIcon  />
+                    {/* <LockOutlinedIcon  /> */}
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     S'enregistrer
@@ -143,7 +141,7 @@ const Register = (props) => {
                         onChange={(e) => setPostPassword(e.target.value)}
                         autoComplete="current-password" />
                     
-                        { passwordStrength==='bon' ? 
+                        {/* { passwordStrength==='bon' ? 
                          <Typography variant="p" color={"Success"}>
                             {postPassword.length && `Force du mot de passe: ${passwordStrength}` }
                         </Typography>  
@@ -151,7 +149,7 @@ const Register = (props) => {
                           <Typography variant="p" color="error"> 
                             {postPassword.length && `Force du mot de passe: ${passwordStrength}` }
                          </Typography>
-                        }
+                        } */}
                     
                     <TextField
                         margin="normal"
@@ -188,14 +186,14 @@ const Register = (props) => {
                         S'enregistrer
                     </Button>
                     <Grid container>
-                        <Grid item xs>
+                        {/* <Grid item xs>
                             <Link mt={2}  href="#" variant="body2">
                                 {"Mot de passe oublié ? Cliquer ici"}
                             </Link>
-                        </Grid>
+                        </Grid> */}
                         <Grid item xs>
-                            <Link mt={2} variant="body2" onClick={props.switchForm}>
-                                {"Vous avez déjà un compte ? Cliquer ici pour vous connecter"}
+                            <Link mt={2} variant="p" onClick={props.switchForm} >
+                                {"Déjà un compte ? Cliquer ici pour vous connecter"}
                             </Link>
                         </Grid>
                     </Grid>

@@ -191,7 +191,7 @@ const Filters = ({ onSubmit }) => {
           >
             {/* faire générer les auteurs ici */}
             {users?.length ? users.map(user => (
-              <MenuItem  value={user.Pseudo}>{user.Pseudo}</MenuItem>
+              <MenuItem key={user.Pseudo}  value={user.Pseudo}>{user.Pseudo}</MenuItem>
             )) : null }
            
           </Select> 
