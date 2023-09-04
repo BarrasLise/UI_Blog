@@ -6,33 +6,39 @@ import { useNavigate } from "react-router-dom";
 
 const Register = (props) => {
     const theme = useTheme(); // Récupérez le thème
-    const [postPseudo, setPostPseudo] = useState("");
-    const [postFirstname, setPostFirstname] = useState("");
-    const [postLastname, setPostLastname] = useState("");
-    const [postEmail, setPostEmail] = useState("");
-    const [postPassword, setPostPassword] = useState("");
-    const [postCheckPassword, setPostCheckPassword] = useState("");
-
+    const [stateRegister, setStateRegister] = useState({
+        Pseudo: "",
+        Firstname: "",
+        Lastname: "",
+        Email: "",
+        Password: "",
+        CheckPassword: "",
+    });
     const navigate = useNavigate();
-
     const { post, response, error} = useFetch('register');
 
     const [errorForm, setErrorForm] = useState("form");
 
+    const updateField = (name, value) => {
+        if (!name) return;
+        setStateRegister({...stateRegister, [name]: value });
+        // setIsDirty(true);
+    };
+   
     const register = async (e) => {
         e.preventDefault();
-    
         const newUser = {
-          Pseudo : postPseudo,
-          Firstname : postFirstname,
-          Lastname  : postLastname,
-          Email : postEmail,
-          Password : postPassword, 
-          CheckPassword : postCheckPassword,
+          Pseudo : stateRegister.Pseudo,
+          Firstname : stateRegister.Firstname,
+          Lastname  : stateRegister.Lastname,
+          Email : stateRegister.Email,
+          Password : stateRegister.Password, 
+          CheckPassword : stateRegister.CheckPassword,
         };
     
         try {
           const registered = await post('', newUser);
+        // console.log(newUser);
           
           if (response?.status === 200) {
             alert(response?.data );
@@ -51,7 +57,7 @@ const Register = (props) => {
     }, [ error ])
 
     //Email valide ?
-    const validEmail = postEmail.match(/^\S+@\S+\.\S+$/) ? true : false;
+    // const validEmail = postEmail.match(/^\S+@\S+\.\S+$/) ? true : false;
   
     //gestion force du mot de passe 
     // const passwordStrength = postPassword.length > 10 ? 'bon' : 'faible';
@@ -86,8 +92,8 @@ const Register = (props) => {
                         label="Pseudo"
                         name="pseudo"
                         autoComplete="pseudo"
-                        value={postPseudo}
-                        onChange={(e) => setPostPseudo(e.target.value)}
+                        value={stateRegister.Pseudo}
+                        onChange={(e) => updateField("Pseudo", e.target.value)}
                         autoFocus />
                     <TextField
                         type="text"
@@ -98,8 +104,8 @@ const Register = (props) => {
                         label="firstname"
                         name="firstname"
                         autoComplete="fistname"
-                        value={postFirstname}
-                        onChange={(e) => setPostFirstname(e.target.value)}
+                        value={stateRegister.Firstname}
+                        onChange={(e) => updateField("Firstname",e.target.value)}
                         autoFocus />
                     <TextField
                         type="text"
@@ -110,8 +116,8 @@ const Register = (props) => {
                         label="lastname"
                         name="lastname"
                         autoComplete="lastname"
-                        value={postLastname}
-                        onChange={(e) => setPostLastname(e.target.value)}
+                        value={stateRegister.Lastname}
+                        onChange={(e) => updateField("Lastname",e.target.value)}
                         autoFocus />
                     <TextField
                         type="text"
@@ -122,12 +128,12 @@ const Register = (props) => {
                         label="email"
                         name="email"
                         autoComplete="email"
-                        value={postEmail}
-                        onChange={(e) => setPostEmail(e.target.value)}
+                        value={stateRegister.Email}
+                        onChange={(e) => updateField("Email",e.target.value)}
                         autoFocus />
-                    <Typography variant="div" xs={{ color: validEmail ? "green" : "red" }}>
+                    {/* <Typography variant="div" xs={{ color: validEmail ? "green" : "red" }}>
                         { postEmail ? validEmail ? "Email valide" : "Email non valide" : null}
-                    </Typography>
+                    </Typography> */}
                     
                     <TextField
                         margin="normal"
@@ -137,8 +143,8 @@ const Register = (props) => {
                         label="Mot de passe"
                         type="password"
                         id="password"
-                        value={postPassword}
-                        onChange={(e) => setPostPassword(e.target.value)}
+                        value={stateRegister.Password}
+                        onChange={(e) => updateField("Password",e.target.value)}
                         autoComplete="current-password" />
                     
                         {/* { passwordStrength==='bon' ? 
@@ -159,12 +165,12 @@ const Register = (props) => {
                         label="confirmer le mot de passe"
                         type="password"
                         id="ConfirmPassword"
-                        value={postCheckPassword}
-                        onChange={(e) => setPostCheckPassword(e.target.value)}
+                        value={stateRegister.CheckPassword}
+                        onChange={(e) => updateField("CheckPassword",e.target.value)}
                         autoComplete="current-password" />
-                    <Typography color="error" variant="div" >
+                    {/* <Typography color="error" variant="div" >
                         {postPassword !== postCheckPassword ? "Les mots de passe ne correspondent pas" : null}
-                    </Typography>
+                    </Typography> */}
 
                     {error ? (
                         <>
@@ -176,12 +182,23 @@ const Register = (props) => {
                         </>
                     ) : null}
 
-                    <Button
+                    {/* <Button
                         type="submit"
                         fullWidth
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                         disabled={postPseudo && postFirstname && postLastname && postEmail && validEmail && postPassword && postCheckPassword && postPassword === postCheckPassword ? false : true  }
+                        onClick={register}
+                    >
+                        S'enregistrer
+                    </Button> */}
+                     <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                        
+                        onClick={register}
                     >
                         S'enregistrer
                     </Button>

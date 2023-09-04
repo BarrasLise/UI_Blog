@@ -19,8 +19,7 @@ const Profile = () => {
 
   const stylesTableRows = {
     "&:nth-of-type(odd):hover": {
-        backgroundColor : color.light,
-       
+        backgroundColor : color.light,  
     },
     ":hover": {
         backgroundColor : color.light,
@@ -33,7 +32,6 @@ const Profile = () => {
     },
   }
   
- 
   return ( 
     <Box component="div" className="MyProfile" 
         sx={{
