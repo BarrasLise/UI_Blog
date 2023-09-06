@@ -1,12 +1,13 @@
-import { Button, Grid, TextField, Typography, Box, CssBaseline, Container, Avatar, useTheme } from "@mui/material";
+import { Grid,  Typography, Box, CssBaseline, Container, Avatar, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useFetch } from "use-http";
-import { useNavigate } from "react-router-dom";
+
+import LoginForm from "../components/LoginForm";
 
 const Register = (props) => {
     const theme = useTheme(); // Récupérez le thème
-    const [stateRegister, setStateRegister] = useState({
+    const [stateRegister] = useState({
         Pseudo: "",
         Firstname: "",
         Lastname: "",
@@ -14,16 +15,53 @@ const Register = (props) => {
         Password: "",
         CheckPassword: "",
     });
-    const navigate = useNavigate();
+    
     const { post, response, error} = useFetch('register');
 
     const [errorForm, setErrorForm] = useState("form");
+    const fields = [
+        {
+          code: 'Pseudo',
+          label: 'Pseudo ',
+          type: 'text'
+        },
+        {
+            code: 'Firstname',
+            label: 'Firstname ',
+            type: 'text'
+        },
+        {
+            code: 'Lastname',
+            label: 'Lastname ',
+            type: 'text'
+        },
+        {
+            code: 'Email',
+            label: 'Email ',
+            type: 'text'
+        },
+        {
+          code: 'Password',
+          label: 'Mot de passe ',
+          type: 'password'
+        },
+        {
+            code: 'CheckPassword',
+            label: 'Confirmer le mot de passe ',
+            type: 'password'
+          }, 
+        {
+          code: 'button',
+          text: "s'enregistrer",
+          type: 'submit'
+        }
+      ];
 
-    const updateField = (name, value) => {
-        if (!name) return;
-        setStateRegister({...stateRegister, [name]: value });
-        // setIsDirty(true);
-    };
+    // const updateField = (name, value) => {
+    //     if (!name) return;
+    //     setStateRegister({...stateRegister, [name]: value });
+    //     // setIsDirty(true);
+    // };
    
     const register = async (e) => {
         e.preventDefault();
@@ -41,10 +79,10 @@ const Register = (props) => {
         // console.log(newUser);
           
           if (response?.status === 200) {
-            alert(response?.data );
+            // alert(response?.data );
             setErrorForm(false);
             console.log('User enregistré avec succès', registered);
-            navigate('/login');
+            // navigate('/login');
             props.switchForm();
           }
           
@@ -71,6 +109,7 @@ const Register = (props) => {
             <Box
                 sx={{
                     marginTop: 8,
+                    marginBottom: 8,
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -83,70 +122,12 @@ const Register = (props) => {
                     S'enregistrer
                 </Typography>
                 <Box component="form" onSubmit={register} noValidate sx={{ mt: 1 }}>
-                    <TextField
-                        type="text"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="pseudo"
-                        label="Pseudo"
-                        name="pseudo"
-                        autoComplete="pseudo"
-                        value={stateRegister.Pseudo}
-                        onChange={(e) => updateField("Pseudo", e.target.value)}
-                        autoFocus />
-                    <TextField
-                        type="text"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="firstname"
-                        label="firstname"
-                        name="firstname"
-                        autoComplete="fistname"
-                        value={stateRegister.Firstname}
-                        onChange={(e) => updateField("Firstname",e.target.value)}
-                        autoFocus />
-                    <TextField
-                        type="text"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="lastname"
-                        label="lastname"
-                        name="lastname"
-                        autoComplete="lastname"
-                        value={stateRegister.Lastname}
-                        onChange={(e) => updateField("Lastname",e.target.value)}
-                        autoFocus />
-                    <TextField
-                        type="text"
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="email"
-                        label="email"
-                        name="email"
-                        autoComplete="email"
-                        value={stateRegister.Email}
-                        onChange={(e) => updateField("Email",e.target.value)}
-                        autoFocus />
+                 
                     {/* <Typography variant="div" xs={{ color: validEmail ? "green" : "red" }}>
                         { postEmail ? validEmail ? "Email valide" : "Email non valide" : null}
                     </Typography> */}
                     
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="password"
-                        label="Mot de passe"
-                        type="password"
-                        id="password"
-                        value={stateRegister.Password}
-                        onChange={(e) => updateField("Password",e.target.value)}
-                        autoComplete="current-password" />
-                    
+                 
                         {/* { passwordStrength==='bon' ? 
                          <Typography variant="p" color={"Success"}>
                             {postPassword.length && `Force du mot de passe: ${passwordStrength}` }
@@ -157,20 +138,12 @@ const Register = (props) => {
                          </Typography>
                         } */}
                     
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="ConfirmPassword"
-                        label="confirmer le mot de passe"
-                        type="password"
-                        id="ConfirmPassword"
-                        value={stateRegister.CheckPassword}
-                        onChange={(e) => updateField("CheckPassword",e.target.value)}
-                        autoComplete="current-password" />
+                  
                     {/* <Typography color="error" variant="div" >
                         {postPassword !== postCheckPassword ? "Les mots de passe ne correspondent pas" : null}
                     </Typography> */}
+
+                    <LoginForm fields={fields} />
 
                     {error ? (
                         <>
@@ -192,16 +165,16 @@ const Register = (props) => {
                     >
                         S'enregistrer
                     </Button> */}
-                     <Button
+                     {/* <Button
                         type="submit"
                         fullWidth
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                         
-                        onClick={register}
+                        // onClick={register}
                     >
                         S'enregistrer
-                    </Button>
+                    </Button> */}
                     <Grid container>
                         {/* <Grid item xs>
                             <Link mt={2}  href="#" variant="body2">
@@ -209,7 +182,7 @@ const Register = (props) => {
                             </Link>
                         </Grid> */}
                         <Grid item xs>
-                            <Link mt={2} variant="p" onClick={props.switchForm} >
+                            <Link mt={2} mb={3} variant="p" onClick={props.switchForm} >
                                 {"Déjà un compte ? Cliquer ici pour vous connecter"}
                             </Link>
                         </Grid>

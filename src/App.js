@@ -1,5 +1,4 @@
 import React, {useContext} from 'react';
-
 import Navbar from "./components/Navbar";
 import { Container, CssBaseline } from '@mui/material';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -16,12 +15,12 @@ function App() {
      // //en local : 
     <>
     <Router>
-      <CssBaseline />
-      <Navbar />
-      <Container maxWidth={'xl'} sx={{mt:"20px"}}>
-        {isLoggedIn ?  <AppRoutes /> :  <Connection />}
-      </Container>
-      </Router>
+        <CssBaseline />
+        <Navbar />
+        <Container maxWidth={'xl'} sx={{mt:"20px"}}>
+          {isLoggedIn ?  <AppRoutes /> :  <Connection />}
+        </Container>
+    </Router>
     </>
   );
 }
