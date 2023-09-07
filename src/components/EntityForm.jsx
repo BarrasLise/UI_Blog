@@ -67,7 +67,7 @@ const EntityForm = ({fields}) => {
 
         )
       })}
-      <Box component="div" 
+      {/* <Box component="div" 
         sx={{
         marginTop: 2,
         display: 'flex',
@@ -76,9 +76,10 @@ const EntityForm = ({fields}) => {
         justifyContent: 'space-evenly'
         }}
       > 
-      {isDirty ? <Button key={"Sauvegarder"} className="IconButton" id="submit" type="submit" value="Sauvegarder" onClick={saveEntity}><SaveIcon /></Button> : null}
-      <Button key={"Supprimer"} className="IconButton" value="Supprimer" onClick={deleteEntity}><DeleteIcon /></Button>
-      </Box>
+        {isDirty ? <Button key={"Sauvegarder"} className="IconButton" id="submit" type="submit" value="Sauvegarder" onClick={saveEntity}><SaveIcon /></Button> : null}
+        <Button key={"Supprimer"} className="IconButton" value="Supprimer" onClick={deleteEntity}><DeleteIcon /></Button>
+
+      </Box> */}
       </>
     ) : null
   )

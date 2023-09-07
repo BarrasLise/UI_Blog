@@ -7,11 +7,13 @@ import { Box, Button, Container, CssBaseline, Paper, Typography } from "@mui/mat
 import EditIcon from '@mui/icons-material/Edit';
 import Loading from "../components/Loading";
 import LikeButton from "../components/LikeButton";
+import DeleteIcon from '@mui/icons-material/Delete';
+import SaveIcon from '@mui/icons-material/Save';
 
 
 const BlogDetails = () => {
   const [edited, setEdited] = useState(false)
-  const { entity, error, loading } = useContext(EntityContext);
+  const { entity, error, loading, isDirty, saveEntity, deleteEntity } = useContext(EntityContext);
   const {user : current_user}=useContext(AuthContext);
   const fields = [
     {
@@ -80,7 +82,21 @@ const BlogDetails = () => {
     
                         <Typography variant="h5" sx={{ mb: 1 }}>Modifier le post :  </Typography>
                         
-                        <EntityForm fields={fields}  />  
+                        <EntityForm fields={fields}  /> 
+
+                        <Box component="div" 
+                          sx={{
+                          marginTop: 2,
+                          display: 'flex',
+                          flexDirection: 'row',
+                          alignItems: 'center',
+                          justifyContent: 'space-evenly'
+                          }}
+                        > 
+                          {isDirty ? <Button key={"Sauvegarder"} className="IconButton" id="submit" type="submit" value="Sauvegarder" onClick={saveEntity}><SaveIcon /></Button> : null}
+                          <Button key={"Supprimer"} className="IconButton" value="Supprimer" onClick={deleteEntity}><DeleteIcon /></Button>
+
+                        </Box>
                     </Box>
                 : null }   
             </>

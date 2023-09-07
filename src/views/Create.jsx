@@ -5,6 +5,8 @@ import { AuthContext } from "../contexts/AuthContext";
 import { Box, Button, TextField, TextareaAutosize,  Typography, Container} from "@mui/material";
 import CssBaseline from '@mui/material/CssBaseline';
 import Loading from "../components/Loading";
+import EntityForm from "../components/EntityForm";
+import { EntityContext } from "../contexts/EntityContext";
 
 
 const Create = () => {
@@ -15,14 +17,18 @@ const Create = () => {
   const { post, response, error, loading } = useFetch('posts', {}, []);
 
   const {user : current_user}=useContext(AuthContext);
+  // const {  updateField, isDirty } = useContext(EntityContext);
 
   const createPost = async (e) => {
     e.preventDefault();
+
+    
 
     const newPost = {
       Title: postTitle,
       Body: postBody,
     };
+    console.log(newPost);
 
     try {
       const createdPost = await post('', newPost);
@@ -36,6 +42,19 @@ const Create = () => {
       console.error('Une erreur s\'est produite', error);
     }
   };
+
+  const fields = [
+    {
+      code: 'postTitle',
+      label: 'Titre du post ',
+      type: 'text'
+    },
+    {
+      code: 'postBody',
+      label: 'Contenu du post ',
+      type: 'textarea'
+    }
+  ];
 
 
   return (
@@ -61,7 +80,7 @@ const Create = () => {
         <Box component="form" onSubmit={createPost} noValidate sx={{ mt: 1 }}>
             
             
-            <TextField
+            {/* <TextField
               margin="normal"
               type="text"
               required
@@ -84,7 +103,9 @@ const Create = () => {
               value={postBody}
               onChange={(e) => setPostBody(e.target.value)}
               style={{ width: "100%", fontSize: "1rem" }}
-            />
+            /> */}
+
+            <EntityForm fields={fields}  /> 
 
             <Button
              type="submit"
