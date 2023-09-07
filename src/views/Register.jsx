@@ -27,12 +27,12 @@ const Register = (props) => {
         },
         {
             code: 'Firstname',
-            label: 'Firstname ',
+            label: 'Prénom ',
             type: 'text'
         },
         {
             code: 'Lastname',
-            label: 'Lastname ',
+            label: 'Nom ',
             type: 'text'
         },
         {

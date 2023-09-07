@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { EntityContext } from "../contexts/EntityContext";
 import DeleteIcon from '@mui/icons-material/Delete';
 import SaveIcon from '@mui/icons-material/Save';
-import { Box, Button, FormLabel, TextField, TextareaAutosize,  Typography, useTheme} from "@mui/material";
+import { Box, Button, TextField, TextareaAutosize } from "@mui/material";
 
 const EntityForm = ({fields}) => {
  
@@ -20,7 +20,7 @@ const EntityForm = ({fields}) => {
            
              
               <TextField
-              
+                key={field.label}
                 margin="normal"
                 type="text"
                 required
@@ -37,6 +37,7 @@ const EntityForm = ({fields}) => {
               <>
               
               <TextareaAutosize
+                key={field.label}
                 type="text"
                 minRows={4}
                 placeholder={field.label}
@@ -53,6 +54,7 @@ const EntityForm = ({fields}) => {
             
               
               <TextField
+                key={field.label}
                 type="password"
                 required
                 label={field.label}
@@ -74,8 +76,8 @@ const EntityForm = ({fields}) => {
         justifyContent: 'space-evenly'
         }}
       > 
-      {isDirty ? <Button className="IconButton" id="submit" type="submit" value="Sauvegarder" onClick={saveEntity}><SaveIcon /></Button> : null}
-      <Button className="IconButton" onClick={deleteEntity}><DeleteIcon /></Button>
+      {isDirty ? <Button key={"Sauvegarder"} className="IconButton" id="submit" type="submit" value="Sauvegarder" onClick={saveEntity}><SaveIcon /></Button> : null}
+      <Button key={"Supprimer"} className="IconButton" value="Supprimer" onClick={deleteEntity}><DeleteIcon /></Button>
       </Box>
       </>
     ) : null

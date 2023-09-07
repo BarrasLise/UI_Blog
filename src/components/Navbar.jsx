@@ -11,9 +11,6 @@ const Navbar = () => {
  
   const {  user : current_user}=useContext(AuthContext);
 
-  
-  
-
   const pages = ['Accueil', 'Créer post'];
   const settings = ['Mon profil', 'Se déconnecter'];
 
@@ -100,13 +97,14 @@ const Navbar = () => {
 
                 {page === "Accueil" ? 
                   <Typography 
+                  key={page}
                   className="Navbar"
                   textAlign="center" 
                   component={"a"} 
                   href={`/`} 
                   sx={{textDecoration: 'none', color: 'inherit',}} >{page}</Typography> 
                   : 
-                  <Typography textAlign="center" component={"a"} href={`/posts`} sx={{textDecoration: 'none', color: 'inherit',}} >{page}</Typography>
+                  <Typography key={page} textAlign="center" component={"a"} href={`/posts`} sx={{textDecoration: 'none', color: 'inherit',}} >{page}</Typography>
                 }
                 
                 </MenuItem>
@@ -115,7 +113,7 @@ const Navbar = () => {
           </Box>
           
           <Tooltip title="retourner à la page d'accueil">
-            <Typography
+            <Typography            
               textDecoration= 'none' 
               variant="h5"
               noWrap

@@ -3,10 +3,10 @@ import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 
 const LoginForm = ({fields}) => {
-    const { updateField, stateLogin} = useContext(AuthContext);
+    const { updateField,  stateEntity} = useContext(AuthContext);
 
     return ( 
-        fields && fields.length && stateLogin ? (
+        fields && fields.length && stateEntity ? (
             <>
 
             {fields.map((field)=> {
@@ -16,6 +16,7 @@ const LoginForm = ({fields}) => {
                     field.type === 'text' ? (
                         
                         <TextField
+                        key={field.label}
                         type="text"
                         margin="normal"
                         required
@@ -24,7 +25,8 @@ const LoginForm = ({fields}) => {
                         label={field.label}
                         name={field.label}
                         autoComplete={field.label}
-                        value={stateLogin[field.code] ? stateLogin[field.code] : "" }
+                        // value={stateLogin[field.code] ? stateLogin[field.code] : "" }
+                        value={stateEntity[field.code] ? stateEntity[field.code] : "" }
                         onChange={(e) => updateField(field.code, e.target.value)}
                         autoFocus 
                         />
@@ -32,14 +34,16 @@ const LoginForm = ({fields}) => {
                     ) : field.type === 'password' ?(
                         
                         <TextField
+                            key={field.label}
                             margin="normal"
                             required
                             fullWidth
                             name={field.label}
                             label={field.label}
-                            type={field.label}
+                            type={field.type}
                             id={field.label}
-                            value={stateLogin[field.code] ? stateLogin[field.code] : ""}
+                            // value={stateLogin[field.code] ? stateLogin[field.code] : ""}
+                            value={stateEntity[field.code] ? stateEntity[field.code] : "" }
                             onChange={(e) => updateField(field.code,e.target.value)}
                             autoComplete="current-password" 
                         />
@@ -47,6 +51,7 @@ const LoginForm = ({fields}) => {
                     ) : field.type === 'submit' ? (
 
                         <Button
+                        key={field.text}
                         type="submit"
                         fullWidth
                         variant="contained"

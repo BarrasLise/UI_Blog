@@ -2,14 +2,9 @@ import  { useState, createContext, useEffect } from 'react';
 import { useCookies } from 'react-cookie';
 import { useFetch } from 'use-http';
 
-
-
 export const AuthContext = createContext({});
 
 const AuthProvider = ({ children }) => {
-  
-
- 
   
   const { data, loading, error, post, get, response } = useFetch('session');
 
@@ -17,32 +12,39 @@ const AuthProvider = ({ children }) => {
   // const [password, setPassword] = useState('');
   const [cookie] = useCookies(['PHPSESSID']);
 
-  const [stateLogin, setStateLogin] = useState({
+  // const [stateLogin, setStateLogin] = useState({
+  //   Pseudo: "",
+  //   Password: "",
+  // });
+  const [stateEntity, setStateEntity] = useState({
     Pseudo: "",
-    Password: "",
-  });
+    Firstname : "", 
+    Lastname : "", 
+    Email : "",
+    Is_Admin : "",
+    Password : "", 
+    CheckPassword : "", 
+  }); 
 
   //fonction pour modifier les champs
   const updateField = (name, value) => {
     if (!name) return;
-    setStateLogin({ ...stateLogin, [name]: value });
+    // setStateLogin({ ...stateLogin, [name]: value });
+    setStateEntity({...stateEntity, [name]: value});
     // setIsDirty(true);
   };
 
-  // const login = () => {
-  //   post('login', {
-  //     Pseudo: stateLogin.Pseudo,
-  //     Password: stateLogin.Password
-  //   });
-  //   navigate('/');
-  // }
   const login = async () => {
     try {
+      // await post('login', {
+      //   Pseudo: stateLogin.Pseudo,
+      //   Password: stateLogin.Password
+      // });
+      
       await post('login', {
-        Pseudo: stateLogin.Pseudo,
-        Password: stateLogin.Password
+        Pseudo: stateEntity.Pseudo,
+        Password: stateEntity.Password
       });
-      // Rediriger l'utilisateur vers "/" après une connexion réussie
     
     } catch (error) {
       // Gérer les erreurs de connexion
@@ -66,7 +68,9 @@ const AuthProvider = ({ children }) => {
     error,
     loading,
     updateField,
-    stateLogin,
+    // stateLogin,
+    stateEntity,
+    setStateEntity,
     // pseudo,
     // setPseudo,
     // password,

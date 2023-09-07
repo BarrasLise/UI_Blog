@@ -42,7 +42,6 @@ const Login = (props) => {
         });
 
         login();
-
     };
 
     return ( 
