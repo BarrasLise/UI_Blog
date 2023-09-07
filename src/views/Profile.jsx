@@ -106,22 +106,22 @@ const Profile = () => {
                   color:theme.palette.primary.contrastText
                   }}>
                   <TableRow  >
-                    <TableCell align="links" sx={{fontWeight:900}} >Pseudo</TableCell>
-                    <TableCell align="links" sx={{fontWeight:900}}>Prénom</TableCell>
-                    <TableCell align="links"sx={{fontWeight:900}} >Nom</TableCell>
-                    <TableCell align="links" sx={{fontWeight:900}}>Email</TableCell>
-                    <TableCell align="links" sx={{fontWeight:900}}>Admin ou utilisateur </TableCell>
+                    <TableCell align="left" sx={{fontWeight:900}} >Pseudo</TableCell>
+                    <TableCell align="left" sx={{fontWeight:900}}>Prénom</TableCell>
+                    <TableCell align="left"sx={{fontWeight:900}} >Nom</TableCell>
+                    <TableCell align="left" sx={{fontWeight:900}}>Email</TableCell>
+                    <TableCell align="left" sx={{fontWeight:900}}>Admin ou utilisateur </TableCell>
                     <TableCell align="center"sx={{fontWeight:900}} >Action</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {users?.length ? users.map(user => (
                     <TableRow key={user.ID} sx={{...stylesTableRows}}>
-                      <TableCell align="links">{user.Pseudo}</TableCell>
-                      <TableCell align="links">{user.Firstname}</TableCell>
-                      <TableCell align="links">{user.Lastname}</TableCell>
-                      <TableCell align="links">{user.Email}</TableCell>
-                      <TableCell align="links">{user.Is_Admin ? "admin" : "utilisateur"}</TableCell>
+                      <TableCell align="left">{user.Pseudo}</TableCell>
+                      <TableCell align="left">{user.Firstname}</TableCell>
+                      <TableCell align="left">{user.Lastname}</TableCell>
+                      <TableCell align="left">{user.Email}</TableCell>
+                      <TableCell align="left">{user.Is_Admin ? "admin" : "utilisateur"}</TableCell>
                       <TableCell align="center"><Link to={`/users/${user.ID}`}><Button  className="link-button" variant="contained" color="primary">Modifier</Button></Link></TableCell>
                     </TableRow>
                   )) : null}

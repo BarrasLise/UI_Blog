@@ -1,64 +1,27 @@
 import { useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { useFetch } from "use-http";
-import { useState } from "react";
 import { useEffect } from "react";
-import DeleteIcon from '@mui/icons-material/Delete';
-import SaveIcon from '@mui/icons-material/Save';
 import { AuthContext } from "../contexts/AuthContext";
-import { Box, Button, InputLabel, MenuItem, Select, TextField, TextareaAutosize } from "@mui/material";
+import {  Button, InputLabel, MenuItem, Select, TextField, TextareaAutosize } from "@mui/material";
 
-const UserForm = ({fields}) => {
+const UserForm = ({fields, isDirty, setIsDirty}) => {
   const { id } = useParams('');
-  const navigate = useNavigate();
-  // const [entity, setEntity] = useState(null);
-  const [isDirty, setIsDirty] = useState(false);
-
-  const { put, data, del, response, loading,} = useFetch( 'users/'+id ,{}, []);
-
-  const {user : current_user, unLogin, stateEntity, setStateEntity}=useContext(AuthContext);
+  const {  data,  response, loading,} = useFetch( 'users/'+id ,{}, []);
+  const { stateEntity, setStateEntity}=useContext(AuthContext);
 
   useEffect(() => {
     if (loading) return;
-    if (response.ok) {
-      // setEntity(data);   
+    if (response.ok) {  
       setStateEntity(data);
     }
   }, [loading, response.ok, data, setStateEntity]);
 
   const updateField = (name, value) => {
     if (!name) return;
-    // setEntity({ ...entity, [name]: value });
     setStateEntity({...stateEntity, [name] : value});
-    setIsDirty(true);
   };
-  const deleteEntity = async () => {
-    if (window.confirm("Voulez vous vraiment supprimer cet utilisateur ?" ) === true){
-      // await del(entity);
-      await del(stateEntity);
-      if (response.ok) navigate('/users');
-    } else {
-      // alert("Vous n'avez pas supprimer l'utilisateur !");
-      console.log("Vous n'avez pas supprimer l'utilisateur !");
-    }
-  };
-
-  const saveEntity = async () => {
-    // if(entity.Pseudo === current_user.Pseudo)
-    if(stateEntity.Pseudo === current_user.Pseudo)
-    {
-      // await put( entity);
-      await put(stateEntity);
-      console.log(stateEntity);
-      unLogin();
-    } else {
-      await put(stateEntity);
-      console.log(stateEntity);
-      // await put( entity);
-      navigate('/users');
-    }
-
-  };
+ 
 
   return (
     fields && fields.length 
@@ -81,9 +44,11 @@ const UserForm = ({fields}) => {
                 required
                 fullWidth
                 label={field.label}
-                // value={entity[field.code] ? entity[field.code] : ''}
+                name={field.label}
+                autoComplete={field.label}
                 value={stateEntity[field.code] ? stateEntity[field.code] : "" }
                 onChange={(e) => updateField(field.code, e.target.value)}
+                autoFocus 
             />
             
             
@@ -96,7 +61,6 @@ const UserForm = ({fields}) => {
                 minRows={4}
                 placeholder={field.label}
                 required
-                // value={entity[field.code] ? entity[field.code] : ''}
                 value={stateEntity[field.code] ? stateEntity[field.code] : "" }
                 onChange={(e) => updateField(field.code, e.target.value)}
                 style={{ width: "100%", minWidth: "500px", fontSize: "1rem" }}
@@ -109,13 +73,15 @@ const UserForm = ({fields}) => {
             <TextField
                 key={field.label}
                 margin="normal"
-                type="password"
+                type={field.type}
                 required
                 fullWidth
                 label={field.label}
-                // value={entity[field.code] ? entity[field.code] : ''}
+                name={field.label}
+                id={field.label}
                 value={stateEntity[field.code] ? stateEntity[field.code] : "" }
                 onChange={(e) => updateField(field.code, e.target.value)}
+                autoComplete="current-password" 
             />
          
           ) : field.type === 'select' ? (
@@ -126,9 +92,7 @@ const UserForm = ({fields}) => {
                     name="Is_Admin" 
                     labelId="Is_Admin" 
                     required
-                    // value={entity.Is_Admin } 
                     value={stateEntity.Is_Admin}
-                    // value={stateEntity[field.code] === '1' ? "Admin" : "Utilisateur"  }
                     label="statut admin"
                     onChange={(e)=>updateField(field.code, e.target.value)}
                 >
@@ -136,39 +100,25 @@ const UserForm = ({fields}) => {
                     <MenuItem key={0} value={0}>Utilisateur</MenuItem>
                 </Select>
             </>
-           
+          ) : field.type === 'submit' ? (
+
+            <Button
+              key={field.text}
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+                {field.text}
+            </Button>
+
+        
           ) : null
-          // field.type === '' (
-            
-          //   <TextField
-          //       key={field.label}
-          //       margin="normal"
-          //       type="text"
-          //       required
-          //       fullWidth
-          //       label={field.label}
-          //       value={data[field.code] ? data[field.code] : ''}
-          //       onChange={(e) => updateField(field.code, e.target.value)}
-          //   />
-            
-          // )
+          
         )
       })}
       
-      <Box component="div" 
-        sx={{
-        marginTop: 8,
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-evenly'
-        }}
-      > 
-
-      {isDirty ? <Button className="IconButton" id="submit" type="submit" value="Sauvegarder" onClick={saveEntity}><SaveIcon/></Button> : null}
       
-      <Button className="IconButton" id="submit" type="submit" value="Supprimer" onClick={deleteEntity}><DeleteIcon/></Button> 
-      </Box>
       
       </>
 

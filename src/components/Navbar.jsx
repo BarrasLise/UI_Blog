@@ -140,7 +140,7 @@ const Navbar = () => {
           flexGrow={1}
           >
             {pages.map((page) => (
-              <>                                                           
+              <React.Fragment key={page}>                                                           
               { page==="Accueil" ? 
                 <Button 
                 key={page} 
@@ -161,7 +161,7 @@ const Navbar = () => {
               color="inherit"
               >{page}</Button> : null
               }
-              </>
+              </React.Fragment>
 
             ))}
           </Box>
@@ -215,7 +215,7 @@ const Navbar = () => {
                       // >
                       //   {setting}
                       // </Link>
-                      <LogoutButton/>
+                      <LogoutButton key={setting} />
                       : 
                       <Link
                       key={setting} 

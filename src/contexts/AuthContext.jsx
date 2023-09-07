@@ -5,17 +5,12 @@ import { useFetch } from 'use-http';
 export const AuthContext = createContext({});
 
 const AuthProvider = ({ children }) => {
+  const [ setIsDirty] = useState(false);
   
   const { data, loading, error, post, get, response } = useFetch('session');
 
-  // const [pseudo, setPseudo] = useState('');
-  // const [password, setPassword] = useState('');
   const [cookie] = useCookies(['PHPSESSID']);
 
-  // const [stateLogin, setStateLogin] = useState({
-  //   Pseudo: "",
-  //   Password: "",
-  // });
   const [stateEntity, setStateEntity] = useState({
     Pseudo: "",
     Firstname : "", 
@@ -31,15 +26,12 @@ const AuthProvider = ({ children }) => {
     if (!name) return;
     // setStateLogin({ ...stateLogin, [name]: value });
     setStateEntity({...stateEntity, [name]: value});
-    // setIsDirty(true);
+    setIsDirty(true);
   };
 
   const login = async () => {
     try {
-      // await post('login', {
-      //   Pseudo: stateLogin.Pseudo,
-      //   Password: stateLogin.Password
-      // });
+      
       
       await post('login', {
         Pseudo: stateEntity.Pseudo,
@@ -69,6 +61,7 @@ const AuthProvider = ({ children }) => {
     loading,
     updateField,
     // stateLogin,
+    // isDirty,
     stateEntity,
     setStateEntity,
     // pseudo,

@@ -1,22 +1,17 @@
 import { Grid,  Typography, Box, CssBaseline, Container, Avatar, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useFetch } from "use-http";
 
-import LoginForm from "../components/LoginForm";
+// import LoginForm from "../components/LoginForm";
+import UserForm from "../components/UserForm";
+import { AuthContext } from "../contexts/AuthContext";
 
 const Register = (props) => {
     const theme = useTheme(); // Récupérez le thème
-    const [stateRegister] = useState({
-        Pseudo: "",
-        Firstname: "",
-        Lastname: "",
-        Email: "",
-        Password: "",
-        CheckPassword: "",
-    });
     
     const { post, response, error} = useFetch('register');
+    const { stateEntity}=useContext(AuthContext);
 
     const [errorForm, setErrorForm] = useState("form");
     const fields = [
@@ -49,7 +44,7 @@ const Register = (props) => {
             code: 'CheckPassword',
             label: 'Confirmer le mot de passe ',
             type: 'password'
-          }, 
+        }, 
         {
           code: 'button',
           text: "s'enregistrer",
@@ -57,32 +52,26 @@ const Register = (props) => {
         }
       ];
 
-    // const updateField = (name, value) => {
-    //     if (!name) return;
-    //     setStateRegister({...stateRegister, [name]: value });
-    //     // setIsDirty(true);
-    // };
    
     const register = async (e) => {
         e.preventDefault();
         const newUser = {
-          Pseudo : stateRegister.Pseudo,
-          Firstname : stateRegister.Firstname,
-          Lastname  : stateRegister.Lastname,
-          Email : stateRegister.Email,
-          Password : stateRegister.Password, 
-          CheckPassword : stateRegister.CheckPassword,
+          Pseudo : stateEntity.Pseudo,
+          Firstname : stateEntity.Firstname,
+          Lastname  : stateEntity.Lastname,
+          Email : stateEntity.Email,
+          Password : stateEntity.Password, 
+          CheckPassword : stateEntity.CheckPassword,
         };
     
         try {
           const registered = await post('', newUser);
-        // console.log(newUser);
+        console.log(newUser);
           
           if (response?.status === 200) {
             // alert(response?.data );
             setErrorForm(false);
             console.log('User enregistré avec succès', registered);
-            // navigate('/login');
             props.switchForm();
           }
           
@@ -143,7 +132,7 @@ const Register = (props) => {
                         {postPassword !== postCheckPassword ? "Les mots de passe ne correspondent pas" : null}
                     </Typography> */}
 
-                    <LoginForm fields={fields} />
+                    <UserForm fields={fields} />
 
                     {error ? (
                         <>
