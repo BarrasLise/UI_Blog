@@ -1,7 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import UserForm from "../components/UserForm";
 import { AuthContext } from "../contexts/AuthContext";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useFetch } from "use-http";
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -10,19 +10,24 @@ import SaveIcon from '@mui/icons-material/Save';
 const UserDetails = () => {
   const { id } = useParams('');
   const navigate = useNavigate();
-  const {user : current_user, unLogin, stateEntity, setStateEntity}=useContext(AuthContext);
+  const {user : current_user, unLogin, stateEntity, setStateEntity, isDirty }=useContext(AuthContext);
   const { put, data, del, response, loading,} = useFetch( 'users/'+id ,{}, []);
 
-  // Déclarez isDirty comme un état local
-  const [isDirty, setIsDirty] = useState(false);
+  // // Déclarez isDirty comme un état local
+  // const [isDirty, setIsDirty] = useState(false);
+  console.log(isDirty);
 
   useEffect(() => {
+    setStateEntity(data);
     if (loading) return;
     if (response.ok) {
       // setEntity(data);   
       setStateEntity(data);
+      
     }
   }, [loading, response.ok, data, setStateEntity]);
+  console.log(stateEntity);
+  console.log(response.ok);
 
   const deleteEntity = async () => {
     if (window.confirm("Voulez vous vraiment supprimer cet utilisateur ?" ) === true){
@@ -95,7 +100,7 @@ const UserDetails = () => {
         }}>
           
         <Typography variant="h2">Détails de l'utilisateur</Typography>
-        <UserForm fields={fields} isDirty={isDirty} setIsDirty={setIsDirty}/>
+        <UserForm fields={fields} />
 
         <Box component="div" 
           sx={{

@@ -5,7 +5,7 @@ import { useFetch } from 'use-http';
 export const AuthContext = createContext({});
 
 const AuthProvider = ({ children }) => {
-  const [ setIsDirty] = useState(false);
+  const [isDirty, setIsDirty] = useState(false);
   
   const { data, loading, error, post, get, response } = useFetch('session');
 
@@ -27,6 +27,7 @@ const AuthProvider = ({ children }) => {
     // setStateLogin({ ...stateLogin, [name]: value });
     setStateEntity({...stateEntity, [name]: value});
     setIsDirty(true);
+    console.log("isDirty:", isDirty); // Ajoutez cette ligne
   };
 
   const login = async () => {
@@ -61,7 +62,8 @@ const AuthProvider = ({ children }) => {
     loading,
     updateField,
     // stateLogin,
-    // isDirty,
+    isDirty,
+    setIsDirty,
     stateEntity,
     setStateEntity,
     // pseudo,

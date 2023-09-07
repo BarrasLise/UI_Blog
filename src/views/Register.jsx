@@ -13,6 +13,8 @@ const Register = (props) => {
     const { post, response, error} = useFetch('register');
     const { stateEntity}=useContext(AuthContext);
 
+    
+
     const [errorForm, setErrorForm] = useState("form");
     const fields = [
         {

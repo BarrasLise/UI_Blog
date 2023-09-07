@@ -5,10 +5,10 @@ import { useEffect } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 import {  Button, InputLabel, MenuItem, Select, TextField, TextareaAutosize } from "@mui/material";
 
-const UserForm = ({fields, isDirty, setIsDirty}) => {
+const UserForm = ({fields}) => {
   const { id } = useParams('');
   const {  data,  response, loading,} = useFetch( 'users/'+id ,{}, []);
-  const { stateEntity, setStateEntity}=useContext(AuthContext);
+  const { stateEntity, setStateEntity, updateField}=useContext(AuthContext);
 
   useEffect(() => {
     if (loading) return;
@@ -17,10 +17,15 @@ const UserForm = ({fields, isDirty, setIsDirty}) => {
     }
   }, [loading, response.ok, data, setStateEntity]);
 
-  const updateField = (name, value) => {
-    if (!name) return;
-    setStateEntity({...stateEntity, [name] : value});
-  };
+  // const updateField = (name, value) => {
+  //   if (!name) return;
+  //   setStateEntity({...stateEntity, [name] : value});
+  //   setIsDirty(true)
+  // };
+
+  // console.log(data);
+  // console.log(stateEntity);
+  // console.log(response.ok);
  
 
   return (
@@ -96,6 +101,7 @@ const UserForm = ({fields, isDirty, setIsDirty}) => {
                     label="statut admin"
                     onChange={(e)=>updateField(field.code, e.target.value)}
                 >
+                    {/* <MenuItem value="">{stateEntity.Is_Admin}</MenuItem> */}
                     <MenuItem key={1} value={1}>Admin</MenuItem>
                     <MenuItem key={0} value={0}>Utilisateur</MenuItem>
                 </Select>
@@ -126,4 +132,4 @@ const UserForm = ({fields, isDirty, setIsDirty}) => {
   )
 }
 
-export default UserForm
+export default UserForm ;

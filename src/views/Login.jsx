@@ -15,7 +15,9 @@ import UserForm from "../components/UserForm";
 
 const Login = (props) => {
     const theme = useTheme(); // Récupérez le thème
-    const {  login,} = useContext(AuthContext);
+    const {  login} = useContext(AuthContext);
+    // Initialisez isDirty avec useState
+   
 
     const fields = [
         {
