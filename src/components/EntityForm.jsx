@@ -1,13 +1,11 @@
 import { useContext } from "react";
 import { EntityContext } from "../contexts/EntityContext";
-import DeleteIcon from '@mui/icons-material/Delete';
-import SaveIcon from '@mui/icons-material/Save';
-import { Box, Button, TextField, TextareaAutosize } from "@mui/material";
+import { TextField, TextareaAutosize } from "@mui/material";
 
 const EntityForm = ({fields}) => {
  
 
-  const { entity, updateField, isDirty, saveEntity, deleteEntity } = useContext(EntityContext);
+  const { entity, updateField } = useContext(EntityContext);
 
   return (
     fields && fields.length && entity ? (
@@ -42,10 +40,10 @@ const EntityForm = ({fields}) => {
                 minRows={4}
                 placeholder={field.label}
                 required
-                size="md"
+                size="xl"
                 value={entity[field.code] ? entity[field.code] : ''}
                 onChange={(e) => updateField(field.code, e.target.value)}
-                style={{ width: "100%", minWidth: "1000px", fontSize: "1rem" }} />
+                style={{ width: "100%", minWidth: "336px", fontSize: "1rem" }} />
                 </>
             
 

@@ -7,7 +7,7 @@ export const AuthContext = createContext({});
 const AuthProvider = ({ children }) => {
   const [isDirty, setIsDirty] = useState(false);
   
-  const { data, loading, error, post, get, response } = useFetch('session');
+  const { data, loading, error, post : postUser, get : getUser, response } = useFetch('session');
 
   const [cookie] = useCookies(['PHPSESSID']);
 
@@ -24,17 +24,15 @@ const AuthProvider = ({ children }) => {
   //fonction pour modifier les champs
   const updateField = (name, value) => {
     if (!name) return;
-    // setStateLogin({ ...stateLogin, [name]: value });
     setStateEntity({...stateEntity, [name]: value});
     setIsDirty(true);
-    console.log("isDirty:", isDirty); // Ajoutez cette ligne
+    console.log("isDirty:", isDirty); 
   };
 
   const login = async () => {
     try {
-      
-      
-      await post('login', {
+ 
+      await postUser('login', {
         Pseudo: stateEntity.Pseudo,
         Password: stateEntity.Password
       });
@@ -46,13 +44,13 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     
-    if(cookie.PHPSESSID) get('current_user');
+    if(cookie.PHPSESSID) getUser('current_user');
 
-  },[cookie, get])
+  },[cookie, getUser])
 
   const unLogin = () => {
     // alert('Vous allez être déconnecter...');
-    get('unlogin');
+    getUser('unlogin');
 
   }
 

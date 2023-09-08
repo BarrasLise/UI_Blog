@@ -11,15 +11,15 @@ const EntityProvider = ({ children, ressource }) => {
   const navigate = useNavigate();
   const baseURL = "posts";
 
-  const { get, put, data, del, post, response, error, loading,} = useFetch( baseURL ,{});
+  const { get, put, data : posts, del, post, response, error, loading,} = useFetch( baseURL ,{});
 
   useEffect(() => {
     if (loading) return;
     if (response.ok) {
-      setEntity(data);
-      setIsDirty(false);
+      setEntity(posts);
+      // setIsDirty(false);
     }
-  }, [loading, response.ok, data, setEntity, setIsDirty]);
+  }, [loading, response.ok, posts, setEntity, setIsDirty]);
 
   useEffect(() => {
     get(`${id}`);
@@ -36,9 +36,31 @@ const EntityProvider = ({ children, ressource }) => {
     setIsDirty(true);
   };
   //Créer une nouvelle entity
-  const createEntity = async () => {
-    await post(true, { ...entity });
-    navigate("../");
+  const createEntity = async (e) => {
+    e.preventDefault();
+    console.log("test crearteEntity");
+    // await post(true, { ...entity });
+    // navigate("../");
+
+    // e.preventDefault(); 
+
+      const newPost = {
+        Title: entity.postTitle,
+        Body: entity.postBody,
+      };
+      console.log(newPost);
+  
+      try {
+        const createdPost = await post('', newPost);
+        if (response.ok) {
+          console.log('Post créé avec succès', createdPost);
+          navigate('/'); // Naviguer vers la page d'accueil ou une autre page après la création réussie du post
+        } else {
+          console.error('La création du post a échoué');
+        }
+      } catch (error) {
+        console.error('Une erreur s\'est produite', error);
+      }
 
   };
  

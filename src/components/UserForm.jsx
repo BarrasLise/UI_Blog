@@ -10,12 +10,12 @@ const UserForm = ({fields}) => {
   const {  data,  response, loading,} = useFetch( 'users/'+id ,{}, []);
   const { stateEntity, setStateEntity, updateField}=useContext(AuthContext);
 
-  useEffect(() => {
-    if (loading) return;
-    if (response.ok) {  
-      setStateEntity(data);
-    }
-  }, [loading, response.ok, data, setStateEntity]);
+  // useEffect(() => {
+  //   if (loading) return;
+  //   if (response.ok) {  
+  //     setStateEntity(data);
+  //   }
+  // }, [loading, response.ok, data, setStateEntity]);
 
   // const updateField = (name, value) => {
   //   if (!name) return;

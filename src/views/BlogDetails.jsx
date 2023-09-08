@@ -9,12 +9,18 @@ import Loading from "../components/Loading";
 import LikeButton from "../components/LikeButton";
 import DeleteIcon from '@mui/icons-material/Delete';
 import SaveIcon from '@mui/icons-material/Save';
+import { GlobalContext } from "../contexts/GlobalContext";
+import Form from "../components/Form";
 
 
 const BlogDetails = () => {
   const [edited, setEdited] = useState(false)
   const { entity, error, loading, isDirty, saveEntity, deleteEntity } = useContext(EntityContext);
   const {user : current_user}=useContext(AuthContext);
+
+  // const {entity, error, loading, isDirty, saveEntity, deleteEntity, user : current_user} = useContext(GlobalContext);
+  console.log(entity);
+
   const fields = [
     {
       code: 'Title',
@@ -55,7 +61,7 @@ const BlogDetails = () => {
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
-                  minWidth: "1000px"
+                  // minWidth: "800px"
             }}
         >
             <Typography variant="h5" sx={{ mb: 1 }}>{entity.Title}</Typography>
@@ -82,7 +88,8 @@ const BlogDetails = () => {
     
                         <Typography variant="h5" sx={{ mb: 1 }}>Modifier le post :  </Typography>
                         
-                        <EntityForm fields={fields}  /> 
+                        {/* <Form fields={fields}  />  */}
+                        <EntityForm fields={fields} />
 
                         <Box component="div" 
                           sx={{

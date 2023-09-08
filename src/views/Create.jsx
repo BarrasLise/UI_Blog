@@ -1,8 +1,7 @@
-import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext} from 'react';
 import { useFetch } from 'use-http';
 import { AuthContext } from "../contexts/AuthContext";
-import { Box, Button, TextField, TextareaAutosize,  Typography, Container} from "@mui/material";
+import { Box, Button, Typography, Container} from "@mui/material";
 import CssBaseline from '@mui/material/CssBaseline';
 import Loading from "../components/Loading";
 import EntityForm from "../components/EntityForm";
@@ -10,39 +9,12 @@ import { EntityContext } from "../contexts/EntityContext";
 
 
 const Create = () => {
-  const [postTitle, setPostTitle] = useState('');
-  const [postBody, setPostBody] = useState('');
-  const navigate = useNavigate();
+  const { error, loading } = useFetch('posts', {}, []);
 
-  const { post, response, error, loading } = useFetch('posts', {}, []);
+  const {  createEntity } = useContext(EntityContext);
 
   const {user : current_user}=useContext(AuthContext);
-  // const {  updateField, isDirty } = useContext(EntityContext);
-
-  const createPost = async (e) => {
-    e.preventDefault();
-
-    
-
-    const newPost = {
-      Title: postTitle,
-      Body: postBody,
-    };
-    console.log(newPost);
-
-    try {
-      const createdPost = await post('', newPost);
-      if (response.ok) {
-        console.log('Post créé avec succès', createdPost);
-        navigate('/'); // Naviguer vers la page d'accueil ou une autre page après la création réussie du post
-      } else {
-        console.error('La création du post a échoué');
-      }
-    } catch (error) {
-      console.error('Une erreur s\'est produite', error);
-    }
-  };
-
+  
   const fields = [
     {
       code: 'postTitle',
@@ -74,37 +46,12 @@ const Create = () => {
       <Typography variant="h2" textAlign={"center"}>Ajouter un nouveau post</Typography>
       { current_user?.Is_Admin ? 
       (<>
-      
-
-         
-        <Box component="form" onSubmit={createPost} noValidate sx={{ mt: 1 }}>
+  
+        <Box 
+          component="form"
+          onSubmit={createEntity}
+          noValidate sx={{ mt: 1 }}>
             
-            
-            {/* <TextField
-              margin="normal"
-              type="text"
-              required
-              fullWidth
-              id="postTitle"
-              label="Titre du post"
-              name="postTitle"
-              autoComplete="postTitle"
-              value={postTitle}
-              onChange={(e) => setPostTitle(e.target.value)}
-            />
-
-            
-            <TextareaAutosize
-              minRows={4}
-              placeholder="Contenu du post"
-              required
-              id="postBody"
-              name="postBody"
-              value={postBody}
-              onChange={(e) => setPostBody(e.target.value)}
-              style={{ width: "100%", fontSize: "1rem" }}
-            /> */}
-
             <EntityForm fields={fields}  /> 
 
             <Button
