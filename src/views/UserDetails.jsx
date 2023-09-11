@@ -6,33 +6,36 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useFetch } from "use-http";
 import DeleteIcon from '@mui/icons-material/Delete';
 import SaveIcon from '@mui/icons-material/Save';
+import Form from "../components/Form";
 
 const UserDetails = () => {
   const { id } = useParams('');
   const navigate = useNavigate();
-  const {user : current_user, unLogin, stateEntity, setStateEntity, isDirty }=useContext(AuthContext);
+  // const {user : current_user, unLogin, stateEntity, setStateEntity, isDirty }=useContext(AuthContext);
+  const {user : current_user, unLogin, entity, setEntity, isDirty }=useContext(AuthContext);
   const { put, data, del, response, loading,} = useFetch( 'users/'+id ,{}, []);
 
   // // Déclarez isDirty comme un état local
   // const [isDirty, setIsDirty] = useState(false);
   console.log(isDirty);
+  
 
   useEffect(() => {
-    setStateEntity(data);
+    // setStateEntity(data);
     if (loading) return;
     if (response.ok) {
-      // setEntity(data);   
-      setStateEntity(data);
+      setEntity(data);   
+      // setStateEntity(data);
       
     }
-  }, [loading, response.ok, data, setStateEntity]);
-  console.log(stateEntity);
+  }, [loading, response.ok, data, setEntity]);
+  console.log(entity);
   console.log(response.ok);
 
   const deleteEntity = async () => {
     if (window.confirm("Voulez vous vraiment supprimer cet utilisateur ?" ) === true){
       // await del(entity);
-      await del(stateEntity);
+      await del(entity);
       if (response.ok) navigate('/users');
     } else {
       // alert("Vous n'avez pas supprimer l'utilisateur !");
@@ -42,15 +45,15 @@ const UserDetails = () => {
 
   const saveEntity = async () => {
     // if(entity.Pseudo === current_user.Pseudo)
-    if(stateEntity.Pseudo === current_user.Pseudo)
+    if(entity.Pseudo === current_user.Pseudo)
     {
       // await put( entity);
-      await put(stateEntity);
-      console.log(stateEntity);
+      await put(entity);
+      console.log(entity);
       unLogin();
     } else {
-      await put(stateEntity);
-      console.log(stateEntity);
+      await put(entity);
+      console.log(entity);
       // await put( entity);
       navigate('/users');
     }
@@ -86,8 +89,6 @@ const UserDetails = () => {
 
   ];
 
-  
-
   return (
     <>
     <Box component="div" className="form" 
@@ -100,7 +101,8 @@ const UserDetails = () => {
         }}>
           
         <Typography variant="h2">Détails de l'utilisateur</Typography>
-        <UserForm fields={fields} />
+        {/* <UserForm fields={fields} /> */}
+        <Form fields={fields} context={"users"} />
 
         <Box component="div" 
           sx={{

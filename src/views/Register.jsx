@@ -6,6 +6,7 @@ import { useFetch } from "use-http";
 // import LoginForm from "../components/LoginForm";
 import UserForm from "../components/UserForm";
 import { AuthContext } from "../contexts/AuthContext";
+import Form from "../components/Form";
 
 const Register = (props) => {
     const theme = useTheme(); // Récupérez le thème
@@ -134,7 +135,7 @@ const Register = (props) => {
                         {postPassword !== postCheckPassword ? "Les mots de passe ne correspondent pas" : null}
                     </Typography> */}
 
-                    <UserForm fields={fields} />
+                    <Form fields={fields} context={"users"} />
 
                     {error ? (
                         <>

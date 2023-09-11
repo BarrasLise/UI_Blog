@@ -88,8 +88,8 @@ const BlogDetails = () => {
     
                         <Typography variant="h5" sx={{ mb: 1 }}>Modifier le post :  </Typography>
                         
-                        {/* <Form fields={fields}  />  */}
-                        <EntityForm fields={fields} />
+                        <Form fields={fields} context={"posts"} /> 
+                        {/* <EntityForm fields={fields} /> */}
 
                         <Box component="div" 
                           sx={{

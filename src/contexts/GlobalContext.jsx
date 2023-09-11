@@ -29,8 +29,8 @@ const GlobalProvider = ({ children }) => {
     const { get, put, data : posts, del, post, response, error, loading,} = useFetch( baseURL ,{});
   
     const [cookie] = useCookies(['PHPSESSID']);
-    console.log(data);
-    console.log(posts);
+    // console.log(data);
+    // console.log(posts);
 
     useEffect(() => {
         get(`${id}`);

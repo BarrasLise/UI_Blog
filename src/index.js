@@ -28,9 +28,9 @@ root.render(
     <ThemeProvider theme={theme}>
       <CookiesProvider>
         <AuthProvider>
-          <GlobalProvider>
+         
             <App />
-          </GlobalProvider>
+        
         </AuthProvider>
       </CookiesProvider>
     </ThemeProvider>

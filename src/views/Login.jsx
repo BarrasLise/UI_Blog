@@ -9,6 +9,8 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import UserForm from "../components/UserForm";
+import Form from "../components/Form";
+
 // import LoginForm from "../components/LoginForm";
 
 
@@ -71,7 +73,8 @@ const Login = (props) => {
                         control={<Checkbox value="remember" color="primary" />}
                         label="Se souvenir de moi" /> */}
                     
-                    <UserForm fields={fields}  />
+                    <Form fields={fields} context={"users"} />
+                    {/* <UserForm fields={fields }/> */}
                     <Grid container>
                         {/* <Grid item xs>
                             <Link mt={2} href="#" variant="body2">

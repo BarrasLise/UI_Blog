@@ -11,7 +11,7 @@ const AuthProvider = ({ children }) => {
 
   const [cookie] = useCookies(['PHPSESSID']);
 
-  const [stateEntity, setStateEntity] = useState({
+  const [entity, setEntity] = useState({
     Pseudo: "",
     Firstname : "", 
     Lastname : "", 
@@ -24,7 +24,7 @@ const AuthProvider = ({ children }) => {
   //fonction pour modifier les champs
   const updateField = (name, value) => {
     if (!name) return;
-    setStateEntity({...stateEntity, [name]: value});
+    setEntity({...entity, [name]: value});
     setIsDirty(true);
     console.log("isDirty:", isDirty); 
   };
@@ -33,8 +33,8 @@ const AuthProvider = ({ children }) => {
     try {
  
       await postUser('login', {
-        Pseudo: stateEntity.Pseudo,
-        Password: stateEntity.Password
+        Pseudo: entity.Pseudo,
+        Password: entity.Password
       });
     
     } catch (error) {
@@ -62,8 +62,10 @@ const AuthProvider = ({ children }) => {
     // stateLogin,
     isDirty,
     setIsDirty,
-    stateEntity,
-    setStateEntity,
+    // stateEntity,
+    // setStateEntity,
+    entity, 
+    setEntity,
     // pseudo,
     // setPseudo,
     // password,

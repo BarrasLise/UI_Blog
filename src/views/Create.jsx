@@ -6,6 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Loading from "../components/Loading";
 import EntityForm from "../components/EntityForm";
 import { EntityContext } from "../contexts/EntityContext";
+import Form from "../components/Form";
 
 
 const Create = () => {
@@ -14,15 +15,16 @@ const Create = () => {
   const {  createEntity } = useContext(EntityContext);
 
   const {user : current_user}=useContext(AuthContext);
+  const context = "posts";
   
   const fields = [
     {
-      code: 'postTitle',
+      code: 'Title',
       label: 'Titre du post ',
       type: 'text'
     },
     {
-      code: 'postBody',
+      code: 'Body',
       label: 'Contenu du post ',
       type: 'textarea'
     }
@@ -52,7 +54,7 @@ const Create = () => {
           onSubmit={createEntity}
           noValidate sx={{ mt: 1 }}>
             
-            <EntityForm fields={fields}  /> 
+            <Form fields={fields} context={"posts"}  /> 
 
             <Button
              type="submit"

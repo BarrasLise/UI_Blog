@@ -29,7 +29,7 @@ const EntityProvider = ({ children, ressource }) => {
     get(`${id}`);
   };
 
-  //fonction pour modifier les champs
+  // fonction pour modifier les champs
   const updateField = (name, value) => {
     if (!name) return;
     setEntity({ ...entity, [name]: value });
@@ -45,8 +45,8 @@ const EntityProvider = ({ children, ressource }) => {
     // e.preventDefault(); 
 
       const newPost = {
-        Title: entity.postTitle,
-        Body: entity.postBody,
+        Title: entity.Title,
+        Body: entity.Body,
       };
       console.log(newPost);
   
