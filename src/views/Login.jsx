@@ -8,17 +8,14 @@ import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import UserForm from "../components/UserForm";
 import Form from "../components/Form";
 
-// import LoginForm from "../components/LoginForm";
 
 
 
 const Login = (props) => {
     const theme = useTheme(); // Récupérez le thème
     const {  login} = useContext(AuthContext);
-    // Initialisez isDirty avec useState
    
 
     const fields = [
@@ -74,7 +71,6 @@ const Login = (props) => {
                         label="Se souvenir de moi" /> */}
                     
                     <Form fields={fields} context={"users"} />
-                    {/* <UserForm fields={fields }/> */}
                     <Grid container>
                         {/* <Grid item xs>
                             <Link mt={2} href="#" variant="body2">

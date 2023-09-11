@@ -39,10 +39,7 @@ const theme = createTheme({
       MuiTypography: {
         styleOverrides: {
           root: {
-            // color : "inherit",
-            // '&:hover': {
-            //   color : "inherit",
-            // }, 
+             
             '&:visited': {
               color : "inherit !important",
             }, 

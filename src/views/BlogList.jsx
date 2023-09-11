@@ -9,9 +9,6 @@ import NoResults from "../components/NoResults";
 import Loading from "../components/Loading";
 import Filters from "../components/Filters";
 
-
-
-
 const BlogList = () => {
 
     const { get, data : datas, error, loading} = useFetch('posts', {}, []);

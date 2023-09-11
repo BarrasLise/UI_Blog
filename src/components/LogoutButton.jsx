@@ -28,7 +28,6 @@ const LogoutButton = () => {
 
     return ( 
         <Box component="div" >
-        {/* <Button onClick={handleOpen} variant="contained" color="secondary"> */}
         <Button onClick={handleOpen} >
           <LogoutIcon />
         </Button>

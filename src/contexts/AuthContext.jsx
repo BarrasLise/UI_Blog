@@ -49,7 +49,6 @@ const AuthProvider = ({ children }) => {
   },[cookie, getUser])
 
   const unLogin = () => {
-    // alert('Vous allez être déconnecter...');
     getUser('unlogin');
 
   }
@@ -59,17 +58,10 @@ const AuthProvider = ({ children }) => {
     error,
     loading,
     updateField,
-    // stateLogin,
     isDirty,
     setIsDirty,
-    // stateEntity,
-    // setStateEntity,
     entity, 
     setEntity,
-    // pseudo,
-    // setPseudo,
-    // password,
-    // setPassword,
     isLoggedIn: !loading ? data?.ID ? (true) : (false) : false,
     user : !loading ? data : null,
     unLogin,
@@ -78,7 +70,6 @@ const AuthProvider = ({ children }) => {
 
   return <AuthContext.Provider value={value}>
     {children}
-    
     </AuthContext.Provider>;
 }
 

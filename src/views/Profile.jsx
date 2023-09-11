@@ -91,7 +91,6 @@ const Profile = () => {
                         <Button className="link-button" ><EditIcon /></Button>
                     </Link>
                     <LogoutButton />
-                    {/* <Button className="link-button" type="button" value="se déconnecter" onClick={handleOpenAlert}><LogoutIcon /></Button> */}
                 </Box>
             </Box>
             

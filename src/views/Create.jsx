@@ -4,7 +4,6 @@ import { AuthContext } from "../contexts/AuthContext";
 import { Box, Button, Typography, Container} from "@mui/material";
 import CssBaseline from '@mui/material/CssBaseline';
 import Loading from "../components/Loading";
-import EntityForm from "../components/EntityForm";
 import { EntityContext } from "../contexts/EntityContext";
 import Form from "../components/Form";
 
@@ -15,7 +14,6 @@ const Create = () => {
   const {  createEntity } = useContext(EntityContext);
 
   const {user : current_user}=useContext(AuthContext);
-  const context = "posts";
   
   const fields = [
     {

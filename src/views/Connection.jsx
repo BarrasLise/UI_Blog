@@ -15,7 +15,6 @@ const Connection = () => {
     <>
         <CssBaseline />
         <Container maxWidth={"lg"}>
-          
 
           {isLoginForm ? (
               <Login switchForm={switchForm} />

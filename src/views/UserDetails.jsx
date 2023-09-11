@@ -1,5 +1,4 @@
 import { Box, Button, Typography } from "@mui/material";
-import UserForm from "../components/UserForm";
 import { AuthContext } from "../contexts/AuthContext";
 import { useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -11,22 +10,15 @@ import Form from "../components/Form";
 const UserDetails = () => {
   const { id } = useParams('');
   const navigate = useNavigate();
-  // const {user : current_user, unLogin, stateEntity, setStateEntity, isDirty }=useContext(AuthContext);
   const {user : current_user, unLogin, entity, setEntity, isDirty }=useContext(AuthContext);
   const { put, data, del, response, loading,} = useFetch( 'users/'+id ,{}, []);
-
-  // // Déclarez isDirty comme un état local
-  // const [isDirty, setIsDirty] = useState(false);
-  console.log(isDirty);
+  
   
 
   useEffect(() => {
-    // setStateEntity(data);
     if (loading) return;
     if (response.ok) {
-      setEntity(data);   
-      // setStateEntity(data);
-      
+      setEntity(data);     
     }
   }, [loading, response.ok, data, setEntity]);
   console.log(entity);
@@ -44,17 +36,14 @@ const UserDetails = () => {
   };
 
   const saveEntity = async () => {
-    // if(entity.Pseudo === current_user.Pseudo)
     if(entity.Pseudo === current_user.Pseudo)
     {
-      // await put( entity);
       await put(entity);
       console.log(entity);
       unLogin();
     } else {
       await put(entity);
       console.log(entity);
-      // await put( entity);
       navigate('/users');
     }
 
@@ -101,7 +90,6 @@ const UserDetails = () => {
         }}>
           
         <Typography variant="h2">Détails de l'utilisateur</Typography>
-        {/* <UserForm fields={fields} /> */}
         <Form fields={fields} context={"users"} />
 
         <Box component="div" 

@@ -17,7 +17,6 @@ const EntityProvider = ({ children, ressource }) => {
     if (loading) return;
     if (response.ok) {
       setEntity(posts);
-      // setIsDirty(false);
     }
   }, [loading, response.ok, posts, setEntity, setIsDirty]);
 
@@ -39,15 +38,11 @@ const EntityProvider = ({ children, ressource }) => {
   const createEntity = async (e) => {
     e.preventDefault();
     console.log("test crearteEntity");
-    // await post(true, { ...entity });
-    // navigate("../");
-
-    // e.preventDefault(); 
-
-      const newPost = {
-        Title: entity.Title,
-        Body: entity.Body,
-      };
+  
+    const newPost = {
+      Title: entity.Title,
+      Body: entity.Body,
+    };
       console.log(newPost);
   
       try {

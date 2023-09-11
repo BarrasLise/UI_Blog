@@ -1,6 +1,5 @@
 import React, { useContext, useState} from 'react';
 import { EntityContext } from '../contexts/EntityContext';
-import EntityForm from '../components/EntityForm';
 import { AuthContext } from "../contexts/AuthContext";
 import NotFound from "./NotFound";
 import { Box, Button, Container, CssBaseline, Paper, Typography } from "@mui/material";
@@ -9,7 +8,6 @@ import Loading from "../components/Loading";
 import LikeButton from "../components/LikeButton";
 import DeleteIcon from '@mui/icons-material/Delete';
 import SaveIcon from '@mui/icons-material/Save';
-import { GlobalContext } from "../contexts/GlobalContext";
 import Form from "../components/Form";
 
 
@@ -18,8 +16,6 @@ const BlogDetails = () => {
   const { entity, error, loading, isDirty, saveEntity, deleteEntity } = useContext(EntityContext);
   const {user : current_user}=useContext(AuthContext);
 
-  // const {entity, error, loading, isDirty, saveEntity, deleteEntity, user : current_user} = useContext(GlobalContext);
-  console.log(entity);
 
   const fields = [
     {
@@ -35,7 +31,6 @@ const BlogDetails = () => {
   ];
 
   const handleEdited = () => {
-    
     edited ? setEdited(false) : setEdited(true);
   }
 
@@ -89,7 +84,6 @@ const BlogDetails = () => {
                         <Typography variant="h5" sx={{ mb: 1 }}>Modifier le post :  </Typography>
                         
                         <Form fields={fields} context={"posts"} /> 
-                        {/* <EntityForm fields={fields} /> */}
 
                         <Box component="div" 
                           sx={{

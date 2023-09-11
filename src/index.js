@@ -6,7 +6,6 @@ import AuthProvider from './contexts/AuthContext';
 import { CookiesProvider } from 'react-cookie';
 import {  ThemeProvider } from '@mui/material/styles';
 import theme from "./components/Theme";
-import GlobalProvider from "./contexts/GlobalContext";
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -29,7 +28,7 @@ root.render(
       <CookiesProvider>
         <AuthProvider>
          
-            <App />
+          <App />
         
         </AuthProvider>
       </CookiesProvider>
