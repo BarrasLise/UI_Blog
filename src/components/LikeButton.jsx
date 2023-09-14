@@ -7,8 +7,9 @@ import { Button, Typography } from "@mui/material";
 
 const LikeButton = () => {
   
-  const {entity, refreshEntity, baseURL, id} = useContext(EntityContext);
-  const { post } = useFetch(`${baseURL}/${id}/like`, {});
+  const {entity, refreshEntity, baseURL, entityId} = useContext(EntityContext);
+  const { post } = useFetch(`${baseURL}/${entityId}/like`, {});
+  // console.log(id);
 
 
   const handleLikeClick = async () => {

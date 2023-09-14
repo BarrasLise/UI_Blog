@@ -105,12 +105,12 @@ const Profile = () => {
                   color:theme.palette.primary.contrastText
                   }}>
                   <TableRow  >
-                    <TableCell align="left" sx={{fontWeight:900}} >Pseudo</TableCell>
-                    <TableCell align="left" sx={{fontWeight:900}}>Prénom</TableCell>
-                    <TableCell align="left"sx={{fontWeight:900}} >Nom</TableCell>
-                    <TableCell align="left" sx={{fontWeight:900}}>Email</TableCell>
-                    <TableCell align="left" sx={{fontWeight:900}}>Admin ou utilisateur </TableCell>
-                    <TableCell align="center"sx={{fontWeight:900}} >Action</TableCell>
+                    <TableCell align="left" sx={{fontWeight:900, color:theme.palette.primary.contrastText}} >Pseudo</TableCell>
+                    <TableCell align="left" sx={{fontWeight:900, color:theme.palette.primary.contrastText}}>Prénom</TableCell>
+                    <TableCell align="left"sx={{fontWeight:900, color:theme.palette.primary.contrastText}} >Nom</TableCell>
+                    <TableCell align="left" sx={{fontWeight:900, color:theme.palette.primary.contrastText}}>Email</TableCell>
+                    <TableCell align="left" sx={{fontWeight:900, color:theme.palette.primary.contrastText}}>Admin ou utilisateur </TableCell>
+                    <TableCell align="center"sx={{fontWeight:900, color:theme.palette.primary.contrastText}} >Action</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>

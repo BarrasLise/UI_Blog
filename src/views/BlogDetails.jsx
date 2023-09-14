@@ -9,12 +9,14 @@ import LikeButton from "../components/LikeButton";
 import DeleteIcon from '@mui/icons-material/Delete';
 import SaveIcon from '@mui/icons-material/Save';
 import Form from "../components/Form";
+import { PostContext } from "../contexts/PostContext";
 
 
 const BlogDetails = () => {
   const [edited, setEdited] = useState(false)
   const { entity, error, loading, isDirty, saveEntity, deleteEntity } = useContext(EntityContext);
   const {user : current_user}=useContext(AuthContext);
+  const {savePost} = useContext(PostContext);
 
 
   const fields = [
@@ -63,6 +65,8 @@ const BlogDetails = () => {
             <Typography variant="p">Ecrit par {entity.Pseudo}</Typography>
             <Box component="div" sx={{ mt: 4 }}>{entity.Body}</Box>
             <LikeButton/>
+            {/* savepost */}
+            <Button onClick={savePost}>savePost</Button>
         </Paper>
        
     
@@ -96,6 +100,7 @@ const BlogDetails = () => {
                         > 
                           {isDirty ? <Button key={"Sauvegarder"} className="IconButton" id="submit" type="submit" value="Sauvegarder" onClick={saveEntity}><SaveIcon /></Button> : null}
                           <Button key={"Supprimer"} className="IconButton" value="Supprimer" onClick={deleteEntity}><DeleteIcon /></Button>
+                          
 
                         </Box>
                     </Box>

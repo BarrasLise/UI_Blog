@@ -21,7 +21,7 @@ const { entity, updateField } = ContextChoice;
                 field.type === 'text'  ? (
 
                     <TextField
-                        key={field.label}
+                        key={entity?.id}
                         margin="normal"
                         type="text"
                         required
@@ -38,7 +38,7 @@ const { entity, updateField } = ContextChoice;
 
                     <> 
                     <TextareaAutosize
-                        key={field.label}
+                        key={entity?.id}
                         type="text"
                         minRows={4}
                         placeholder={field.label}
@@ -54,7 +54,7 @@ const { entity, updateField } = ContextChoice;
         
                     <TextField
                         margin="normal"
-                        key={field.label}
+                        key={entity?.id}
                         type="password"
                         required
                         fullWidth
@@ -68,24 +68,25 @@ const { entity, updateField } = ContextChoice;
 
                 ) : field.type === 'select' ? (
                     <>
-                    <InputLabel key={field.label} required id="Is_Admin">statut admin</InputLabel>
+                    <InputLabel key={field.type} required id="Is_Admin">statut admin</InputLabel>
                         <Select 
-                                key={field.label}
+                                // key={field.label}
+                                key={entity?.id}
                                 name="Is_Admin" 
                                 labelId="Is_Admin" 
                                 required
-                                value={entity.Is_Admin}
+                                value={entity?.Is_Admin ? entity?.Is_Admin : null}
                                 label="statut admin"
                                 onChange={(e)=>updateField(field.code, e.target.value)}
                         >
-                            <MenuItem key={1} value={1}>Admin</MenuItem>
-                            <MenuItem key={0} value={0}>Utilisateur</MenuItem>
+                            <MenuItem key={entity?.id+1} value={1}>Admin</MenuItem>
+                            <MenuItem key={entity?.id+2} value={0}>Utilisateur</MenuItem>
                     </Select>
                     </>
                 ) : field.type === 'submit' ? (
             
                     <Button
-                        key={field.text}
+                        key={entity?.id}
                         type="submit"
                         fullWidth
                         variant="contained"

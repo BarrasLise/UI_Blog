@@ -14,16 +14,16 @@ const EntityProvider = ({ children, ressource, entityId }) => {
   const { get, put, data : posts, del, post, response, error, loading,} = useFetch( baseURL ,{});
 
   useEffect(() => {
-    get(`${entityId}`); //entityId contient id qui est récuérer au niveau de la vue BlogDetailsView.jsx
+    // get(`${entityId}`); //entityId contient id qui est récuérer au niveau de la vue BlogDetailsView.jsx
     if (loading) return;
     if (response.ok) {
       setEntity(posts);
     }
   }, [loading, response.ok, posts, setEntity, setIsDirty, entityId, get]);
 
-  // useEffect(() => {
-  //   get(`${id}`);
-  // }, [id, get])
+  useEffect(() => {
+    get(`${entityId}`);
+  }, [entityId, get])
 
   const refreshEntity = () => {
     get(`${entityId}`);

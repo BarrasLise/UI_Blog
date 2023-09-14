@@ -34,7 +34,7 @@ const Filters = ({ onSubmit }) => {
   const [author, setAuthor] = useState([]);
 
   const { data : users} = useFetch( 'users' ,{}, []);
-  console.log(users);
+  // console.log(users);
  
 
   
