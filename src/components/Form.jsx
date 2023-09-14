@@ -43,6 +43,7 @@ const { entity, updateField } = ContextChoice;
                         minRows={4}
                         placeholder={field.label}
                         required
+                        margin="normal"
                         size="xl"
                         value={entity[field.code] ? entity[field.code] : ''}
                         onChange={(e) => updateField(field.code, e.target.value)}
@@ -52,9 +53,11 @@ const { entity, updateField } = ContextChoice;
                 ) : field.type === 'password' ? (
         
                     <TextField
+                        margin="normal"
                         key={field.label}
                         type="password"
                         required
+                        fullWidth
                         label={field.label}
                         name={field.label}
                         id={field.label}

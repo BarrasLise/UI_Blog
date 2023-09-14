@@ -5,9 +5,9 @@ import NotFound from "./NotFound";
 import BlogList from "./BlogList";
 import EntityProvider from '../contexts/EntityContext';
 import Create from "./Create";
-import BlogDetails from './BlogDetails';
 import Profile from "./Profile";
 import UserDetails from "./UserDetails";
+import BlogDetailsView from "./BlogDetailsView";
 
 const AppRoutes = () => {
   return(
@@ -24,9 +24,11 @@ const AppRoutes = () => {
         <Route
           path="/posts/:id"
           element={
-            <EntityProvider>
-              <BlogDetails />
-            </EntityProvider>
+            <BlogDetailsView/>
+            
+            // <EntityProvider  >
+            //   <BlogDetails />
+            // </EntityProvider>
           }
         />
         <Route path="/login" 

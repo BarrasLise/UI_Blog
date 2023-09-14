@@ -1,31 +1,32 @@
 import { useState, createContext, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import useFetch from 'use-http';
 
 export const EntityContext = createContext({});
 
-const EntityProvider = ({ children, ressource }) => {
+const EntityProvider = ({ children, ressource, entityId }) => {
   const [entity, setEntity] = useState(null);
   const [isDirty, setIsDirty] = useState(false);
-  const { id } = useParams("");
+  
   const navigate = useNavigate();
   const baseURL = "posts";
 
   const { get, put, data : posts, del, post, response, error, loading,} = useFetch( baseURL ,{});
 
   useEffect(() => {
+    get(`${entityId}`); //entityId contient id qui est récuérer au niveau de la vue BlogDetailsView.jsx
     if (loading) return;
     if (response.ok) {
       setEntity(posts);
     }
-  }, [loading, response.ok, posts, setEntity, setIsDirty]);
+  }, [loading, response.ok, posts, setEntity, setIsDirty, entityId, get]);
 
-  useEffect(() => {
-    get(`${id}`);
-  }, [id, get])
+  // useEffect(() => {
+  //   get(`${id}`);
+  // }, [id, get])
 
   const refreshEntity = () => {
-    get(`${id}`);
+    get(`${entityId}`);
   };
 
   // fonction pour modifier les champs
@@ -63,7 +64,7 @@ const EntityProvider = ({ children, ressource }) => {
   //test alert confirm : 
   const deleteEntity= async () => {
     if (window.confirm("Voulez vous vraiment supprimer ce post ?" ) === true){
-      await del(`${id}`);
+      await del(`${entityId}`);
       if (response.ok) navigate('../');
     } else {
       alert("Vous n'avez pas supprimer le post !");
@@ -71,12 +72,12 @@ const EntityProvider = ({ children, ressource }) => {
   }
 
   const saveEntity = async () => {
-    await put(`${id}`, entity);
+    await put(`${entityId}`, entity);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await put(`${id}`, entity);
+    await put(`${entityId}`, entity);
     if (response.ok) {
       // navigate('../');
     }
@@ -106,8 +107,8 @@ const EntityProvider = ({ children, ressource }) => {
     put,
     post,
     refreshEntity, 
-    id,
-    baseURL
+    entityId,
+    baseURL,
   };
 
   return <EntityContext.Provider value={value}>{children}</EntityContext.Provider>;

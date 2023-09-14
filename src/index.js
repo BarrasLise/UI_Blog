@@ -24,6 +24,7 @@ root.render(
   <HttpProvider url={"http://localhost/1A/BARRAS/blog/api/v1"} options={options}>
   {/* //   En ligne       */}
   {/* <HttpProvider url={"https://coursx75.fr/1A/BARRAS/blog/api/v1"} options={options}>    */}
+{/* <HttpProvider url={"https://coursx75.fr/2023-2024/2A_X75/BARRAS/blog/api/v1"} options={options}>   */}
     <ThemeProvider theme={theme}>
       <CookiesProvider>
         <AuthProvider>
