@@ -1,6 +1,6 @@
 import { Typography, useTheme } from "@mui/material";
 import Container from '@mui/material/Container';
-import React,{useContext} from 'react';
+import React,{useContext, useState} from 'react';
 import { AuthContext } from "../contexts/AuthContext";
 import Avatar from '@mui/material/Avatar';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,18 +11,18 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Form from "../components/Form";
 
 
-
-
 const Login = (props) => {
     const theme = useTheme(); // Récupérez le thème
-    const {  login} = useContext(AuthContext);
+    const { login, response, error} = useContext(AuthContext);
    
+    const [loginError, setLoginError] = useState(null);
+    console.log(loginError);
 
     const fields = [
         {
           code: 'Pseudo',
           label: 'Pseudo ',
-          type: 'text'
+          type: 'text', 
         },
         {
           code: 'Password',
@@ -34,21 +34,32 @@ const Login = (props) => {
           text: 'se connecter',
           type: 'submit'
         }
-      ];
+    ];
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         console.log({
           Pseudo: data.get('Pseudo'),
           Password: data.get('Password'),
         });
-
-        login();
-    };
+        if (response.ok){
+          console.log(response.data);
+          setLoginError(response.data.message);
+        }
+      
+        try {
+          await login();
+          
+        } catch (error) {
+          setLoginError(error);
+          console.log(error);
+        }
+      };
 
     return ( 
         <>
+        {/* {error ? console.log(error) : null } */}
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <Box
@@ -70,7 +81,12 @@ const Login = (props) => {
                         control={<Checkbox value="remember" color="primary" />}
                         label="Se souvenir de moi" /> */}
                     
-                    <Form fields={fields} context={"users"} />
+                    <Form noValidate fields={fields} context={"users"} />
+                    {error || loginError ?
+                    <Box backgroundColor="error.main" borderRadius={"8px"} mb={"10px"} padding={"5px"}>
+                    <Typography color="primary.contrastText" ><strong>Erreur {response?.data?.code} : </strong> </Typography>
+                     <Typography color="primary.contrastText"> {response?.data?.message}</Typography> 
+                     </Box>: null}
                     <Grid container>
                         {/* <Grid item xs>
                             <Link mt={2} href="#" variant="body2">
@@ -87,6 +103,7 @@ const Login = (props) => {
             </Box>
             
         </Container>
+        
         </>
      );
 }

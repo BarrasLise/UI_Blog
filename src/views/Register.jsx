@@ -66,7 +66,7 @@ const Register = (props) => {
     
         try {
           const registered = await post('', newUser);
-        console.log(newUser);
+          console.log(newUser);
           
           if (response?.status === 200) {
             // alert(response?.data );
@@ -84,10 +84,12 @@ const Register = (props) => {
     }, [ error ])
 
     //Email valide ?
-    // const validEmail = postEmail.match(/^\S+@\S+\.\S+$/) ? true : false;
+    const validEmail = stateEntity?.Email.match(/^\S+@\S+\.\S+$/) ? true : false;
   
     //gestion force du mot de passe 
-    // const passwordStrength = postPassword.length > 10 ? 'bon' : 'faible';
+    const passwordStrength = stateEntity?.Password.length > 10 ? 'bon' : 'faible';
+
+    //attention pas encore fini !!!!erreur formulaire 
   
 
     return ( 
@@ -112,9 +114,9 @@ const Register = (props) => {
                 </Typography>
                 <Box component="form" onSubmit={register} noValidate sx={{ mt: 1 }}>
                  
-                    {/* <Typography variant="div" xs={{ color: validEmail ? "green" : "red" }}>
-                        { postEmail ? validEmail ? "Email valide" : "Email non valide" : null}
-                    </Typography> */}
+                    <Typography  xs={{ color: validEmail ? "green" : "red" }}>
+                        { validEmail ? "Email valide" : "Email non valide" }
+                    </Typography>
                     
                  
                         {/* { passwordStrength==='bon' ? 

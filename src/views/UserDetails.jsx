@@ -90,7 +90,7 @@ const UserDetails = () => {
         }}>
           
         <Typography variant="h2">Détails de l'utilisateur</Typography>
-        <Form fields={fields} context={"users"} />
+        <Form noValidate fields={fields} context={"users"} />
 
         <Box component="div" 
           sx={{

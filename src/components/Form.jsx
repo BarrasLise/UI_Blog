@@ -1,35 +1,57 @@
-import { useContext } from "react";
-import { Box, Button, InputLabel, MenuItem, Select, TextField, TextareaAutosize } from "@mui/material";
+import { useContext, useEffect, useState } from "react";
+import { Box, Button, FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField, TextareaAutosize, Typography, useFormControl, OutlinedInput } from "@mui/material";
 import { EntityContext } from "../contexts/EntityContext";
 import { AuthContext } from "../contexts/AuthContext";
+import MyFormHelperText from "./MyFormHelperText";
 
 
 const Form = ({fields, context}) => {
+    
+    const ContextChoice = useContext(context === "users" ? AuthContext : EntityContext);
+    const { entity, updateField, error, loading, response } = ContextChoice;
 
+    const [fieldErrors, setFieldErrors] = useState({});
+    const [responseMessage, setResponseMessage] = useState("");
 
-const ContextChoice = useContext(context === "users" ? AuthContext : EntityContext);
-const { entity, updateField } = ContextChoice;
+   
+    useEffect(() => {
+        if (response.ok) {
+          setResponseMessage(response.data.message);
+        } else {
+          setResponseMessage(""); // Effacez le message s'il n'y a pas de réponse
+        }
+      
+        if (error) {
+          setFieldErrors(error);
+        } else {
+          setFieldErrors({}); // Effacez les erreurs de champ s'il n'y a pas d'erreur
+        }
+      }, [error, response]);
 
-const valeursInitiales = {};
-fields.forEach((field) => {
-  valeursInitiales[field.code] = "";
-});
+    const valeursInitiales = {};
+    fields.forEach((field) => {
+    valeursInitiales[field.code] = "";
+    });
 
   return (
-    fields && fields.length && entity && context
+    fields && fields.length && entity  && context
      ? (
+        // <FormControl fullWidth>
         <>
         { fields.map((field, index) => {
-            //  const uniqueKey = field.code + (entity?.id );
+            
             const uniqueKey = `${field.code}-${index}`; 
-          
+
             return(
 
                 field.type === 'text'  ? (
-
-                    <TextField
+                    
+                        
+                    <FormControl key={uniqueKey} fullWidth>
+                        <InputLabel key={uniqueKey + "11"} htmlFor="component-outlined">{field.label}</InputLabel>
+                        <OutlinedInput
                         key={uniqueKey}
-                        margin="normal"
+                        // margin=""
                         type="text"
                         required
                         fullWidth
@@ -39,8 +61,13 @@ fields.forEach((field) => {
                         // value={entity[field.code] ? entity[field.code] : ''}
                         value={entity[field.code] || valeursInitiales[field.code]}
                         onChange={(e) => updateField(field.code, e.target.value)}
-                        autoFocus 
-                    />
+                        autoFocus />
+                        {/* <MyFormHelperText error={error}  /> */}
+                        <MyFormHelperText key={uniqueKey+"12"} error={fieldErrors[field.code]} response={responseMessage} />
+                    </FormControl>
+                        
+                        
+                    
 
                 ) : field.type === 'textarea' ? (
 
@@ -117,6 +144,7 @@ fields.forEach((field) => {
             )
         })}
         </>
+        // </FormControl >
     ) : "erreur de chargement ?"
     
 );
