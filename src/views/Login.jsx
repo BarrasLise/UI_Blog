@@ -16,7 +16,7 @@ const Login = (props) => {
     const { login, response, error} = useContext(AuthContext);
    
     const [loginError, setLoginError] = useState(null);
-    console.log(loginError);
+    // console.log(loginError);
 
     const fields = [
         {

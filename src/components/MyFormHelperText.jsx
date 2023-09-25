@@ -1,20 +1,73 @@
-import { FormHelperText, useFormControl } from "@mui/material";
-import { useMemo } from "react";
+import { FormHelperText, Typography, useFormControl } from "@mui/material";
+import { useContext,  useMemo } from "react";
+import { AuthContext } from "../contexts/AuthContext";
 
-const MyFormHelperText = ({}) => {
-    const {focused, filled} = useFormControl() || {};
-    // console.log(focused);
+const MyFormHelperText = ({ fieldCode }) => {
+    const {focused, filled } = useFormControl() || {};
+    const { entity, info}=useContext(AuthContext);
+    
+    const validEmail = entity?.Email.match(/^\S+@\S+\.\S+$/) ? true : false;
+    const passwordStrength = entity?.Password.length > 10 ? true : false;
+    
+    const passwordMatch = entity?.Password === entity?.CheckPassword;
+    console.log("password : " + passwordMatch);
 
-    const helperText = useMemo(()=> {
-        
-        return <p>
-            {filled ? 'complété': "vide"}&nbsp;|&nbsp;
-            {focused ? "champs actif" : "champ inactif"}
-        
-        </p>
+    const helperText = useMemo(() => {
+       
+        if (fieldCode === 'Email') {
+          
+          return (
+            <Typography variant="body2" color={validEmail ? "" : "error"}>
+              {focused || info ===true ?  (
+                <>
+                  {filled ? 'complété' : 'vide'}&nbsp;|&nbsp;
+                  {validEmail ? 'Email valide'  :  'Email non valide'}
+                </>
+              ) : null}
+            </Typography>
+          );
 
-    }, [focused,  filled])
+        } else if (fieldCode === 'Password') {
 
+            return (
+
+                <Typography variant="body2" color={passwordStrength?  "" : "error"} >
+              {focused || info ===true ?  (
+                <>
+                  {filled ? 'complété' : 'vide'}&nbsp;|&nbsp;
+                  {passwordStrength ? "bon" : "faible" }
+                </>
+              ) :null}
+            </Typography>
+
+            );
+          
+        } else if (fieldCode === 'CheckPassword') {
+
+            return (
+                <Typography variant="body2" color={!passwordMatch? "error" : ""}>
+                  {focused || info ===true ?  (
+                    <>
+                      {filled ? 'complété' : 'vide'}&nbsp;|&nbsp;
+                      {!passwordMatch ? "Les mots de passe ne correspondent pas" : "les mots de passe correspondent"}
+                    </>
+                  ) : null}
+                </Typography>
+              );
+          
+        } else {
+          // Texte d'aide par défaut pour les autres champs
+          return(
+            <Typography variant="body2">
+          {focused || info ===true  ? (
+            <>
+              {filled ? 'complété' : 'vide'}
+            </>
+          ) : null}
+        </Typography>
+          )  
+        } 
+      }, [focused, filled, fieldCode, validEmail, info, passwordMatch, passwordStrength ]);
 
     return ( 
         <FormHelperText>{helperText}</FormHelperText>

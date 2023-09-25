@@ -27,7 +27,7 @@ const LikeButton = () => {
  
   return (
     
-    <><Button className="IconButton" onClick={() => (handleLikeClick())}>{!entity?.UserLiked ? <FavoriteBorderIcon /> : <FavoriteIcon />}</Button><Typography variant="p">Nombres de like: {entity?.TotalLikes}</Typography></>
+    <><Button className="IconButton" onClick={() => (handleLikeClick())}>{!entity?.UserLiked ? <FavoriteBorderIcon /> : <FavoriteIcon />}</Button><Typography variant="body2">Nombres de like: {entity?.TotalLikes}</Typography></>
    
   );
 }

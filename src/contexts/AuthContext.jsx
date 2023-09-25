@@ -6,6 +6,7 @@ export const AuthContext = createContext({});
 
 const AuthProvider = ({ children }) => {
   const [isDirty, setIsDirty] = useState(false);
+  const [info, setInfo] = useState(false)
   
   const { data, loading, error, post : postUser, get : getUser, response } = useFetch('session');
 
@@ -20,6 +21,12 @@ const AuthProvider = ({ children }) => {
     Password : "", 
     CheckPassword : "", 
   }); 
+
+  const infos = () => {
+    //Fonction pour afficher les "heperText sus les fields"
+    setInfo(!info);
+    console.log(info);
+ } 
 
   //fonction pour modifier les champs
   const updateField = (name, value) => {
@@ -39,6 +46,7 @@ const AuthProvider = ({ children }) => {
     
     } catch (error) {
       // Gérer les erreurs de connexion
+      console.log(error);
     }
   }
 
@@ -57,6 +65,8 @@ const AuthProvider = ({ children }) => {
     response,
     error,
     loading,
+    infos,
+    info,
     updateField,
     isDirty,
     setIsDirty,

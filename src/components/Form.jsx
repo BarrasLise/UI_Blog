@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Box, Button, FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField, TextareaAutosize, Typography, useFormControl, OutlinedInput } from "@mui/material";
+import { Box, Button, FormControl,  InputLabel, MenuItem, Select,  TextareaAutosize, OutlinedInput } from "@mui/material";
 import { EntityContext } from "../contexts/EntityContext";
 import { AuthContext } from "../contexts/AuthContext";
 import MyFormHelperText from "./MyFormHelperText";
@@ -9,7 +9,6 @@ const Form = ({fields, context}) => {
     
     const ContextChoice = useContext(context === "users" ? AuthContext : EntityContext);
     const { entity, updateField, error, loading, response } = ContextChoice;
-
     const [fieldErrors, setFieldErrors] = useState({});
     const [responseMessage, setResponseMessage] = useState("");
 
@@ -26,7 +25,7 @@ const Form = ({fields, context}) => {
         } else {
           setFieldErrors({}); // Effacez les erreurs de champ s'il n'y a pas d'erreur
         }
-      }, [error, response]);
+    }, [error, response]);
 
     const valeursInitiales = {};
     fields.forEach((field) => {
@@ -47,7 +46,7 @@ const Form = ({fields, context}) => {
                 field.type === 'text'  ? (
                     
                         
-                    <FormControl key={uniqueKey} fullWidth>
+                     <FormControl key={uniqueKey} fullWidth margin="normal">
                         <InputLabel key={uniqueKey + "11"} htmlFor="component-outlined">{field.label}</InputLabel>
                         <OutlinedInput
                         key={uniqueKey}
@@ -63,8 +62,9 @@ const Form = ({fields, context}) => {
                         onChange={(e) => updateField(field.code, e.target.value)}
                         autoFocus />
                         {/* <MyFormHelperText error={error}  /> */}
-                        <MyFormHelperText key={uniqueKey+"12"} error={fieldErrors[field.code]} response={responseMessage} />
+                        <MyFormHelperText key={uniqueKey+"12"} error={fieldErrors[field.code]} response={responseMessage}  fieldCode={field.code}  />
                     </FormControl>
+                    
                         
                         
                     
@@ -80,28 +80,31 @@ const Form = ({fields, context}) => {
                         required
                         margin="normal"
                         size="xl"
-                        // value={entity[field.code] ? entity[field.code] : ''}
                         value={entity[field.code] || valeursInitiales[field.code]}
                         onChange={(e) => updateField(field.code, e.target.value)}
                         style={{ width: "100%", minWidth: "500px", fontSize: "1rem" }} />
                     
 
                 ) : field.type === 'password' ? (
-        
-                    <TextField
-                        margin="normal"
-                        key={uniqueKey}
-                        type="password"
-                        required
-                        fullWidth
-                        label={field.label}
-                        name={field.label}
-                        id={field.label}
-                        // value={entity[field.code] ? entity[field.code] : ''}
-                        value={entity[field.code] || valeursInitiales[field.code]}
-                        onChange={(e) => updateField(field.code, e.target.value)}
-                        autoComplete="current-password" 
-                    />
+                    
+                     <FormControl key={uniqueKey} fullWidth margin="normal">
+                        <InputLabel key={uniqueKey + "11"} htmlFor="component-outlined">{field.label}</InputLabel>
+                        <OutlinedInput
+                            margin="normal"
+                            key={uniqueKey}
+                            type="password"
+                            required
+                            fullWidth
+                            label={field.label}
+                            name={field.label}
+                            id={field.label}
+                            value={entity[field.code] || valeursInitiales[field.code]}
+                            onChange={(e) => updateField(field.code, e.target.value)}
+                            autoComplete="current-password" 
+                        />
+                        <MyFormHelperText key={uniqueKey+"12"} error={fieldErrors[field.code]} response={responseMessage}  fieldCode={field.code}  />
+                     </FormControl>
+                    
 
                 ) : field.type === 'select' ? (
                     
@@ -113,12 +116,10 @@ const Form = ({fields, context}) => {
                     }}>
                     <InputLabel key={uniqueKey} required id="Is_Admin">statut admin</InputLabel>
                     <Select
-                                    // key={field.label}
                                     key={uniqueKey + "1"}
                                     name="Is_Admin"
                                     labelId="Is_Admin"
                                     required
-                                    // value={entity?.Is_Admin ? entity?.Is_Admin : null}
                                     value={entity?.Is_Admin || valeursInitiales[field.code]}
                                     label="statut admin"
                                     onChange={(e) => updateField(field.code, e.target.value)}
