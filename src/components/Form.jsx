@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Box, Button, FormControl,  InputLabel, MenuItem, Select,  TextareaAutosize, OutlinedInput } from "@mui/material";
+import { Box, Button, FormControl,  InputLabel, MenuItem, Select,   OutlinedInput, TextField } from "@mui/material";
 import { EntityContext } from "../contexts/EntityContext";
 import { AuthContext } from "../contexts/AuthContext";
 import MyFormHelperText from "./MyFormHelperText";
@@ -68,17 +68,15 @@ const Form = ({fields, context}) => {
                 ) : field.type === 'textarea' ? (
 
                     
-                    <TextareaAutosize
-                        key={uniqueKey}
-                        type="text"
-                        minRows={4}
-                        placeholder={field.label}
+                    <TextField
+                        label={field.label}
                         required
                         margin="normal"
-                        size="xl"
+                        multiline
+                        fullWidth
                         value={entity[field.code] || valeursInitiales[field.code]}
                         onChange={(e) => updateField(field.code, e.target.value)}
-                        style={{ width: "100%", minWidth: "500px", fontSize: "1rem" }} />
+                    />
                     
 
                 ) : field.type === 'password' ? (

@@ -2,7 +2,7 @@ import React, { useContext, useState} from 'react';
 import { EntityContext } from '../contexts/EntityContext';
 import { AuthContext } from "../contexts/AuthContext";
 import NotFound from "./NotFound";
-import { Box, Button, Container, CssBaseline, Paper, TextField, Typography } from "@mui/material";
+import { Box, Button,  CssBaseline,  Typography } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import Loading from "../components/Loading";
 import LikeButton from "../components/LikeButton";
@@ -10,6 +10,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import SaveIcon from '@mui/icons-material/Save';
 import Form from "../components/Form";
 import { PostContext } from "../contexts/PostContext";
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 
 
 const BlogDetails = () => {
@@ -37,22 +39,19 @@ const BlogDetails = () => {
   }
 
   return (
-
-    <Container component="main" maxWidth="xl" sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-    }}>
+    <>
     <CssBaseline />
-  
+   
       {loading ? <Loading/> :  
         error ? <Box component="div">{error}</Box> 
        : null }
 
       {entity ? (
         <>
-        
-        <Paper elevation={3} 
+        <Box>
+        <Card 
+        elevation={3} 
+        fullWidth
             sx={{
                   padding: 5,
                   display: 'flex',
@@ -61,69 +60,77 @@ const BlogDetails = () => {
                   // minWidth: "800px"
             }}
         >
-            <Typography variant="h5" sx={{ mb: 1 }}>{entity.Title}</Typography>
+          <CardContent sx={{
+                
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                
+            }}>
+            <Typography  variant="h5" sx={{ mb: 1 }}>{entity.Title}</Typography>
             <Typography variant="body2">Ecrit par {entity.Pseudo}</Typography>
-            <Box component="div" sx={{ mt: 2, mb: 2 }}>
-              <TextField  
-                variant="standard" 
-                inputProps={{ readOnly: true }} 
-                value={entity.Body} 
-                maxRows={15}
-                multiline  
-                margin="normal" 
-                style={{ width: "100%", minWidth: "500px", fontSize: "1rem"
-              }}
-                
-                
-              />
+            <Box   sx={{ mt: 2, mb: 2 }}>
+            
+              <Typography  sx={{ whiteSpace: 'pre-line'}}>
+                {entity.Body}
+              </Typography>
              
             </Box>
             <LikeButton/>
             {/* savepost */}
             <Button onClick={savePost}>savePost</Button>
-        </Paper>
+            </CardContent>
+        </Card>
+        </Box>
+        
        
     
         {current_user?.Is_Admin? ( 
-            <>   
+            <> 
+            <Box sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              mb: 4
+              }}
+            > 
                 <Button className="IconButton" onClick={handleEdited} sx={{mt:2}}>
                   <EditIcon  />
                 </Button>
                 { edited ? 
-                    <Box component="div" 
+                    <><Box component="div"
                     sx={{
-                        mt:8,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
+                      mt: 8,
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
                     }}
-                    >
-    
-                        <Typography variant="h5" sx={{ mb: 1 }}>Modifier le post :  </Typography>
-                        
-                        <Form fields={fields} context={"posts"} /> 
+                  >
 
-                        <Box component="div" 
-                          sx={{
-                          marginTop: 2,
-                          display: 'flex',
-                          flexDirection: 'row',
-                          alignItems: 'center',
-                          justifyContent: 'space-evenly'
-                          }}
-                        > 
-                          {isDirty ? <Button key={"Sauvegarder"} className="IconButton" id="submit" type="submit" value="Sauvegarder" onClick={saveEntity}><SaveIcon /></Button> : null}
-                          <Button key={"Supprimer"} className="IconButton" value="Supprimer" onClick={deleteEntity}><DeleteIcon /></Button>
-                          
+                    <Typography variant="h5" sx={{ mb: 1 }}>Modifier le post :  </Typography>
+                  </Box><Form fields={fields} context={"posts"} /><Box component="div"
+                    sx={{
+                      marginTop: 2,
+                      display: 'flex',
+                      flexDirection: 'row',
+                      alignItems: 'center',
+                      justifyContent: 'space-evenly'
+                    }}
+                  >
+                      {isDirty ? <Button key={"Sauvegarder"} className="IconButton" id="submit" type="submit" value="Sauvegarder" onClick={saveEntity}><SaveIcon /></Button> : null}
+                      <Button key={"Supprimer"} className="IconButton" value="Supprimer" onClick={deleteEntity}><DeleteIcon /></Button>
 
-                        </Box>
-                    </Box>
-                : null }   
+
+                    </Box></>
+                    
+                : null } 
+                </Box>  
             </>
         ) : null }
     </>   
     )  : <NotFound/>}
-    </Container>
+    
+    </>
   );
 };
 
