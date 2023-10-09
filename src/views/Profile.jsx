@@ -66,16 +66,16 @@ const Profile = () => {
                         flexDirection: 'column',
                         alignItems: 'stretch',
                 }}>
-                    <Typography variant="p">
+                    <Typography variant="body2">
                       Mon pseudo : <Box component="span" sx={{fontWeight:900}}>{current_user.Pseudo}</Box>
                     </Typography>
-                    <Typography variant="p">
+                    <Typography variant="body2">
                       Mes nom et prénom : <Box component="span" sx={{fontWeight:900}}>{current_user.Lastname} {current_user.Username}</Box>
                     </Typography>
-                    <Typography variant="p">
+                    <Typography variant="body2">
                       Mon Email : <Box component="span" sx={{fontWeight:900}}>{current_user.Email}</Box>
                     </Typography>
-                    <Typography variant="p">
+                    <Typography variant="body2">
                       Mon statut : <Box component="span" sx={{fontWeight:900}}>{current_user.Is_Admin ? "admin" : "utilisateur"}</Box> 
                     </Typography>
                 </Box>

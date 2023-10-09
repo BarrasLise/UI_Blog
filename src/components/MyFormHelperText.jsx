@@ -7,10 +7,10 @@ const MyFormHelperText = ({ fieldCode }) => {
     const { entity, info}=useContext(AuthContext);
     
     const validEmail = entity?.Email.match(/^\S+@\S+\.\S+$/) ? true : false;
-    const passwordStrength = entity?.Password.length > 10 ? true : false;
+    const passwordStrength = entity?.Password?.length > 10 ? true : false;
     
     const passwordMatch = entity?.Password === entity?.CheckPassword;
-    console.log("password : " + passwordMatch);
+    // console.log("password : " + passwordMatch);
 
     const helperText = useMemo(() => {
        

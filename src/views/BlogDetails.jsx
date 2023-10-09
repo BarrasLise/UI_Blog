@@ -2,7 +2,7 @@ import React, { useContext, useState} from 'react';
 import { EntityContext } from '../contexts/EntityContext';
 import { AuthContext } from "../contexts/AuthContext";
 import NotFound from "./NotFound";
-import { Box, Button, Container, CssBaseline, Paper, Typography } from "@mui/material";
+import { Box, Button, Container, CssBaseline, Paper, TextField, Typography } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import Loading from "../components/Loading";
 import LikeButton from "../components/LikeButton";
@@ -62,8 +62,22 @@ const BlogDetails = () => {
             }}
         >
             <Typography variant="h5" sx={{ mb: 1 }}>{entity.Title}</Typography>
-            <Typography variant="p">Ecrit par {entity.Pseudo}</Typography>
-            <Box component="div" sx={{ mt: 4 }}>{entity.Body}</Box>
+            <Typography variant="body2">Ecrit par {entity.Pseudo}</Typography>
+            <Box component="div" sx={{ mt: 2, mb: 2 }}>
+              <TextField  
+                variant="standard" 
+                inputProps={{ readOnly: true }} 
+                value={entity.Body} 
+                maxRows={15}
+                multiline  
+                margin="normal" 
+                style={{ width: "100%", minWidth: "500px", fontSize: "1rem"
+              }}
+                
+                
+              />
+             
+            </Box>
             <LikeButton/>
             {/* savepost */}
             <Button onClick={savePost}>savePost</Button>

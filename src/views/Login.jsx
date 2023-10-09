@@ -94,7 +94,7 @@ const Login = (props) => {
                             </Link>
                         </Grid> */}
                         <Grid item>
-                            <Link mt={2} variant="p" onClick={props.switchForm}>
+                            <Link mt={2} variant="" onClick={props.switchForm}>
                                 {" Pas de compte ? Inscrivez-vous "}
                             </Link>
                         </Grid>

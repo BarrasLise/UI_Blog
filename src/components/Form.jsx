@@ -8,7 +8,7 @@ import MyFormHelperText from "./MyFormHelperText";
 const Form = ({fields, context}) => {
     
     const ContextChoice = useContext(context === "users" ? AuthContext : EntityContext);
-    const { entity, updateField, error, loading, response } = ContextChoice;
+    const { entity, updateField, error, response } = ContextChoice;
     const [fieldErrors, setFieldErrors] = useState({});
     const [responseMessage, setResponseMessage] = useState("");
 
@@ -64,10 +64,6 @@ const Form = ({fields, context}) => {
                         {/* <MyFormHelperText error={error}  /> */}
                         <MyFormHelperText key={uniqueKey+"12"} error={fieldErrors[field.code]} response={responseMessage}  fieldCode={field.code}  />
                     </FormControl>
-                    
-                        
-                        
-                    
 
                 ) : field.type === 'textarea' ? (
 
@@ -90,7 +86,7 @@ const Form = ({fields, context}) => {
                      <FormControl key={uniqueKey} fullWidth margin="normal">
                         <InputLabel key={uniqueKey + "11"} htmlFor="component-outlined">{field.label}</InputLabel>
                         <OutlinedInput
-                            margin="normal"
+                            margin="dense"
                             key={uniqueKey}
                             type="password"
                             required
@@ -120,7 +116,7 @@ const Form = ({fields, context}) => {
                                     name="Is_Admin"
                                     labelId="Is_Admin"
                                     required
-                                    value={entity?.Is_Admin || valeursInitiales[field.code]}
+                                    value={entity?.Is_Admin }
                                     label="statut admin"
                                     onChange={(e) => updateField(field.code, e.target.value)}
                     >
