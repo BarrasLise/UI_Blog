@@ -17,7 +17,7 @@ const MyFormHelperText = ({ fieldCode }) => {
         if (fieldCode === 'Email') {
           
           return (
-            <Typography variant="body2" color={validEmail ? "" : "error"}>
+            <Typography component={'span'}  variant="body2" color={validEmail ? "" : "error"}>
               {focused || info ===true ?  (
                 <>
                   {filled ? 'complété' : 'vide'}&nbsp;|&nbsp;
@@ -31,7 +31,7 @@ const MyFormHelperText = ({ fieldCode }) => {
 
             return (
 
-                <Typography variant="body2" color={passwordStrength?  "" : "error"} >
+                <Typography component={'span'}  variant="body2" color={passwordStrength?  "" : "error"} >
               {focused || info ===true ?  (
                 <>
                   {filled ? 'complété' : 'vide'}&nbsp;|&nbsp;
@@ -45,11 +45,11 @@ const MyFormHelperText = ({ fieldCode }) => {
         } else if (fieldCode === 'CheckPassword') {
 
             return (
-                <Typography variant="body2" color={!passwordMatch? "error" : ""}>
+                <Typography component={'span'}  variant="body2" color={!passwordMatch? "error" : ""}>
                   {focused || info ===true ?  (
                     <>
                       {filled ? 'complété' : 'vide'}&nbsp;|&nbsp;
-                      {!passwordMatch ? "Les mots de passe ne correspondent pas" : "les mots de passe correspondent"}
+                      {!passwordMatch ? "Les mots de passe ne correspondent pas" : "Les mots de passe correspondent"}
                     </>
                   ) : null}
                 </Typography>
@@ -58,7 +58,7 @@ const MyFormHelperText = ({ fieldCode }) => {
         } else {
           // Texte d'aide par défaut pour les autres champs
           return(
-            <Typography variant="body2">
+            <Typography component={'span'}  variant="body2">
           {focused || info ===true  ? (
             <>
               {filled ? 'complété' : 'vide'}

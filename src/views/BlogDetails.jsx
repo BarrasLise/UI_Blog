@@ -51,7 +51,7 @@ const BlogDetails = () => {
         <Box>
         <Card 
         elevation={3} 
-        fullWidth
+        
             sx={{
                   padding: 5,
                   display: 'flex',

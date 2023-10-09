@@ -69,6 +69,7 @@ const Form = ({fields, context}) => {
 
                     
                     <TextField
+                        key={uniqueKey}
                         label={field.label}
                         required
                         margin="normal"
