@@ -2,7 +2,7 @@ import React, { useContext, useState} from 'react';
 import { EntityContext } from '../contexts/EntityContext';
 import { AuthContext } from "../contexts/AuthContext";
 import NotFound from "./NotFound";
-import { Box, Button,  CssBaseline,  Typography } from "@mui/material";
+import { Box, Button,  CssBaseline,  Typography, useThemeProps } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import Loading from "../components/Loading";
 import LikeButton from "../components/LikeButton";
@@ -12,9 +12,11 @@ import Form from "../components/Form";
 import { PostContext } from "../contexts/PostContext";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import { useTheme } from "@emotion/react";
 
 
 const BlogDetails = () => {
+  const theme = useTheme(); // Récupérez le thème
   const [edited, setEdited] = useState(false)
   const { entity, error, loading, isDirty, saveEntity, deleteEntity } = useContext(EntityContext);
   const {user : current_user}=useContext(AuthContext);
@@ -48,8 +50,16 @@ const BlogDetails = () => {
 
       {entity ? (
         <>
-        <Box>
-        <Card 
+        <Box sx={{
+                  padding: 5,
+                  display: 'flex',
+                  flexDirection: 'row',
+                  // alignItems: 'center',
+                  alignItems: 'flex-start',
+                  justifyContent: 'space-around',
+                  // minWidth: "800px"
+            }}>
+        {/* <Card 
         elevation={3} 
         
             sx={{
@@ -59,28 +69,32 @@ const BlogDetails = () => {
                   alignItems: 'center',
                   // minWidth: "800px"
             }}
-        >
-          <CardContent sx={{
+        > */}
+          {/* <CardContent sx={{
                 
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center',
                 
-            }}>
-            <Typography  variant="h5" sx={{ mb: 1 }}>{entity.Title}</Typography>
-            <Typography variant="body2">Ecrit par {entity.Pseudo}</Typography>
-            <Box   sx={{ mt: 2, mb: 2 }}>
-            
-              <Typography  sx={{ whiteSpace: 'pre-line'}}>
-                {entity.Body}
-              </Typography>
+            }}> */}
+            <Box   sx={{ mt: 2, mb: 2,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center', }}>
+              <Typography  variant="h5" sx={{ mb: 1 }}>{entity.Title}</Typography>
+              <Typography variant="body2">Ecrit par {entity.Pseudo}</Typography>
+              {/* <Box   sx={{ mt: 2, mb: 2 }}> */}
+              
+                <Typography  sx={{ whiteSpace: 'pre-line'}}>
+                  {entity.Body}
+                </Typography>
              
             </Box>
             <LikeButton/>
             {/* savepost */}
-            <Button onClick={savePost}>savePost</Button>
-            </CardContent>
-        </Card>
+            {/* <Button onClick={savePost}>savePost</Button> */}
+            {/* </CardContent> */}
+        {/* </Card> */}
         </Box>
         
        
@@ -94,7 +108,7 @@ const BlogDetails = () => {
               mb: 4
               }}
             > 
-                <Button className="IconButton" onClick={handleEdited} sx={{mt:2}}>
+                <Button className="IconButton" onClick={handleEdited} sx={{mt:2 }}>
                   <EditIcon  />
                 </Button>
                 { edited ? 
@@ -104,6 +118,7 @@ const BlogDetails = () => {
                       display: 'flex',
                       flexDirection: 'column',
                       alignItems: 'center',
+                     
                     }}
                   >
 
