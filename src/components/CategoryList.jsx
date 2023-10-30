@@ -1,11 +1,11 @@
 import  { useContext } from 'react';
 import { Typography, Chip, Box } from '@mui/material';
 import { EntityContext } from "../contexts/EntityContext";
-import { useTheme } from "@emotion/react";
+
 
 
 const CategoryList = () => {
-    const theme = useTheme(); // Récupérez le thème
+ 
   const {entity} = useContext(EntityContext);
   
   const categoriesArray = entity?.Categories?.split(',');
@@ -17,22 +17,13 @@ const CategoryList = () => {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        // justifyContent: 'space-around',
-        // minWidth: "800px"
+        
   }}>
       <Typography variant="h5">Categories : </Typography>
     
         
 
-      {/* {categoriesArray.map((category, index) => (
-        <Chip
-          key={index}
-          label={category}
-          variant="outlined"
-          color="primary"
-          style={{ marginLeft: '10px' }}
-        />
-      ))} */}
+    
       {categoriesArray?.length > 0 ? (
         categoriesArray.map((category, index) => (
           <Chip
