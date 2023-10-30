@@ -13,6 +13,7 @@ import { PostContext } from "../contexts/PostContext";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { useTheme } from "@emotion/react";
+import CategoryList from "../components/CategoryList";
 
 
 const BlogDetails = () => {
@@ -50,6 +51,17 @@ const BlogDetails = () => {
 
       {entity ? (
         <>
+        <CategoryList/>
+        <Box sx={{
+                  padding: 5,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  
+                  justifyContent: 'space-around',
+                  // minWidth: "800px"
+            }}>
+              {/* <CategoryList/> */}
         <Box sx={{
                   padding: 5,
                   display: 'flex',
@@ -77,7 +89,7 @@ const BlogDetails = () => {
                   alignItems: 'center',
                 
             }}> */}
-            <Box   sx={{ mt: 2, mb: 2,
+            <Box   sx={{ mt: 2, mb: 2,margin : 2,
                   display: 'flex',
                   flexDirection: 'column',
                   alignItems: 'center', }}>
@@ -95,7 +107,12 @@ const BlogDetails = () => {
             {/* <Button onClick={savePost}>savePost</Button> */}
             {/* </CardContent> */}
         {/* </Card> */}
+
+        
         </Box>
+        {entity.Categories}
+        </Box>
+        
         
        
     

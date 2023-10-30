@@ -29,7 +29,7 @@ const LikeButton = () => {
  
   return (
     
-    <Box sx={{ mt: 2, mb: 2, padding: '10px',
+    <Box sx={{ mt: 2, mb: 2,margin : 2, padding: '10px',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center', 
