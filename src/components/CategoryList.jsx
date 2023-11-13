@@ -6,10 +6,9 @@ import { EntityContext } from "../contexts/EntityContext";
 
 const CategoryList = () => {
  
-  const {entity} = useContext(EntityContext);
-  
+  const {entity} = useContext(EntityContext); 
   const categoriesArray = entity?.Categories?.split(',');
-
+  console.log(categoriesArray);
   return (
     <Box sx={{
         padding: 5,
@@ -20,9 +19,6 @@ const CategoryList = () => {
         
   }}>
       <Typography variant="h5">Categories : </Typography>
-    
-        
-
     
       {categoriesArray?.length > 0 ? (
         categoriesArray.map((category, index) => (

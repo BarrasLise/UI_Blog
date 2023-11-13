@@ -20,8 +20,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import FormControl from '@mui/material/FormControl';
 import Box from '@mui/material/Box';
 import Chip from '@mui/material/Chip';
-import { useTheme } from "@mui/material";
-
+import {  useTheme } from "@mui/material";
 
 const Filters = ({ onSubmit }) => {
   const theme = useTheme(); // Récupérez le thème
@@ -32,12 +31,14 @@ const Filters = ({ onSubmit }) => {
   });
   const [searchValue, setSearchValue] = useState("");
   const [author, setAuthor] = useState([]);
-
+  const [category, setCategory] = useState([]);
+  // console.log(category);
   const { data : users} = useFetch( 'users' ,{}, []);
   // console.log(users);
+  const { data : categories} = useFetch( 'categories' ,{}, []);
+  // console.log(categories); // ceci renvoie un objet : {Categories : Array(5)}
+  // console.log(Array.isArray(categories.Categories)); //Ceci est un tableau
  
-
-  
   //button open/close
   const handleClickOpen = () => {
     setOpen(true);
@@ -65,6 +66,7 @@ const Filters = ({ onSubmit }) => {
     console.log("Checkbox state:", checkboxState); //renvoie un objet (true/false)
     console.log("Search value:", searchValue);
     console.log("Author Value:", author);//renvoie un tableau de valeur
+    console.log("Category Value:", category);//renvoie un tableau de valeur
 
     // Construction de l'URL avec les paramètres de filtre :
     const filterURL = buildFilterURL();
@@ -85,7 +87,9 @@ const Filters = ({ onSubmit }) => {
     if (author.length > 0) {
       params.append('author', author.join(','));
     }
-
+    if (category.length > 0) {
+      params.append('category', category.join(','));
+    }
     if (checkboxState.liked) {
       params.append('liked', 'true');
     }
@@ -105,6 +109,7 @@ const Filters = ({ onSubmit }) => {
     });
     setSearchValue("");
     setAuthor([]);
+    setCategory([]);
   };
 
   const handleAuthorChange = (event) => {
@@ -113,12 +118,20 @@ const Filters = ({ onSubmit }) => {
       target: { value },
     } = event;
     setAuthor(
-      // On autofill we get a stringified value.
       typeof value === 'string' ? value.split(',') : value,
     );
   };
 
-  
+  const handleCategoryChange = (event) => {
+
+    const {
+      target: { value },
+    } = event;
+    setCategory(
+      typeof value === 'string' ? value.split(',') : value,
+    );
+  };
+   
   return (
     <>
     <Box component="div" >
@@ -132,7 +145,6 @@ const Filters = ({ onSubmit }) => {
       </Button>
      
         <Dialog open={open} onClose={handleClose}>
-          
           <DialogTitle sx={{
                          display: 'flex',
                          flexDirection: 'row',
@@ -174,12 +186,11 @@ const Filters = ({ onSubmit }) => {
               />
             </FormGroup>
             <FormControl sx={{ m: 1, width: 300 }}>
-            <InputLabel id="">Auteur</InputLabel>
+            <InputLabel id="">Auteurs</InputLabel>
           <Select
             value={author}
             multiple
             input={<OutlinedInput label="Name" />}
-            
             onChange={handleAuthorChange}
             renderValue={(selected) => (
               <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
@@ -193,21 +204,36 @@ const Filters = ({ onSubmit }) => {
             {users?.length ? users.map(user => (
               <MenuItem key={user.Pseudo}  value={user.Pseudo}>{user.Pseudo}</MenuItem>
             )) : null }
-           
           </Select> 
           </FormControl>
 
+          <FormControl sx={{ m: 1, width: 300 }}>
+          <InputLabel id="">Catégories</InputLabel>
+          <Select
+            id="categories-select"
+            label="Categories"
+            multiple
+            value={category}
+            onChange={handleCategoryChange}
+          >
+            {/* faire générer les catégories éxistantes ici */}
+            {categories?.Categories.map((category) => (
+              <MenuItem key={category} value={category}>
+                {category}
+              </MenuItem>
+            ))}
+          </Select>
+          </FormControl>
           </DialogContent>
+
           <DialogActions style={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Box component="div" >
               <Button  variant="contained" onClick={handleFilter} ><SearchIcon/>Filtrer</Button>
               <Button variant="contained" onClick={handleReset}><ReplayIcon /> Réinitialiser</Button>
-              
               <Button color="secondary" variant="contained" onClick={handleClose}><CloseIcon />Fermer</Button>
             </Box>
           </DialogActions>
         </Dialog>
-      
     </Box>
     
     </>

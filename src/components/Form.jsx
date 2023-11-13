@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Box, Button, FormControl,  InputLabel, MenuItem, Select,   OutlinedInput, TextField } from "@mui/material";
+import { Box, Button, FormControl,  InputLabel, MenuItem, Select,   OutlinedInput, TextField, Autocomplete, Chip } from "@mui/material";
 import { EntityContext } from "../contexts/EntityContext";
 import { AuthContext } from "../contexts/AuthContext";
 import MyFormHelperText from "./MyFormHelperText";
@@ -11,7 +11,6 @@ const Form = ({fields, context}) => {
     const { entity, updateField, error, response } = ContextChoice;
     const [fieldErrors, setFieldErrors] = useState({});
     const [responseMessage, setResponseMessage] = useState("");
-
    
     useEffect(() => {
         if (response.ok) {
@@ -124,7 +123,42 @@ const Form = ({fields, context}) => {
                     </Select>
                     </Box>
                     
-                ) : field.type === 'submit' ? (
+                ) : field.type === 'Autocomplete' ? ( 
+                    
+                    <Box key={uniqueKey+"5"} component="div" className="form" 
+                    sx={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'stretch',
+                    }}>
+                       
+                            {/* <Autocomplete
+                                multiple
+                                id="tags-filled"
+                                options={categoriesArray.map((option) => option.title)}
+                                defaultValue={[categoriesArray.title]}
+                                freeSolo
+                                renderTags={(value, getTagProps) =>
+                                value.map((option, index) => (
+                                    <Chip variant="outlined" label={option} {...getTagProps({ index })} />
+                                ))
+                                }
+                                renderInput={(params) => (
+                                <TextField
+                                    {...params}
+                                    variant="filled"
+                                    label={field.code}
+                                    placeholder="Favorites"
+                                />
+                                )}
+                            /> */}
+
+                            
+
+                    
+                    </Box>
+                    
+                ): field.type === 'submit' ? (
             
                     <Button
                         key={uniqueKey}

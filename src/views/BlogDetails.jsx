@@ -30,6 +30,11 @@ const BlogDetails = () => {
       code: 'Body',
       label: 'Le contenu du post ',
       type: 'textarea'
+    }, 
+    {
+      code: 'Categories',
+      label: 'Les categories ',
+      type: 'Autocomplete'
     }
   ];
 
@@ -91,22 +96,28 @@ const BlogDetails = () => {
               mb: 4
               }}
             > 
-                <Button className="IconButton" onClick={handleEdited} sx={{mt:2 }}>
-                  <EditIcon  />
-                </Button>
+              
+              <Button className="IconButton" onClick={handleEdited} sx={{mt:2, boxShadow:' -5px -5px 9px rgba(255,255,255,0.45), 5px 5px 9px rgba(94,104,121,0.3)',
+                ':hover': {
+                  boxShadow: 'inset -5px -5px 9px rgba(255,255,255,0.45), inset 5px 5px 9px rgba(94,104,121,0.3)',
+                }, }}>
+                <EditIcon  />
+              </Button>
+              
                 { edited ? 
-                    <><Box component="div"
+                    <>
+                    <Box component="div"
                     sx={{
                       mt: 8,
                       display: 'flex',
                       flexDirection: 'column',
                       alignItems: 'center',
-                     
                     }}
                   >
-
                     <Typography variant="h5" sx={{ mb: 1 }}>Modifier le post :  </Typography>
-                  </Box><Form fields={fields} context={"posts"} /><Box component="div"
+                  </Box>
+                  <Form fields={fields} context={"posts"} />
+                  <Box component="div"
                     sx={{
                       marginTop: 2,
                       display: 'flex',
@@ -115,10 +126,27 @@ const BlogDetails = () => {
                       justifyContent: 'space-evenly'
                     }}
                   >
-                      {isDirty ? <Button key={"Sauvegarder"} className="IconButton" id="submit" type="submit" value="Sauvegarder" onClick={saveEntity}><SaveIcon /></Button> : null}
-                      <Button key={"Supprimer"} className="IconButton" value="Supprimer" onClick={deleteEntity}><DeleteIcon /></Button>
+                      {isDirty ? 
+                      <Button key={"Sauvegarder"} className="IconButton" id="submit" type="submit" value="Sauvegarder" onClick={saveEntity} sx={{ mr: 2,
+                        boxShadow:' -5px -5px 9px rgba(255,255,255,0.45), 5px 5px 9px rgba(94,104,121,0.3)',
+                        ':hover': {
+                          boxShadow: 'inset -5px -5px 9px rgba(255,255,255,0.45), inset 5px 5px 9px rgba(94,104,121,0.3)',
+                        }, 
+                      }}>
+                        <SaveIcon />
+                      </Button> 
+                      : null}
+                      <Button key={"Supprimer"} className="IconButton" value="Supprimer" onClick={deleteEntity} sx={{ 
+                        boxShadow:' -5px -5px 9px rgba(255,255,255,0.45), 5px 5px 9px rgba(94,104,121,0.3)',
+                        ':hover': {
+                          boxShadow: 'inset -5px -5px 9px rgba(255,255,255,0.45), inset 5px 5px 9px rgba(94,104,121,0.3)',
+                        }, 
+                      }}>
+                        <DeleteIcon />
+                      </Button>
 
-                    </Box></>
+                  </Box>
+                  </>
                     
                 : null } 
                 </Box>  
