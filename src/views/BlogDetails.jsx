@@ -10,14 +10,24 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import SaveIcon from '@mui/icons-material/Save';
 import Form from "../components/Form";
 import CategoryList from "../components/CategoryList";
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 
 const BlogDetails = () => {
   
   const [edited, setEdited] = useState(false)
-  const { entity, error, loading, isDirty, saveEntity, deleteEntity } = useContext(EntityContext);
+  const { entity, error, loading, isDirty, saveEntity, deleteEntity, setAlertOpen, alertOpen } = useContext(EntityContext);
   const {user : current_user}=useContext(AuthContext);
   // const {savePost} = useContext(PostContext);
+  // const [alertOpen] = useState(false);
+
+  const handleCloseAlert = ( reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setAlertOpen(false);
+  };
 
 
   const fields = [
@@ -146,6 +156,24 @@ const BlogDetails = () => {
                       </Button>
 
                   </Box>
+                  <Snackbar
+                    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                    open={alertOpen}
+                    autoHideDuration={10000}
+                    onClose={handleCloseAlert}
+                  >
+                    <MuiAlert
+                      elevation={6}
+                      variant="filled"
+                      onClose={handleCloseAlert}
+                      severity="success"
+                    >
+                      Les modifications ont été sauvegardées !
+                    </MuiAlert>
+                  </Snackbar>
+
+
+
                   </>
                     
                 : null } 

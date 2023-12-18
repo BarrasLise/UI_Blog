@@ -11,6 +11,7 @@ const Form = ({fields, context}) => {
     const { entity, updateField, error, response } = ContextChoice;
     const [fieldErrors, setFieldErrors] = useState({});
     const [responseMessage, setResponseMessage] = useState("");
+    const [charCount, setCharCount] = useState(0);
    
     useEffect(() => {
         if (response.ok) {
@@ -46,7 +47,7 @@ const Form = ({fields, context}) => {
                     
                         
                      <FormControl key={uniqueKey} fullWidth margin="normal">
-                        <InputLabel key={uniqueKey + "11"} htmlFor="component-outlined">{field.label}</InputLabel>
+                        <InputLabel key={uniqueKey + "11"} htmlFor="component-outlined" color={charCount >= 70 ? "error" : ""}>{field.label}</InputLabel>
                         <OutlinedInput
                         key={uniqueKey}
                         // margin=""
@@ -58,10 +59,15 @@ const Form = ({fields, context}) => {
                         autoComplete={field.label}
                         // value={entity[field.code] ? entity[field.code] : ''}
                         value={entity[field.code] || valeursInitiales[field.code]}
-                        onChange={(e) => updateField(field.code, e.target.value)}
+                        onChange={(e) =>{
+                            updateField(field.code, e.target.value);
+                            setCharCount(e.target.value.length);
+
+                        } }
+                        color={charCount >= 70 ? "error" : ""}
                         autoFocus />
                         {/* <MyFormHelperText error={error}  /> */}
-                        <MyFormHelperText key={uniqueKey+"12"} error={fieldErrors[field.code]} response={responseMessage}  fieldCode={field.code}  />
+                        <MyFormHelperText key={uniqueKey+"12"} error={fieldErrors[field.code]} response={responseMessage}  fieldCode={field.code} charCount={charCount} />
                     </FormControl>
 
                 ) : field.type === 'textarea' ? (
@@ -153,9 +159,6 @@ const Form = ({fields, context}) => {
                                 )}
                             /> */}
 
-                            
-
-                    
                     </Box>
                     
                 ): field.type === 'submit' ? (

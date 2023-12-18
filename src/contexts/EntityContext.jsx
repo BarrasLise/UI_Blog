@@ -7,6 +7,7 @@ export const EntityContext = createContext({});
 const EntityProvider = ({ children, ressource, entityId }) => {
   const [entity, setEntity] = useState(null);
   const [isDirty, setIsDirty] = useState(false);
+  const [alertOpen, setAlertOpen] = useState(false);
   
   const navigate = useNavigate();
   const baseURL = "posts";
@@ -73,6 +74,10 @@ const EntityProvider = ({ children, ressource, entityId }) => {
 
   const saveEntity = async () => {
     await put(`${entityId}`, entity);
+
+    console.log("test saveEntity");
+    // Afficher l'alerte
+    setAlertOpen(true);
   };
 
   const handleSubmit = async (e) => {
@@ -109,6 +114,7 @@ const EntityProvider = ({ children, ressource, entityId }) => {
     refreshEntity, 
     entityId,
     baseURL,
+    setAlertOpen, alertOpen
   };
 
   return <EntityContext.Provider value={value}>{children}</EntityContext.Provider>;
