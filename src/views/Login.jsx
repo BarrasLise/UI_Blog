@@ -17,6 +17,7 @@ const Login = (props) => {
    
     const [loginError, setLoginError] = useState(null);
     // console.log(loginError);
+    console.log(error);
 
     const fields = [
         {
@@ -44,7 +45,7 @@ const Login = (props) => {
           Password: data.get('Password'),
         });
         if (response.ok){
-          console.log(response.data);
+          console.log("response", response.data);
           setLoginError(response.data.message);
         }
       
@@ -52,8 +53,9 @@ const Login = (props) => {
           await login();
           
         } catch (error) {
-          setLoginError(error);
-          console.log(error);
+          setLoginError(error.message);
+          console.log("error handlesubmit", error);
+          
         }
       };
 
@@ -84,8 +86,8 @@ const Login = (props) => {
                     <Form noValidate fields={fields} context={"users"} />
                     {error || loginError ?
                     <Box backgroundColor="error.main" borderRadius={"8px"} mb={"10px"} padding={"5px"}>
-                    <Typography color="primary.contrastText" ><strong>Erreur {response?.data?.code} : </strong> </Typography>
-                     <Typography color="primary.contrastText"> {response?.data?.message}</Typography> 
+                    <Typography color="primary.contrastText" ><strong>Erreur {response?.data?.code || "500"} : </strong> </Typography>
+                     <Typography color="primary.contrastText"> {response?.data?.message || 'Une erreur s\'est produite lors de la connexion.'}</Typography> 
                      </Box>: null}
                     <Grid container>
                         {/* <Grid item xs>
