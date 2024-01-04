@@ -8,6 +8,9 @@ const EntityProvider = ({ children, ressource, entityId }) => {
   const [entity, setEntity] = useState(null);
   const [isDirty, setIsDirty] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
+  const [alertSeverity, setAlertSeverity] = useState(null);
+  const [alertMessage, setAlertMessage] = useState(null);
+
   
   const navigate = useNavigate();
   const baseURL = "posts";
@@ -15,7 +18,7 @@ const EntityProvider = ({ children, ressource, entityId }) => {
   const { get, put, data : posts, del, post, response, error, loading,} = useFetch( baseURL ,{});
 
   useEffect(() => {
-    // get(`${entityId}`); //entityId contient id qui est récuérer au niveau de la vue BlogDetailsView.jsx
+    // get(`${entityId}`); //entityId contient id qui est récupérer au niveau de la vue BlogDetailsView.jsx
     if (loading) return;
     if (response.ok) {
       setEntity(posts);
@@ -36,30 +39,42 @@ const EntityProvider = ({ children, ressource, entityId }) => {
     setEntity({ ...entity, [name]: value });
     setIsDirty(true);
   };
-  //Créer une nouvelle entity
+ 
   const createEntity = async (e) => {
     e.preventDefault();
-    console.log("test crearteEntity");
+    console.log("test createEntity");
   
     const newPost = {
       Title: entity.Title,
       Body: entity.Body,
+      Categories: entity.Categories,
     };
-      console.log(newPost);
+    console.log(newPost);
   
-      try {
-        const createdPost = await post('', newPost);
-        if (response.ok) {
-          console.log('Post créé avec succès', createdPost);
-          navigate('/'); // Naviguer vers la page d'accueil ou une autre page après la création réussie du post
-        } else {
-          console.error('La création du post a échoué');
-        }
-      } catch (error) {
-        console.error('Une erreur s\'est produite', error);
+    try {
+      const createdPost = await post('', newPost);
+  
+      // if (response.ok) {
+      if(response.status === 200) { 
+        console.log('Post créé avec succès', createdPost);
+        setAlertOpen(true);
+        setAlertSeverity('success'); //  définir le type de sévérité de l'alerte
+        setAlertMessage('Le post a été créé avec succès!'); //  définir le message de l'alerte
+        // navigate('/'); // Naviguer vers la page d'accueil 
+      } else {
+        console.error('La création du post a échoué');
+        setAlertOpen(true);
+        setAlertSeverity('error'); //  définir le type de sévérité de l'alerte
+        setAlertMessage('Erreur lors de la création du post.'); // définir le message de l'alerte
       }
-
+    } catch (error) {
+      console.error('Une erreur s\'est produite', error);
+      setAlertOpen(true);
+      setAlertSeverity('error'); // définir le type de sévérité de l'alerte
+      setAlertMessage('Une erreur s\'est produite lors de la création du post.'); //  définir le message de l'alerte
+    }
   };
+  
  
 
   //test alert confirm : 
@@ -68,7 +83,10 @@ const EntityProvider = ({ children, ressource, entityId }) => {
       await del(`${entityId}`);
       if (response.ok) navigate('../');
     } else {
-      alert("Vous n'avez pas supprimer le post !");
+      // alert("Vous n'avez pas supprimer le post !");
+      setAlertOpen(true);
+      setAlertSeverity('success'); //  définir le type de sévérité de l'alerte
+      setAlertMessage('Le post a été supprimer avec succès!');
     }
   }
 
@@ -78,6 +96,8 @@ const EntityProvider = ({ children, ressource, entityId }) => {
     console.log("test saveEntity");
     // Afficher l'alerte
     setAlertOpen(true);
+    setAlertSeverity('success'); //  définir le type de sévérité de l'alerte
+    setAlertMessage('Le post a été enregistré avec succès!');
   };
 
   const handleSubmit = async (e) => {
@@ -94,6 +114,7 @@ const EntityProvider = ({ children, ressource, entityId }) => {
 
   const editPost = () => {
     navigate('../edit/' + entity.id);
+    console.log("editpost");
   };
 
   const value = {
@@ -114,7 +135,9 @@ const EntityProvider = ({ children, ressource, entityId }) => {
     refreshEntity, 
     entityId,
     baseURL,
-    setAlertOpen, alertOpen
+    setAlertOpen, alertOpen, 
+    setAlertSeverity, alertSeverity,
+    setAlertMessage, alertMessage
   };
 
   return <EntityContext.Provider value={value}>{children}</EntityContext.Provider>;

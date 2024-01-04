@@ -6,6 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Loading from "../components/Loading";
 import { EntityContext } from "../contexts/EntityContext";
 import Form from "../components/Form";
+import GlobalPopup from "../components/GlobalPopup";
 
 
 const Create = () => {
@@ -13,6 +14,7 @@ const Create = () => {
   const {createEntity } = useContext(EntityContext);
   const {user : current_user}=useContext(AuthContext);
   const { data : categories} = useFetch( 'categories' ,{}, []);
+
   
   const fields = [
     {
@@ -34,6 +36,8 @@ const Create = () => {
 
 
   return (
+    <>
+    <GlobalPopup/>
     <Container component="main" maxWidth="xl">
       <CssBaseline />
       {loading ? <Loading/> :  
@@ -71,6 +75,8 @@ const Create = () => {
       }
       </Box>
     </Container >
+    </>
+    
   );
 };
 

@@ -9,53 +9,43 @@ import Profile from "./Profile";
 import UserDetails from "./UserDetails";
 import BlogDetailsView from "./BlogDetailsView";
 
+
 const AppRoutes = () => {
   return(
-    <Routes >
-        <Route exact path="/" element={<BlogList />} />
-        <Route
-          path="/posts"
-          element={
-            <EntityProvider>
-              <Create />
-            </EntityProvider>
-          }
-        />
-        <Route
-          path="/posts/:id"
-          element={
-            <BlogDetailsView/>
-            
-            // <EntityProvider  >
-            //   <BlogDetails />
-            // </EntityProvider>
-          }
-        />
-        <Route path="/login" 
+    <>
+    
+    <Routes>
+      <Route exact path="/" element={<BlogList />} />
+      <Route
+        path="/posts"
         element={
-          <Login />
-        } 
-        />
-        <Route
-          path="/register"
-          element={
-            <Register /> 
-          }
-        />
-        <Route
-          path="/users"
-          element={
-            <Profile />
-          }
-        />
-        <Route
-          path="/users/:id"
-          element={
-            <UserDetails />
-          }
-        />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+        <EntityProvider>
+          <Create />
+        </EntityProvider>
+      } />
+      <Route
+        path="/posts/:id"
+        element={<BlogDetailsView />
+          // <EntityProvider  >
+          //   <BlogDetails />
+          // </EntityProvider>
+        } />
+      <Route path="/login"
+        element={<Login />} />
+      <Route
+        path="/register"
+        element={<Register />} />
+      <Route
+        path="/users"
+        element={<Profile />} />
+      <Route
+        path="/users/:id"
+        element={<UserDetails />} />
+      <Route path="*" element={<NotFound />} />
+
+    </Routes>
+    
+    </>
   )
 }
 

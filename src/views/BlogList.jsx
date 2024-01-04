@@ -8,6 +8,7 @@ import { CardActionArea, Avatar, CardHeader } from '@mui/material';
 import NoResults from "../components/NoResults";
 import Loading from "../components/Loading";
 import Filters from "../components/Filters";
+import GlobalPopup from "../components/GlobalPopup";
 
 const BlogList = () => {
 
@@ -56,6 +57,7 @@ const BlogList = () => {
     return ( 
        
         <Box sx={{ display: 'flex', flexDirection: 'column'} }>
+            <GlobalPopup/>
         
         {loading ? <Loading/> :  
         error ? <Box component="div">{error}</Box> 

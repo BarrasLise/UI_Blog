@@ -139,7 +139,7 @@ const Form = ({fields, context, categories}) => {
                                         const trimmedOption = option.trim();
                                         return trimmedOption.length > 0
                                             ? trimmedOption.charAt(0).toUpperCase() + trimmedOption.slice(1).toLowerCase()
-                                            : '';
+                                            : null;
                                     });
                                     updateField(field.code, formattedValue.join(','));
                                 }}

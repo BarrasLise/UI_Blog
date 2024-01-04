@@ -13,6 +13,7 @@ import CategoryList from "../components/CategoryList";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import { useFetch } from "use-http";
+import GlobalPopup from "../components/GlobalPopup";
 
 
 const BlogDetails = () => {
@@ -58,6 +59,7 @@ const BlogDetails = () => {
   return (
     <>
     <CssBaseline />
+    <GlobalPopup/>
    
       {loading ? <Loading/> :  
         error ? <Box component="div">{error}</Box> 

@@ -27,10 +27,10 @@ root.render(
 {/* <HttpProvider url={"https://coursx75.fr/2023-2024/2A_X75/BARRAS/blog/api/v1"} options={options}>   */}
     <ThemeProvider theme={theme}>
       <CookiesProvider>
-        <AuthProvider>
+        <AuthProvider>       
          
           <App />
-        
+
         </AuthProvider>
       </CookiesProvider>
     </ThemeProvider>
