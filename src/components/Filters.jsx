@@ -32,13 +32,11 @@ const Filters = ({ onSubmit }) => {
   const [searchValue, setSearchValue] = useState("");
   const [author, setAuthor] = useState([]);
   const [category, setCategory] = useState([]);
-  // console.log(category);
+
   const { data : users} = useFetch( 'users' ,{}, []);
-  // console.log(users);
+
   const { data : categories} = useFetch( 'categories' ,{}, []);
-  // console.log(categories); // ceci renvoie un objet : {Categories : Array(5)}
-  // console.log(Array.isArray(categories.Categories)); //Ceci est un tableau
- 
+
   //button open/close
   const handleClickOpen = () => {
     setOpen(true);
@@ -122,8 +120,8 @@ const Filters = ({ onSubmit }) => {
     );
   };
 
-  const handleCategoryChange = (event) => {
-
+  const handleCategoryChange = (event) => { 
+    
     const {
       target: { value },
     } = event;

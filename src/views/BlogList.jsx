@@ -12,18 +12,14 @@ import Filters from "../components/Filters";
 const BlogList = () => {
 
     const { get, data : datas, error, loading} = useFetch('posts', {}, []);
-    // console.log(datas);
-    
 
     const stringToColor = (string) => {
         let hash = 0;
         let i;
       
-       
         /* generateur de couleur */
         for (i = 0; i < string.length; i += 1) {
           hash = string.charCodeAt(i) + ((hash << 5) - hash);
-         
         }
       
         let color = '#';

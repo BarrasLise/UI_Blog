@@ -9,8 +9,6 @@ const LikeButton = () => {
   
   const {entity, refreshEntity, baseURL, entityId} = useContext(EntityContext);
   const { post } = useFetch(`${baseURL}/${entityId}/like`, {});
-  // console.log(id);
-
 
   const handleLikeClick = async () => {
     console.log(entity);

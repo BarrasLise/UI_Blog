@@ -23,7 +23,7 @@ const BlogDetails = () => {
   // const {savePost} = useContext(PostContext);
   // const [alertOpen] = useState(false);
   const { data : categories} = useFetch( 'categories' ,{}, []);
-  console.log(categories);
+  // console.log(categories);
 
   const handleCloseAlert = ( reason) => {
     if (reason === 'clickaway') {

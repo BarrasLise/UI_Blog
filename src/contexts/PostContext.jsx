@@ -5,8 +5,6 @@ export const PostContext = createContext({});
 
 const PostProvider = ({children}) => {
     const {entityId, baseURL} = useContext(EntityContext);
-    // console.log(entityId);
-    // console.log("coucou");
     
     const savePost = () => {  
         console.log("test savePost de PostsContext : " + entityId + " et baseURL : " + baseURL);    

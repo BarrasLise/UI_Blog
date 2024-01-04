@@ -9,11 +9,10 @@ import Form from "../components/Form";
 
 
 const Create = () => {
-  const { error, loading } = useFetch('posts', {}, []);
-
-  const {  createEntity } = useContext(EntityContext);
-
+  const {error, loading } = useFetch('posts', {}, []);
+  const {createEntity } = useContext(EntityContext);
   const {user : current_user}=useContext(AuthContext);
+  const { data : categories} = useFetch( 'categories' ,{}, []);
   
   const fields = [
     {
@@ -25,6 +24,11 @@ const Create = () => {
       code: 'Body',
       label: 'Contenu du post ',
       type: 'textarea'
+    }, 
+    {
+      code: 'Categories',
+      label: 'Les categories ',
+      type: 'Autocomplete'
     }
   ];
 
@@ -37,22 +41,21 @@ const Create = () => {
        : null }
       <Box component="div"
             sx={{
-                    marginTop: 8,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
+              marginTop: 8,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
             }}
       >
       <Typography variant="h2" textAlign={"center"}>Ajouter un nouveau post</Typography>
       { current_user?.Is_Admin ? 
-      (<>
-  
+        (<>
         <Box 
           component="form"
           onSubmit={createEntity}
           noValidate sx={{ mt: 1 }}>
             
-            <Form fields={fields} context={"posts"}  /> 
+            <Form fields={fields} context={"posts"} categories={categories?.Categories || []} /> 
 
             <Button
              type="submit"
@@ -60,11 +63,11 @@ const Create = () => {
              variant="contained"
              sx={{ mt: 3, mb: 2 }}
             >Ajouter post</Button>
-         
+
         </Box>
         </>
         ) : 
-        <Typography variant="h1"> Vous n'avez pas les autorisations requises</Typography>
+        <Typography variant="h1">Vous n'avez pas les autorisations requises</Typography>
       }
       </Box>
     </Container >

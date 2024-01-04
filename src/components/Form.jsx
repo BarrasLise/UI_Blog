@@ -13,13 +13,6 @@ const Form = ({fields, context, categories}) => {
     const [responseMessage, setResponseMessage] = useState("");
     const [charCount, setCharCount] = useState(0);
 
-    // const categoriesArray = entity?.Categories?.split(',');
-    // const categoriesobj = categories.Categories;
-    // const categoriesArray = categoriesobj.split(',');
-    // console.log(categoriesArray);
-    // console.log(categories);
-   
-
     useEffect(() => {
         if (response.ok) {
           setResponseMessage(response.data.message);
@@ -42,7 +35,6 @@ const Form = ({fields, context, categories}) => {
   return (
     fields && fields.length && entity  && context
      ? (
-        // <FormControl fullWidth>
         <>
         { fields.map((field, index) => {
             
@@ -51,20 +43,17 @@ const Form = ({fields, context, categories}) => {
             return(
 
                 field.type === 'text'  ? (
-                    
-                        
+                       
                      <FormControl key={uniqueKey} fullWidth margin="normal">
                         <InputLabel key={uniqueKey + "11"} htmlFor="component-outlined" color={charCount >= 70 ? "error" : ""}>{field.label}</InputLabel>
                         <OutlinedInput
                         key={uniqueKey}
-                        // margin=""
                         type="text"
                         required
                         fullWidth
                         label={field.label}
                         name={field.label}
                         autoComplete={field.label}
-                        // value={entity[field.code] ? entity[field.code] : ''}
                         value={entity[field.code] || valeursInitiales[field.code]}
                         onChange={(e) =>{
                             updateField(field.code, e.target.value);
@@ -117,19 +106,19 @@ const Form = ({fields, context, categories}) => {
                     
                     <Box key={uniqueKey+"4"} component="div" className="form" 
                     sx={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'stretch',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'stretch',
                     }}>
                     <InputLabel key={uniqueKey} required id="Is_Admin">statut admin</InputLabel>
                     <Select
-                                    key={uniqueKey + "1"}
-                                    name="Is_Admin"
-                                    labelId="Is_Admin"
-                                    required
-                                    value={entity?.Is_Admin }
-                                    label="statut admin"
-                                    onChange={(e) => updateField(field.code, e.target.value)}
+                         key={uniqueKey + "1"}
+                        name="Is_Admin"
+                        labelId="Is_Admin"
+                        required
+                        value={entity?.Is_Admin }
+                        label="statut admin"
+                        onChange={(e) => updateField(field.code, e.target.value)}
                     >
                         <MenuItem key={uniqueKey + "2"} value={1}>Admin</MenuItem>
                         <MenuItem key={uniqueKey + "3"} value={0}>Utilisateur</MenuItem>
@@ -138,19 +127,10 @@ const Form = ({fields, context, categories}) => {
                     
                 ) : field.type === 'Autocomplete' ? ( 
                     
-                    // <Box key={uniqueKey + "5"} component="div" className="form"
-                    // sx={{
-                    //     display: 'flex',
-                    //     flexDirection: 'column',
-                    //     alignItems: 'stretch',
-                    //     width: '100%',
-                    // }}>
-                        <FormControl key={uniqueKey} fullWidth margin="normal">
+                  
+                    <FormControl key={uniqueKey} fullWidth margin="normal">
                         <Autocomplete
-                                // sx={{ width: '100% '}}
-                                // style={{ width: '100%' }}
                                 multiple
-                                // id="tags-outlined" 
                                 options={Array.isArray(categories) ? categories : []}
                                 value={entity[field.code] ? entity[field.code].split(',') : []}
                                 freeSolo
@@ -169,17 +149,14 @@ const Form = ({fields, context, categories}) => {
                                         sx={{  
                                             marginRight: '4px',
                                             marginBottom: '4px',
-                                         
-                                         }}
+                                        }}
                                         color="primary"
-                
                                         variant="outlined" 
                                         label={option} {...getTagProps({ index })} />
                                     ))
                                 }
                                 renderInput={(params) => (
-                                    <TextField
-                                        
+                                    <TextField 
                                         {...params}
                                         // variant="filled"
                                         label={field.label}
@@ -187,14 +164,8 @@ const Form = ({fields, context, categories}) => {
                                     />
                                 )}
                         />
-                        </FormControl>
-                        
-                       
+                    </FormControl>  
 
-
-                    // {/* </Box> */}
-                    
-                    
                 ): field.type === 'submit' ? (
             
                     <Button
@@ -211,7 +182,6 @@ const Form = ({fields, context, categories}) => {
             )
         })}
         </>
-        // </FormControl >
     ) : "erreur de chargement ?"
     
 );

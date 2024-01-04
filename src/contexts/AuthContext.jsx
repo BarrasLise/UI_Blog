@@ -48,8 +48,6 @@ const AuthProvider = ({ children }) => {
       // Gérer les erreurs de connexion
       // console.log(error);
       console.log("error", error.message);
-     
-   
     }
   }
 

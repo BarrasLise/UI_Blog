@@ -13,8 +13,6 @@ const UserDetails = () => {
   const {user : current_user, unLogin, entity, setEntity, isDirty }=useContext(AuthContext);
   const { put, data, del, response, loading,} = useFetch( 'users/'+id ,{}, []);
   
-  
-
   useEffect(() => {
     if (loading) return;
     if (response.ok) {
@@ -46,7 +44,6 @@ const UserDetails = () => {
       console.log(entity);
       navigate('/users');
     }
-
   };
 
   const fields = [
@@ -74,19 +71,16 @@ const UserDetails = () => {
       code : 'Is_Admin',
       type : 'select'
     }, 
-   
-
   ];
 
   return (
     <>
     <Box component="div" className="form" 
         sx={{
-                    marginTop: 8,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'stretch',
-                    // maxWidth : "900px"
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'stretch',
         }}>
           
         <Typography variant="h2">Détails de l'utilisateur</Typography>
@@ -105,7 +99,6 @@ const UserDetails = () => {
       
           <Button className="IconButton" id="submit" type="submit" value="Supprimer" onClick={deleteEntity}><DeleteIcon/></Button> 
 
-         
         </Box>
     </Box>
     </>

@@ -9,8 +9,6 @@ import {  Box, Button,  Table, TableBody, TableCell, TableContainer, TableHead, 
 import Loading from "../components/Loading";
 import LogoutButton from "../components/LogoutButton";
 
-
-
 const Profile = () => {
   const theme = useTheme(); // Récupérez le thème
   const color = theme.palette.primary ;
@@ -35,36 +33,36 @@ const Profile = () => {
   return ( 
     <Box component="div" className="MyProfile" 
         sx={{
-                    marginTop: 8,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
         }}
     >
      
-        {loading ? <Loading/> :  
-        error ? <NotFound /> 
-       : 
+      {loading ? <Loading/> :  
+      error ? <NotFound /> 
+      : 
       <Box component="div" className="MyProfile">
         <Typography variant="h1">Mon profil</Typography >
         <Box component="div" className="infos-users">
             <Typography variant="h2">Mon compte</Typography >
             <Box component="div" 
             sx={{
-                    marginTop: 2,
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'stretch',
-                    justifyContent: 'space-between'
+              marginTop: 2,
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'stretch',
+              justifyContent: 'space-between'
             }}>
                 {current_user ? (
                 <>
                 <Box component="div" 
                 sx={{
-                        marginTop: 2,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'stretch',
+                  marginTop: 2,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'stretch',
                 }}>
                     <Typography variant="body2">
                       Mon pseudo : <Box component="span" sx={{fontWeight:900}}>{current_user.Pseudo}</Box>
@@ -81,11 +79,13 @@ const Profile = () => {
                 </Box>
                 </>
                 ) : null}
-                <Box component="div" sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-between'
+                <Box 
+                component="div" 
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-between'
                 }}>
                     <Link to={`/users/${current_user.ID}`}>
                         <Button className="link-button" ><EditIcon /></Button>

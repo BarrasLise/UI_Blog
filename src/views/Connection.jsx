@@ -24,8 +24,6 @@ const Connection = () => {
 
         </Container>
     </>
-   
-
    );
 }
  

@@ -8,10 +8,8 @@ import InfoIcon from '@mui/icons-material/Info';
 
 const Register = (props) => {
     const theme = useTheme(); // Récupérez le thème
-    
     const { post, response, error} = useFetch('register');
     const {entity, infos} = useContext(AuthContext);
-
     const [errorForm, setErrorForm] = useState("form");
     const fields = [
         {
@@ -71,8 +69,8 @@ const Register = (props) => {
             setErrorForm(false);
             console.log('User enregistré avec succès', registered);
             props.switchForm();
-          }
-          
+          }  
+
         } catch (error) {
           console.error('Une erreur s\'est produite', error);
         }
@@ -85,8 +83,6 @@ const Register = (props) => {
     //Email valide ?
     const validEmail = entity?.Email.match(/^\S+@\S+\.\S+$/) ? true : false;
   
-
-
     return ( 
         <>
         <Typography variant="div" className={errorForm}></Typography>
@@ -124,8 +120,6 @@ const Register = (props) => {
                         </Typography>
                         </Box>
                     ) : null}
-
-                    
 
                     <Button
                         type="submit"
