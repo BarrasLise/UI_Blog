@@ -12,6 +12,7 @@ import Form from "../components/Form";
 import CategoryList from "../components/CategoryList";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import { useFetch } from "use-http";
 
 
 const BlogDetails = () => {
@@ -21,6 +22,8 @@ const BlogDetails = () => {
   const {user : current_user}=useContext(AuthContext);
   // const {savePost} = useContext(PostContext);
   // const [alertOpen] = useState(false);
+  const { data : categories} = useFetch( 'categories' ,{}, []);
+  console.log(categories);
 
   const handleCloseAlert = ( reason) => {
     if (reason === 'clickaway') {
@@ -94,7 +97,7 @@ const BlogDetails = () => {
             <LikeButton/>
             {/* <Button onClick={savePost}>savePost</Button> */}
         </Box>
-        {entity.Categories}
+        {/* {entity.Categories} */}
         </Box>
         
         {current_user?.Is_Admin? ( 
@@ -126,7 +129,7 @@ const BlogDetails = () => {
                   >
                     <Typography variant="h5" sx={{ mb: 1 }}>Modifier le post :  </Typography>
                   </Box>
-                  <Form fields={fields} context={"posts"} />
+                  <Form fields={fields} context={"posts"} categories={categories.Categories || []}/>
                   <Box component="div"
                     sx={{
                       marginTop: 2,

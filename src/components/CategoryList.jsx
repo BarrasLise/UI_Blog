@@ -20,7 +20,7 @@ const CategoryList = () => {
   }}>
       <Typography variant="h5">Categories : </Typography>
     
-      {categoriesArray?.length > 0 ? (
+      {categoriesArray && categoriesArray.length > 0  && categoriesArray[0] !== "" ? (
         categoriesArray.map((category, index) => (
           <Chip
             key={index}

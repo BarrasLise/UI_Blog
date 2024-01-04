@@ -5,14 +5,21 @@ import { AuthContext } from "../contexts/AuthContext";
 import MyFormHelperText from "./MyFormHelperText";
 
 
-const Form = ({fields, context}) => {
+const Form = ({fields, context, categories}) => {
     
     const ContextChoice = useContext(context === "users" ? AuthContext : EntityContext);
     const { entity, updateField, error, response } = ContextChoice;
     const [fieldErrors, setFieldErrors] = useState({});
     const [responseMessage, setResponseMessage] = useState("");
     const [charCount, setCharCount] = useState(0);
+
+    // const categoriesArray = entity?.Categories?.split(',');
+    // const categoriesobj = categories.Categories;
+    // const categoriesArray = categoriesobj.split(',');
+    // console.log(categoriesArray);
+    // console.log(categories);
    
+
     useEffect(() => {
         if (response.ok) {
           setResponseMessage(response.data.message);
@@ -131,35 +138,62 @@ const Form = ({fields, context}) => {
                     
                 ) : field.type === 'Autocomplete' ? ( 
                     
-                    <Box key={uniqueKey+"5"} component="div" className="form" 
-                    sx={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'stretch',
-                    }}>
-                       
-                            {/* <Autocomplete
+                    // <Box key={uniqueKey + "5"} component="div" className="form"
+                    // sx={{
+                    //     display: 'flex',
+                    //     flexDirection: 'column',
+                    //     alignItems: 'stretch',
+                    //     width: '100%',
+                    // }}>
+                        <FormControl key={uniqueKey} fullWidth margin="normal">
+                        <Autocomplete
+                                // sx={{ width: '100% '}}
+                                // style={{ width: '100%' }}
                                 multiple
-                                id="tags-filled"
-                                options={categoriesArray.map((option) => option.title)}
-                                defaultValue={[categoriesArray.title]}
+                                // id="tags-outlined" 
+                                options={Array.isArray(categories) ? categories : []}
+                                value={entity[field.code] ? entity[field.code].split(',') : []}
                                 freeSolo
+                                onChange={(event, newValue) => {
+                                    const formattedValue = newValue.map(option => {
+                                        const trimmedOption = option.trim();
+                                        return trimmedOption.length > 0
+                                            ? trimmedOption.charAt(0).toUpperCase() + trimmedOption.slice(1).toLowerCase()
+                                            : '';
+                                    });
+                                    updateField(field.code, formattedValue.join(','));
+                                }}
                                 renderTags={(value, getTagProps) =>
-                                value.map((option, index) => (
-                                    <Chip variant="outlined" label={option} {...getTagProps({ index })} />
-                                ))
+                                    value.map((option, index) => (
+                                        <Chip 
+                                        sx={{  
+                                            marginRight: '4px',
+                                            marginBottom: '4px',
+                                         
+                                         }}
+                                        color="primary"
+                
+                                        variant="outlined" 
+                                        label={option} {...getTagProps({ index })} />
+                                    ))
                                 }
                                 renderInput={(params) => (
-                                <TextField
-                                    {...params}
-                                    variant="filled"
-                                    label={field.code}
-                                    placeholder="Favorites"
-                                />
+                                    <TextField
+                                        
+                                        {...params}
+                                        // variant="filled"
+                                        label={field.label}
+                                        placeholder="Ajouter des catégories"
+                                    />
                                 )}
-                            /> */}
+                        />
+                        </FormControl>
+                        
+                       
 
-                    </Box>
+
+                    // {/* </Box> */}
+                    
                     
                 ): field.type === 'submit' ? (
             
