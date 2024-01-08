@@ -57,7 +57,7 @@ const Navbar = () => {
                 
                 }}
             >
-                Topaz Blog
+              Topaz Blog
             </Typography>
           </Tooltip>
 
@@ -119,8 +119,7 @@ const Navbar = () => {
               noWrap
               component="a" // précise que c'est un lien (balise a) :  <a> <a/>
               href="/" //direction lien où il renvoit
-              display={ {xs: 'flex', md: 'none' }}
-                //petit menu ->petit écran
+              display={ {xs: 'flex', md: 'none' }} //petit menu ->petit écran
               color= 'inherit'
               mr="2"
               flexGrow= "1"
@@ -129,10 +128,9 @@ const Navbar = () => {
              fontWeight: 700,
              letterSpacing: '.2rem',
              textDecoration: 'none'
-              }}
-                
+              }}   
             > 
-                Topaz Blog
+              Topaz Blog
             </Typography>
           </Tooltip>
           <Box 
@@ -149,8 +147,9 @@ const Navbar = () => {
                 component={"a"} 
                 href={`/`} 
                 color="inherit"
-                
-                >{page}</Button> 
+                >
+                  {page}
+                </Button> 
               : 
               current_user?.Is_Admin ?  
               <Button
@@ -159,10 +158,11 @@ const Navbar = () => {
               component={"a"} 
               href={`/posts`} 
               color="inherit"
-              >{page}</Button> : null
+              >
+                {page}
+              </Button> : null
               }
               </React.Fragment>
-
             ))}
           </Box>
 
@@ -190,31 +190,12 @@ const Navbar = () => {
                 horizontal: 'right',
               }}
               open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-              
+              onClose={handleCloseUserMenu} 
             >
               {settings.map((setting) => (
                 <MenuItem key={setting}  sx={{ justifyContent: "center"}}>
-
                   {<>
                     {setting==="Se déconnecter" ? 
-                      // <Link 
-                      //   key={setting} 
-                      //   textAlign="center"
-                      //   // variant="h5"
-                      //   onClick={unLogin}
-                      //   color={"inherit"}
-                      //   sx={{
-                      //       // mr: 2,
-                      //       fontSize : '18px', 
-                      //       flexGrow: 1,
-                      //       fontWeight: 200,
-                      //       color: 'inherit',
-                      //       textDecoration: 'none', 
-                      //     }}
-                      // >
-                      //   {setting}
-                      // </Link>
                       <LogoutButton key={setting} />
                       : 
                       <Link
@@ -225,22 +206,17 @@ const Navbar = () => {
                       color={"inherit"}
                       textDecoration="none"
                       sx={{
-                        // mr: 2,
                         fontSize : '18px', 
                         flexGrow: 1,
                         fontWeight: 200,
                         color: 'inherit',
                         textDecoration: 'none', 
                       }}
-                     
                       >
                         {setting}
                       </Link>
-
                     }
-                    
                     </>}
-                  
                 </MenuItem>
               ))}
             </Menu>
@@ -248,7 +224,6 @@ const Navbar = () => {
         </Toolbar>
       </Container>
     </AppBar>
-
   );
 }
  

@@ -46,24 +46,27 @@ const Profile = () => {
       <Box component="div" className="MyProfile">
         <Typography variant="h1">Mon profil</Typography >
         <Box component="div" className="infos-users">
-            <Typography variant="h2">Mon compte</Typography >
-            <Box component="div" 
-            sx={{
-              marginTop: 2,
-              display: 'flex',
-              flexDirection: 'row',
-              alignItems: 'stretch',
-              justifyContent: 'space-between'
-            }}>
-                {current_user ? (
+          <Typography variant="h2">Mon compte</Typography >
+          <Box 
+              component="div" 
+              sx={{
+                marginTop: 2,
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'stretch',
+                justifyContent: 'space-between'
+              }}
+          >
+            {current_user ? (
                 <>
                 <Box component="div" 
-                sx={{
-                  marginTop: 2,
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'stretch',
-                }}>
+                  sx={{
+                    marginTop: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'stretch',
+                  }}
+                >
                     <Typography variant="body2">
                       Mon pseudo : <Box component="span" sx={{fontWeight:900}}>{current_user.Pseudo}</Box>
                     </Typography>
@@ -78,21 +81,22 @@ const Profile = () => {
                     </Typography>
                 </Box>
                 </>
-                ) : null}
-                <Box 
-                component="div" 
-                sx={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  justifyContent: 'space-between'
-                }}>
-                    <Link to={`/users/${current_user.ID}`}>
-                        <Button className="link-button" ><EditIcon /></Button>
-                    </Link>
-                    <LogoutButton />
-                </Box>
+            ) : null}
+            <Box 
+              component="div" 
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between'
+              }}
+            >
+              <Link to={`/users/${current_user.ID}`}>
+                <Button className="link-button" ><EditIcon /></Button>
+              </Link>
+              <LogoutButton />
             </Box>
+          </Box>
             
         </Box>
           {current_user?.Is_Admin ? 

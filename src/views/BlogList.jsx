@@ -30,7 +30,6 @@ const BlogList = () => {
           color += `00${value.toString(16)}`.slice(-2);
         }
        
-
         // generateur de couleur dans les tons bleu
         // for (i = 0; i < string.length; i += 1) {
         //     hash = string.charCodeAt(i) + ((hash << 5) - hash);
@@ -57,7 +56,7 @@ const BlogList = () => {
     return ( 
        
         <Box sx={{ display: 'flex', flexDirection: 'column'} }>
-            <GlobalPopup/>
+            <GlobalPopup context={"posts"}/>
         
         {loading ? <Loading/> :  
         error ? <Box component="div">{error}</Box> 

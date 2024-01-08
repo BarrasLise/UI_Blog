@@ -14,8 +14,7 @@ const CategoryList = () => {
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'flex-start',
-        
+      justifyContent: 'flex-start',    
     }}>
       <Typography variant="h5">Categories : </Typography>
     

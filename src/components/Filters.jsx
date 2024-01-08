@@ -1,26 +1,11 @@
 import  React, { useState} from 'react';
 import useFetch from 'use-http';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+import {Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, FormGroup, FormControlLabel, Checkbox, MenuItem, Select, InputLabel, OutlinedInput, FormControl, Box, Chip, useTheme} from '@mui/material/';
 import CloseIcon from '@mui/icons-material/Close';
 import ReplayIcon from '@mui/icons-material/Replay';
 import SearchIcon from '@mui/icons-material/Search';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
-import InputLabel from '@mui/material/InputLabel';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import FormControl from '@mui/material/FormControl';
-import Box from '@mui/material/Box';
-import Chip from '@mui/material/Chip';
-import {  useTheme } from "@mui/material";
+
+
 
 const Filters = ({ onSubmit }) => {
   const theme = useTheme(); // Récupérez le thème

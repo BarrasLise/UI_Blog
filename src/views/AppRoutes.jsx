@@ -3,33 +3,22 @@ import Login from './Login';
 import Register from './Register';
 import NotFound from "./NotFound";
 import BlogList from "./BlogList";
-import EntityProvider from '../contexts/EntityContext';
 import Create from "./Create";
 import Profile from "./Profile";
 import UserDetails from "./UserDetails";
 import BlogDetailsView from "./BlogDetailsView";
 
-
 const AppRoutes = () => {
   return(
     <>
-    
     <Routes>
       <Route exact path="/" element={<BlogList />} />
       <Route
         path="/posts"
-        element={
-        <EntityProvider>
-          <Create />
-        </EntityProvider>
-      } />
+        element={<Create />} />
       <Route
         path="/posts/:id"
-        element={<BlogDetailsView />
-          // <EntityProvider  >
-          //   <BlogDetails />
-          // </EntityProvider>
-        } />
+        element={<BlogDetailsView />} />
       <Route path="/login"
         element={<Login />} />
       <Route
@@ -42,9 +31,7 @@ const AppRoutes = () => {
         path="/users/:id"
         element={<UserDetails />} />
       <Route path="*" element={<NotFound />} />
-
     </Routes>
-    
     </>
   )
 }

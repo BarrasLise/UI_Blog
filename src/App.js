@@ -5,7 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { AuthContext } from './contexts/AuthContext';
 import AppRoutes from './views/AppRoutes';
 import Connection from "./views/Connection";
-import GlobalPopup from "./components/GlobalPopup";
+// import GlobalPopup from "./components/GlobalPopup";
 
 function App() {
   const { isLoggedIn } = useContext(AuthContext);
@@ -20,7 +20,7 @@ function App() {
         
         <Navbar />
         <Container maxWidth={'xl'} sx={{mt:"20px"}}>
-          <GlobalPopup />
+          {/* <GlobalPopup /> */}
           {isLoggedIn ?  <AppRoutes /> :  <Connection />}
         </Container>
     </Router>

@@ -8,16 +8,14 @@ const MyFormHelperText = ({ fieldCode, charCount }) => {
 
     const validEmail = entity?.Email.match(/^\S+@\S+\.\S+$/) ? true : false;
     const passwordStrength = entity?.Password?.length > 10 ? true : false;
-   
-    
+  
     const passwordMatch = entity?.Password === entity?.CheckPassword;
-    // console.log("password : " + passwordMatch);
 
     const helperText = useMemo(() => {
        
-        if (fieldCode === 'Email') {
+      if (fieldCode === 'Email') {
           
-          return (
+        return (
             <Typography component={'span'}  variant="body2" color={validEmail ? "" : "error"}>
               {focused || info ===true ?  (
                 <>
@@ -26,48 +24,47 @@ const MyFormHelperText = ({ fieldCode, charCount }) => {
                 </>
               ) : null}
             </Typography>
-          );
+        );
 
-        } else if (fieldCode === 'Password') {
+      } else if (fieldCode === 'Password') {
 
-            return (
+        return (
 
-              <Typography component={'span'}  variant="body2" color={passwordStrength?  "" : "error"} >
+          <Typography component={'span'}  variant="body2" color={passwordStrength?  "" : "error"} >
               {focused || info ===true ?  (
                 <>
                   {filled ? 'complété' : 'vide'}&nbsp;|&nbsp;
                   {passwordStrength ? "bon" : "faible" }
                 </>
               ) :null}
-            </Typography>
+          </Typography>
 
-            );
+          );
           
-        } else if (fieldCode === 'CheckPassword') {
+      } else if (fieldCode === 'CheckPassword') {
 
-            return (
-                <Typography component={'span'}  variant="body2" color={!passwordMatch? "error" : ""}>
-                  {focused || info ===true ?  (
+        return (
+            <Typography component={'span'}  variant="body2" color={!passwordMatch? "error" : ""}>
+              {focused || info ===true ?  (
                     <>
                       {filled ? 'complété' : 'vide'}&nbsp;|&nbsp;
                       {!passwordMatch ? "Les mots de passe ne correspondent pas" : "Les mots de passe correspondent"}
                     </>
-                  ) : null}
-                </Typography>
-              );
-          
+              ) : null}
+            </Typography>
+          ); 
         } 
-        else if (fieldCode === 'Title') {
+      else if (fieldCode === 'Title') {
 
-          return (
-              <Typography component={'span'}  variant="body2" color={charCount >= 70 ? "error" : ""}>
-                {focused  ?  (
-                  <>
-                    {charCount}/{70}
-                  </>
-                  ) : null} 
-              </Typography>
-            );
+        return (
+            <Typography component={'span'}  variant="body2" color={charCount >= 70 ? "error" : ""}>
+              {focused  ?  (
+                <>
+                  {charCount}/{70}
+                </>
+              ) : null} 
+            </Typography>
+        );
         
       } else {
           // Texte d'aide par défaut pour les autres champs

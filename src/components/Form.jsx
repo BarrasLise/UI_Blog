@@ -33,7 +33,7 @@ const Form = ({fields, context, categories}) => {
     });
 
   return (
-    fields && fields.length && entity  && context
+    fields && fields.length && entity && context
      ? (
         <>
         { fields.map((field, index) => {
@@ -58,17 +58,14 @@ const Form = ({fields, context, categories}) => {
                         onChange={(e) =>{
                             updateField(field.code, e.target.value);
                             setCharCount(e.target.value.length);
-
                         } }
                         color={charCount >= 70 ? "error" : ""}
                         autoFocus />
-                        {/* <MyFormHelperText error={error}  /> */}
                         <MyFormHelperText key={uniqueKey+"12"} error={fieldErrors[field.code]} response={responseMessage}  fieldCode={field.code} charCount={charCount} />
                     </FormControl>
 
                 ) : field.type === 'textarea' ? (
-
-                    
+  
                     <TextField
                         key={uniqueKey}
                         label={field.label}
@@ -80,7 +77,6 @@ const Form = ({fields, context, categories}) => {
                         onChange={(e) => updateField(field.code, e.target.value)}
                     />
                     
-
                 ) : field.type === 'password' ? (
                     
                      <FormControl key={uniqueKey} fullWidth margin="normal">
@@ -127,14 +123,13 @@ const Form = ({fields, context, categories}) => {
                     
                 ) : field.type === 'Autocomplete' ? ( 
                     
-                  
                     <FormControl key={uniqueKey} fullWidth margin="normal">
                         <Autocomplete
-                                multiple
-                                options={Array.isArray(categories) ? categories : []}
-                                value={entity[field.code] ? entity[field.code].split(',') : []}
-                                freeSolo
-                                onChange={(event, newValue) => {
+                            multiple
+                            options={Array.isArray(categories) ? categories : []}
+                            value={entity[field.code] ? entity[field.code].split(',') : []}
+                            freeSolo
+                            onChange={(event, newValue) => {
                                     const formattedValue = newValue.map(option => {
                                         const trimmedOption = option.trim();
                                         return trimmedOption.length > 0
@@ -142,10 +137,10 @@ const Form = ({fields, context, categories}) => {
                                             : null;
                                     });
                                     updateField(field.code, formattedValue.join(','));
-                                }}
-                                renderTags={(value, getTagProps) =>
+                            }}
+                            renderTags={(value, getTagProps) =>
                                     value.map((option, index) => (
-                                        <Chip 
+                                    <Chip 
                                         sx={{  
                                             marginRight: '4px',
                                             marginBottom: '4px',
@@ -155,14 +150,14 @@ const Form = ({fields, context, categories}) => {
                                         label={option} {...getTagProps({ index })} />
                                     ))
                                 }
-                                renderInput={(params) => (
-                                    <TextField 
+                            renderInput={(params) => (
+                                <TextField 
                                         {...params}
                                         // variant="filled"
                                         label={field.label}
                                         placeholder="Ajouter des catégories"
-                                    />
-                                )}
+                                />
+                            )}
                         />
                     </FormControl>  
 

@@ -105,7 +105,6 @@ const Register = (props) => {
                 </Typography>
                 <Box component="form" onSubmit={register} noValidate sx={{ mt: 1 }}>
                     <Box component={"div"} mb={"20px"} sx={{display: "flex", justifyContent: "flex-end", alignItems:"center"}}>
-
                         <Button onClick={infos} ><InfoIcon/></Button>
                     </Box>
                 

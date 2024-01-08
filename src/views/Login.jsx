@@ -9,6 +9,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Form from "../components/Form";
+import GlobalPopup from "../components/GlobalPopup";
 
 
 const Login = (props) => {
@@ -17,7 +18,7 @@ const Login = (props) => {
    
     const [loginError, setLoginError] = useState(null);
     // console.log(loginError);
-    console.log(error);
+   
 
     const fields = [
         {
@@ -48,66 +49,65 @@ const Login = (props) => {
           console.log("response", response.data);
           setLoginError(response.data.message);
         }
+        
       
         try {
-          await login();
-          
+          await login(); 
         } catch (error) {
           setLoginError(error.message);
           console.log("error handlesubmit", error);
-          
         }
       };
 
     return ( 
-        <>
+      <>
         {/* {error ? console.log(error) : null } */}
         <Container component="main" maxWidth="xs">
             <CssBaseline />
+            <GlobalPopup context={"users"} />
             <Box
-                sx={{
-                    marginTop: 8,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                }}
+              sx={{
+                marginTop: 8,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
             >
-                <Avatar sx={{ m: 1, bgcolor: theme.palette.primary.main }}>
-                    <LockOutlinedIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                    Se connecter
-                </Typography>
-                <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+              <Avatar sx={{ m: 1, bgcolor: theme.palette.primary.main }}>
+                <LockOutlinedIcon />
+              </Avatar>
+              <Typography component="h1" variant="h5">
+                Se connecter
+              </Typography>
+              <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                     {/* <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}
                         label="Se souvenir de moi" /> */}
                     
-                    <Form noValidate fields={fields} context={"users"} />
-                    {error || loginError ?
+                <Form noValidate fields={fields} context={"users"} />
+                  {error || loginError ?
                     <Box backgroundColor="error.main" borderRadius={"8px"} mb={"10px"} padding={"5px"}>
-                    <Typography color="primary.contrastText" ><strong>Erreur {response?.data?.code || "500"} : </strong> </Typography>
-                     <Typography color="primary.contrastText"> {response?.data?.message || 'Une erreur s\'est produite lors de la connexion.'}</Typography> 
-                     </Box>: null}
-                    <Grid container>
+                      <Typography color="primary.contrastText" ><strong>Erreur {response?.data?.code || "500"} : </strong> </Typography>
+                      <Typography color="primary.contrastText"> {response?.data?.message || 'Une erreur s\'est produite lors de la connexion.'}</Typography> 
+                    </Box>
+                  : null}
+                <Grid container>
                         {/* <Grid item xs>
                             <Link mt={2} href="#" variant="body2">
                                 {"Mot de passe oublié ?"}
                             </Link>
                         </Grid> */}
-                        <Grid item>
-                            <Link mt={2} variant="" onClick={props.switchForm}>
-                                {" Pas de compte ? Inscrivez-vous "}
-                            </Link>
-                        </Grid>
-                    </Grid>
-                </Box>
-            </Box>
-            
-        </Container>
-        
-        </>
-     );
+                  <Grid item>
+                    <Link mt={2} variant="" onClick={props.switchForm}>
+                      {" Pas de compte ? Inscrivez-vous "}
+                    </Link>
+                  </Grid>
+                </Grid>
+              </Box>
+            </Box>   
+      </Container> 
+      </>
+    );
 }
  
 export default Login;

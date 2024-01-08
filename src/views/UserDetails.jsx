@@ -13,6 +13,7 @@ const UserDetails = () => {
   const {user : current_user, unLogin, entity, setEntity, isDirty }=useContext(AuthContext);
   const { put, data, del, response, loading,} = useFetch( 'users/'+id ,{}, []);
   
+  
   useEffect(() => {
     if (loading) return;
     if (response.ok) {
@@ -27,6 +28,9 @@ const UserDetails = () => {
       // await del(entity);
       await del(entity);
       if (response.ok) navigate('/users');
+      //améliorer la gestion des erreurs pour la compréhension de l'utilisateur ! 
+     
+
     } else {
       // alert("Vous n'avez pas supprimer l'utilisateur !");
       console.log("Vous n'avez pas supprimer l'utilisateur !");

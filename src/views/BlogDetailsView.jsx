@@ -11,7 +11,7 @@ const BlogDetailsView = () => {
         <>
         {/* entityID est un paramètre(=props) de l'entityProvider qui permet de récupérer l'id  */}
         <EntityProvider entityId={id} > 
-        <GlobalPopup/>
+        <GlobalPopup context={"posts"} />
             <PostProvider>
                 <BlogDetails />
             </PostProvider>

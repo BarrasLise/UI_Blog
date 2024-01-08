@@ -18,7 +18,6 @@ const PostProvider = ({children}) => {
         <PostContext.Provider value={value}>
             {children}
         </PostContext.Provider>
-
     );
 }
  

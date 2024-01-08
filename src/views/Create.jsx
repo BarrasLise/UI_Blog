@@ -37,7 +37,7 @@ const Create = () => {
 
   return (
     <>
-    <GlobalPopup/>
+    <GlobalPopup context={"posts"}/>
     <Container component="main" maxWidth="xl">
       <CssBaseline />
       {loading ? <Loading/> :  
@@ -66,7 +66,9 @@ const Create = () => {
              fullWidth
              variant="contained"
              sx={{ mt: 3, mb: 2 }}
-            >Ajouter post</Button>
+            >
+              Ajouter post
+            </Button>
 
         </Box>
         </>

@@ -29,7 +29,6 @@ import { createTheme } from '@mui/material/styles';
       light: '#7ce7e9',
       dark: '#30b8bc',
       contrastText: '#ffffff',
-
     },
     warning: {
       main: '#fc823b',

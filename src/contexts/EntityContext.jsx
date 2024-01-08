@@ -1,5 +1,5 @@
 import { useState, createContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import useFetch from 'use-http';
 
 export const EntityContext = createContext({});
@@ -12,7 +12,7 @@ const EntityProvider = ({ children, ressource, entityId }) => {
   const [alertMessage, setAlertMessage] = useState(null);
 
   
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const baseURL = "posts";
 
   const { get, put, data : posts, del, post, response, error, loading,} = useFetch( baseURL ,{});
@@ -53,50 +53,57 @@ const EntityProvider = ({ children, ressource, entityId }) => {
   
     try {
       const createdPost = await post('', newPost);
-  
       // if (response.ok) {
       if(response.status === 200) { 
         console.log('Post créé avec succès', createdPost);
         setAlertOpen(true);
         setAlertSeverity('success'); //  définir le type de sévérité de l'alerte
         setAlertMessage('Le post a été créé avec succès!'); //  définir le message de l'alerte
-        // navigate('/'); // Naviguer vers la page d'accueil 
       } else {
         console.error('La création du post a échoué');
         setAlertOpen(true);
-        setAlertSeverity('error'); //  définir le type de sévérité de l'alerte
-        setAlertMessage('Erreur lors de la création du post.'); // définir le message de l'alerte
+        setAlertSeverity('error'); 
+        setAlertMessage('Erreur lors de la création du post.');
       }
     } catch (error) {
       console.error('Une erreur s\'est produite', error);
       setAlertOpen(true);
-      setAlertSeverity('error'); // définir le type de sévérité de l'alerte
-      setAlertMessage('Une erreur s\'est produite lors de la création du post.'); //  définir le message de l'alerte
+      setAlertSeverity('error'); 
+      setAlertMessage('Une erreur s\'est produite lors de la création du post.'); 
     }
   };
   
- 
-
-  //test alert confirm : 
   const deleteEntity= async () => {
     if (window.confirm("Voulez vous vraiment supprimer ce post ?" ) === true){
       await del(`${entityId}`);
-      if (response.ok) navigate('../');
+      // if (response.ok) navigate('../');
+      if(response.status === 200) { 
+        console.log("test1");
+        console.log('Suppression du post avec succès');
+        setAlertOpen(true);
+        setAlertSeverity('success'); 
+        setAlertMessage('Le post a été supprimé avec succès!'); 
+      } else {
+        console.error('La suppression du post a échoué');
+        setAlertOpen(true);
+        setAlertSeverity('error'); 
+        setAlertMessage('Erreur lors de la supression du post.'); 
+      }
     } else {
+      console.log("test2");
       // alert("Vous n'avez pas supprimer le post !");
       setAlertOpen(true);
-      setAlertSeverity('success'); //  définir le type de sévérité de l'alerte
-      setAlertMessage('Le post a été supprimer avec succès!');
+      setAlertSeverity('info');
+      setAlertMessage("Vous n'avez pas supprimer le post ");
     }
   }
 
   const saveEntity = async () => {
     await put(`${entityId}`, entity);
-
     console.log("test saveEntity");
-    // Afficher l'alerte
+
     setAlertOpen(true);
-    setAlertSeverity('success'); //  définir le type de sévérité de l'alerte
+    setAlertSeverity('success'); 
     setAlertMessage('Le post a été enregistré avec succès!');
   };
 
@@ -108,14 +115,14 @@ const EntityProvider = ({ children, ressource, entityId }) => {
     }
   };
 
-  const backTo = () => {
-    navigate ('../blogs/'+ entity.id);
-  };
+  // const backTo = () => {
+  //   navigate ('../blogs/'+ entity.id);
+  // };
 
-  const editPost = () => {
-    navigate('../edit/' + entity.id);
-    console.log("editpost");
-  };
+  // const editPost = () => {
+  //   navigate('../edit/' + entity.id);
+  //   console.log("editpost");
+  // };
 
   const value = {
     isDirty,
@@ -128,8 +135,6 @@ const EntityProvider = ({ children, ressource, entityId }) => {
     deleteEntity,
     saveEntity,
     handleSubmit,
-    backTo,
-    editPost,
     put,
     post,
     refreshEntity, 

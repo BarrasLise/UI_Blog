@@ -6,9 +6,12 @@ export const AuthContext = createContext({});
 
 const AuthProvider = ({ children }) => {
   const [isDirty, setIsDirty] = useState(false);
-  const [info, setInfo] = useState(false)
+  const [info, setInfo] = useState(false);
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertSeverity, setAlertSeverity] = useState(null);
+  const [alertMessage, setAlertMessage] = useState(null);
   
-  const { data, loading, error, post : postUser, get : getUser, response } = useFetch('session');
+  const { data, loading, error, post, get , response } = useFetch('session');
 
   const [cookie] = useCookies(['PHPSESSID']);
 
@@ -38,28 +41,39 @@ const AuthProvider = ({ children }) => {
 
   const login = async () => {
     try {
- 
-      await postUser('login', {
+      await post('login', {
         Pseudo: entity.Pseudo,
         Password: entity.Password
       });
-    
+      if(response.code === 200) { 
+        console.log('La connexion est un succès');
+        setAlertOpen(true);
+        setAlertSeverity('success'); //  définir le type de sévérité de l'alerte
+        setAlertMessage('La connexion est un succès'); //  définir le message de l'alerte
+      } else {
+        console.error('La connexion a échoué');
+        setAlertOpen(true);
+        setAlertSeverity('error'); 
+        setAlertMessage('Erreur lors de la connexion.');
+      }
     } catch (error) {
       // Gérer les erreurs de connexion
       // console.log(error);
+      console.log("test2");
       console.log("error", error.message);
+      setAlertOpen(true);
+      setAlertSeverity('error'); 
+      setAlertMessage('Une erreur s\'est produite lors de la création du post.'); 
     }
   }
 
   useEffect(() => {
-    
-    if(cookie.PHPSESSID) getUser('current_user');
-
-  },[cookie, getUser])
+    //gestion des cookies
+    if(cookie.PHPSESSID) get('current_user');
+  },[cookie, get])
 
   const unLogin = () => {
-    getUser('unlogin');
-
+    get('unlogin');
   }
 
   const value = {
@@ -77,6 +91,9 @@ const AuthProvider = ({ children }) => {
     user : !loading ? data : null,
     unLogin,
     login,
+    setAlertOpen, alertOpen, 
+    setAlertSeverity, alertSeverity,
+    setAlertMessage, alertMessage
   };
 
   return <AuthContext.Provider value={value}>

@@ -12,7 +12,6 @@ const LikeButton = () => {
 
   const handleLikeClick = async () => {
     console.log(entity);
-    
     try { 
       await post(entity);
       refreshEntity();

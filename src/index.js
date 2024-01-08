@@ -6,6 +6,7 @@ import AuthProvider from './contexts/AuthContext';
 import { CookiesProvider } from 'react-cookie';
 import {  ThemeProvider } from '@mui/material/styles';
 import theme from "./components/Theme";
+import EntityProvider from './contexts/EntityContext';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -27,9 +28,11 @@ root.render(
 {/* <HttpProvider url={"https://coursx75.fr/2023-2024/2A_X75/BARRAS/blog/api/v1"} options={options}>   */}
     <ThemeProvider theme={theme}>
       <CookiesProvider>
-        <AuthProvider>       
+        <AuthProvider>   
+          <EntityProvider>   
          
-          <App />
+            <App />
+          </EntityProvider>    
 
         </AuthProvider>
       </CookiesProvider>

@@ -10,29 +10,15 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import SaveIcon from '@mui/icons-material/Save';
 import Form from "../components/Form";
 import CategoryList from "../components/CategoryList";
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
 import { useFetch } from "use-http";
 import GlobalPopup from "../components/GlobalPopup";
-
 
 const BlogDetails = () => {
   
   const [edited, setEdited] = useState(false)
-  const { entity, error, loading, isDirty, saveEntity, deleteEntity, setAlertOpen, alertOpen } = useContext(EntityContext);
+  const { entity, error, loading, isDirty, saveEntity, deleteEntity } = useContext(EntityContext);
   const {user : current_user}=useContext(AuthContext);
-  // const {savePost} = useContext(PostContext);
-  // const [alertOpen] = useState(false);
   const { data : categories} = useFetch( 'categories' ,{}, []);
-  // console.log(categories);
-
-  const handleCloseAlert = ( reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setAlertOpen(false);
-  };
-
 
   const fields = [
     {
@@ -59,7 +45,7 @@ const BlogDetails = () => {
   return (
     <>
     <CssBaseline />
-    <GlobalPopup/>
+    <GlobalPopup context={"posts"} />
    
       {loading ? <Loading/> :  
         error ? <Box component="div">{error}</Box> 
@@ -89,12 +75,9 @@ const BlogDetails = () => {
                   alignItems: 'center', }}>
               <Typography  variant="h5" sx={{ mb: 1 }}>{entity.Title}</Typography>
               <Typography variant="body2">Ecrit par {entity.Pseudo}</Typography>
-           
-              
-                <Typography  sx={{ whiteSpace: 'pre-line'}}>
-                  {entity.Body}
-                </Typography>
-             
+              <Typography  sx={{ whiteSpace: 'pre-line'}}>
+                {entity.Body}
+              </Typography>
             </Box>
             <LikeButton/>
             {/* <Button onClick={savePost}>savePost</Button> */}
@@ -110,28 +93,30 @@ const BlogDetails = () => {
               alignItems: 'center',
               mb: 4
               }}
-            > 
-              
+            >  
               <Button className="IconButton" onClick={handleEdited} sx={{mt:2, boxShadow:' -5px -5px 9px rgba(255,255,255,0.45), 5px 5px 9px rgba(94,104,121,0.3)',
                 ':hover': {
                   boxShadow: 'inset -5px -5px 9px rgba(255,255,255,0.45), inset 5px 5px 9px rgba(94,104,121,0.3)',
                 }, }}>
                 <EditIcon  />
               </Button>
-              
+
                 { edited ? 
                     <>
-                    <Box component="div"
+                    <Box 
+                    component="div"
                     sx={{
                       mt: 8,
                       display: 'flex',
                       flexDirection: 'column',
-                      alignItems: 'center',
+                      alignItems: 'center', 
                     }}
                   >
                     <Typography variant="h5" sx={{ mb: 1 }}>Modifier le post :  </Typography>
                   </Box>
+
                   <Form fields={fields} context={"posts"} categories={categories.Categories || []}/>
+
                   <Box component="div"
                     sx={{
                       marginTop: 2,
@@ -141,7 +126,7 @@ const BlogDetails = () => {
                       justifyContent: 'space-evenly'
                     }}
                   >
-                      {isDirty ? 
+                    {isDirty ? 
                       <Button key={"Sauvegarder"} className="IconButton" id="submit" type="submit" value="Sauvegarder" onClick={saveEntity} sx={{ mr: 2,
                         boxShadow:' -5px -5px 9px rgba(255,255,255,0.45), 5px 5px 9px rgba(94,104,121,0.3)',
                         ':hover': {
@@ -150,44 +135,30 @@ const BlogDetails = () => {
                       }}>
                         <SaveIcon />
                       </Button> 
-                      : null}
-                      <Button key={"Supprimer"} className="IconButton" value="Supprimer" onClick={deleteEntity} sx={{ 
+                    : null}
+                    <Button 
+                      key={"Supprimer"} 
+                      className="IconButton" 
+                      value="Supprimer" 
+                      onClick={deleteEntity} 
+                      sx={{ 
                         boxShadow:' -5px -5px 9px rgba(255,255,255,0.45), 5px 5px 9px rgba(94,104,121,0.3)',
                         ':hover': {
                           boxShadow: 'inset -5px -5px 9px rgba(255,255,255,0.45), inset 5px 5px 9px rgba(94,104,121,0.3)',
                         }, 
-                      }}>
-                        <DeleteIcon />
-                      </Button>
+                      }}
+                    >
+                      <DeleteIcon />
+                    </Button>
 
                   </Box>
-                  <Snackbar
-                    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                    open={alertOpen}
-                    autoHideDuration={10000}
-                    onClose={handleCloseAlert}
-                  >
-                    <MuiAlert
-                      elevation={6}
-                      variant="filled"
-                      onClose={handleCloseAlert}
-                      severity="success"
-                    >
-                      Les modifications ont été sauvegardées !
-                    </MuiAlert>
-                  </Snackbar>
-
-
-
-                  </>
-                    
+                </>   
                 : null } 
                 </Box>  
             </>
         ) : null }
     </>   
     )  : <NotFound/>}
-    
     </>
   );
 };
