@@ -42,11 +42,6 @@ const Register = (props) => {
             label: 'Confirmer le mot de passe ',
             type: 'password'
         }, 
-        // {
-        //   code: 'button',
-        //   text: "s'enregistrer",
-        //   type: 'submit'
-        // }
     ];
 
     const register = async (e) => {

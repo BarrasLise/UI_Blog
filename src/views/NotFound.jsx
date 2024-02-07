@@ -75,8 +75,8 @@ const NotFound = () => {
             <Typography variant="body2">La page demandé n'a pas été trouvé. </Typography>
             <Typography variant="body2">Vous pouvez : </Typography>
             <Typography variant="div" className="buttons" display={"flex"} alignItems={"center"} justifyContent={"center"} sx={stylesBoutons}>
-                <Button className="link-button" onClick={Refresh} ><RefreshIcon sx={{width:"40px", height: "40px"}}/></Button> <Typography variant="body2">ou</Typography>
-                <Link to="/"><Button className="link-button"><HomeIcon sx={{width:"40px", height: "40px"}}/></Button></Link>
+                <Button className="link-button" onClick={Refresh} title="rafraichir la page" ><RefreshIcon sx={{width:"40px", height: "40px"}}/></Button> <Typography variant="body2">ou</Typography>
+                <Link to="/"><Button className="link-button" title="retourner à la page d'accueil"><HomeIcon sx={{width:"40px", height: "40px"}}/></Button></Link>
             </Typography> 
         </Typography>
         </Container>

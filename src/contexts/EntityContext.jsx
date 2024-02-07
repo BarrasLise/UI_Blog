@@ -4,7 +4,7 @@ import useFetch from 'use-http';
 
 export const EntityContext = createContext({});
 
-const EntityProvider = ({ children, ressource, entityId }) => {
+const EntityProvider = ({ children, entityId }) => {
   const [entity, setEntity] = useState(null);
   const [isDirty, setIsDirty] = useState(false);
   const [alertOpen, setAlertOpen] = useState(false);
@@ -107,23 +107,6 @@ const EntityProvider = ({ children, ressource, entityId }) => {
     setAlertMessage('Le post a été enregistré avec succès!');
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await put(`${entityId}`, entity);
-    if (response.ok) {
-      // navigate('../');
-    }
-  };
-
-  // const backTo = () => {
-  //   navigate ('../blogs/'+ entity.id);
-  // };
-
-  // const editPost = () => {
-  //   navigate('../edit/' + entity.id);
-  //   console.log("editpost");
-  // };
-
   const value = {
     isDirty,
     entity,
@@ -134,7 +117,6 @@ const EntityProvider = ({ children, ressource, entityId }) => {
     createEntity,
     deleteEntity,
     saveEntity,
-    handleSubmit,
     put,
     post,
     refreshEntity, 

@@ -16,7 +16,7 @@ const MyFormHelperText = ({ fieldCode, charCount }) => {
       if (fieldCode === 'Email') {
           
         return (
-            <Typography component={'span'}  variant="body2" color={validEmail ? "" : "error"}>
+            <Typography component={'span'}  variant="body2" color={validEmail ? "green" : "error"}>
               {focused || info ===true ?  (
                 <>
                   {filled ? 'complété' : 'vide'}&nbsp;|&nbsp;
@@ -30,7 +30,7 @@ const MyFormHelperText = ({ fieldCode, charCount }) => {
 
         return (
 
-          <Typography component={'span'}  variant="body2" color={passwordStrength?  "" : "error"} >
+          <Typography component={'span'}  variant="body2" color={passwordStrength?  "green" : "error"} >
               {focused || info ===true ?  (
                 <>
                   {filled ? 'complété' : 'vide'}&nbsp;|&nbsp;

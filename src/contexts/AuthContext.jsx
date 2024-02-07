@@ -58,12 +58,10 @@ const AuthProvider = ({ children }) => {
       }
     } catch (error) {
       // Gérer les erreurs de connexion
-      // console.log(error);
-      console.log("test2");
       console.log("error", error.message);
       setAlertOpen(true);
       setAlertSeverity('error'); 
-      setAlertMessage('Une erreur s\'est produite lors de la création du post.'); 
+      setAlertMessage('Une erreur s\'est produite lors de la connexion.'); 
     }
   }
 
@@ -74,6 +72,9 @@ const AuthProvider = ({ children }) => {
 
   const unLogin = () => {
     get('unlogin');
+    setAlertOpen(true);
+    setAlertSeverity('success'); 
+    setAlertMessage('Vous avez été déconnecter');
   }
 
   const value = {
