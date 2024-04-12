@@ -13,6 +13,9 @@ const Form = ({fields, context, categories}) => {
     const [responseMessage, setResponseMessage] = useState("");
     const [charCount, setCharCount] = useState(0);
 
+    console.log(entity?.Is_Admin);
+    console.log(entity);
+
     useEffect(() => {
         if (response.ok) {
           setResponseMessage(response.data.message);
@@ -112,7 +115,7 @@ const Form = ({fields, context, categories}) => {
                         name="Is_Admin"
                         labelId="Is_Admin"
                         required
-                        value={entity?.Is_Admin }
+                        value={entity?.Is_Admin || 0 }
                         label="statut admin"
                         onChange={(e) => updateField(field.code, e.target.value)}
                     >

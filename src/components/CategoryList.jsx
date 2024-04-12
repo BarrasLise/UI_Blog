@@ -7,6 +7,7 @@ import { EntityContext } from "../contexts/EntityContext";
 const CategoryList = () => {
   const {entity} = useContext(EntityContext); 
   const categoriesArray = entity?.Categories?.split(',');
+  console.log(categoriesArray);
  
   return (
     <Box sx={{
